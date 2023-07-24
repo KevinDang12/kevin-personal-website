@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+/* #signInDiv {
+  text-align: center;
+  align-items: right;
+  justify-content: right;
+  display: flex;
+} */
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
