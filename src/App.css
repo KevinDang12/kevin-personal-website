@@ -1,13 +1,26 @@
 .App {
+  display: flex;
+  align-items: center; /* To center items vertically */
+  justify-content: center; /* To center items horizontally */
+  height: 80vh;
+  align-items: center;
+  margin: 0;
+}
+
+.Notepad {
   text-align: center;
 }
 
-/* #signInDiv {
-  text-align: center;
-  align-items: right;
-  justify-content: right;
+.Title {
+  padding: 20px;
+}
+
+.GoogleLogin {
   display: flex;
-} */
+  align-items: center;
+  justify-content: center;
+}
+
 
 .App-logo {
   height: 40vmin;
@@ -42,4 +55,21 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.textArea {
+  display: flex;
+  flex-direction: column; /* Align flex items vertically */
+  position: fixed;
+}
+
+.textArea input,
+.textArea textarea {
+  margin: 10px; /* Optional: Add some spacing between the input field and the textarea */
+}
+
+.textArea textarea {
+  resize: vertical; /* Allow vertical resizing */
+  min-height: 300px; /* Set a maximum height for the textarea */
+  max-height: 500px; /* Set a maximum height for the textarea */
 }

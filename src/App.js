@@ -2,15 +2,26 @@ import {useEffect, useState} from 'react';
 import jwt_decode from "jwt-decode";
 import './App.css';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './Header';
+import { GoogleLogin } from '@react-oauth/google';
 
 export default function App() {
 
   const [ user, setUser ] = useState({});
-  const [ signedIn, setSignedIn ] = useState(true);
+  const [ signedIn, setSignedIn ] = useState(false);
+  const [ title, setTitle ] = useState("");
   const [ note, setNote ] = useState("");
 
   const handleInputChange = (event) => {
-    setNote(event.target.value);
+    const { name, value } = event.target;
+
+    // Check the name of the input field and update the state accordingly
+    if (name === 'title') {
+      setTitle(value);
+    } else if (name === 'note') {
+      setNote(value);
+    }
   };
 
   async function handleCallbackResponse(response) {
@@ -18,21 +29,24 @@ export default function App() {
 
     const idToken = response.credential;
 
+    localStorage.setItem('googleAuthToken', idToken);
+    setSignedIn(true);
+
     let userObject = jwt_decode(idToken);
     const googleUserId = userObject.sub;
 
-    // console.log(userObject);
-    setSignedIn(false);
-
     console.log("Google User ID: " + googleUserId);
 
-    const name = userObject.name;
+    const first_name = userObject.given_name;
+    const last_name = userObject.family_name;
     const email = userObject.email;
 
     const user = {
       id: googleUserId,
-      name: name,
+      first_name: first_name,
+      last_name: last_name,
       email: email,
+      title: "",
       note: "Enter your note here",
     };
 
@@ -69,6 +83,7 @@ export default function App() {
         console.log(res.data);
         setUser(res.data);
         setNote(res.data.note);
+        setTitle(res.data.title);
       })
       .catch(err => {
         console.log(err);
@@ -76,23 +91,30 @@ export default function App() {
   }
 
   function handleSignOut() {
+    localStorage.removeItem('googleAuthToken');
     setUser({});
-    setSignedIn(true);
+    setSignedIn(false);
   }
 
   useEffect(() => {
-    /* global google */
-    google.accounts.id.initialize({
-      client_id: "773818320096-obluqspdkvpqla9lqvm83hf4od62fh9s.apps.googleusercontent.com",
-      callback: handleCallbackResponse
-    });
+    const token = localStorage.getItem('googleAuthToken');
+    
+    if (token) {
+      setSignedIn(true);
+      const decodedToken = jwt_decode(token);
+      console.log(decodedToken);
+      const googleUserId = decodedToken.sub;
 
-    google.accounts.id.renderButton(
-      document.getElementById("signInDiv"),
-      { theme: "outline", size: "large" }
-    );
-
-    google.accounts.id.prompt();
+      axios.get('http://localhost:5000/api/notes/' + googleUserId)
+      .then(res => {
+        setUser(res.data);
+        setNote(res.data.note);
+        setTitle(res.data.title);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    }
   }, [signedIn])
 
   /**
@@ -103,6 +125,7 @@ export default function App() {
     const userUpdate = {
       id: user.id,
       note: note,
+      title: title,
     };
 
     axios.put('http://localhost:5000/api/notes/' + user.id, userUpdate)
@@ -118,24 +141,51 @@ export default function App() {
   // If we have no user: show the login button
   // If we have a user: show the logout button
   return (
-    <div className="App">
-      { signedIn && 
-        <div id="signInDiv" style={{textAlign: 'center', alignItems: 'center', justifyContent: 'center', display: 'flex'}}></div>
-      }
-      { Object.keys(user).length !== 0 &&
-        <div>
-          <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
-          <p>{user.name}</p>
-          <p>{user.email}</p>
-          <input
-            type="text"
-            value={note} // Set the pre-existing text using the 'value' prop
-            onChange={handleInputChange}
-          />
-          <button onClick={handleSave}>Save</button>
+    <>
+      <Header
+        handleSave={handleSave}
+        handleSignOut={handleSignOut}
+        signedIn={signedIn}
+        name={user.first_name}
+      />
+      <div className="App">
+        <div className='Notepad'>
+          { !signedIn && 
+          <>
+            <h1 className='Title'>Welcome to your Notepad</h1>
+             <div className='GoogleLogin'>
+              <GoogleLogin
+                onSuccess={credentialResponse => {
+                  console.log(credentialResponse);
+                  handleCallbackResponse(credentialResponse);
+                }}
+                onError={() => {
+                  console.log('Login Failed');
+                }}
+              />
+             </div>
+          </>
+          }
         </div>
-      }
-      {/* Show the notepad */}
-    </div>
+        { signedIn &&
+          <div className='textArea'>
+            <input 
+            name='title'
+            type='text' 
+            placeholder="Untitled"
+            onChange={handleInputChange}
+            value={title}
+            />
+            <textarea
+              name='note'
+              value={note}
+              onChange={handleInputChange}
+              rows={20}
+              cols={100}
+            />
+          </div>
+        }
+      </div>
+    </>
   );
 }

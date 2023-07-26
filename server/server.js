@@ -35,6 +35,7 @@ app.put('/api/notes/:id', (req, res) => {
         res.status(404).send('The board with the given ID was not found.');
     }
     note.note = req.body.note;
+    note.title = req.body.title;
     res.send(note);
 });
   
