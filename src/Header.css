@@ -1,0 +1,68 @@
+.header {
+    background-color: rgb(247, 198, 2);
+    height: 4.5em;
+    line-height: 4em;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: fixed;
+}
+
+.header>ul {
+    display: inline;
+    margin: 0;
+    list-style-type: none;
+}
+
+.header>ul>li {
+    display: inline;
+    margin-right: 1.5em;
+}
+
+.header>ul>li>a, h2 {
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: rgba(0, 0, 0, 0.8);
+    text-decoration: none;
+}
+
+.header>ul>li>a:hover {
+    color: white;
+}
+
+.header>ul>li.logo {
+    font-size: 1.2em;
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+}
+
+.header-left {
+    justify-self: start;
+}
+
+.header-right {
+    justify-self: end;
+    list-style: none; /* Remove the default list styling */
+    padding-right: 15px; /* Remove any default padding */
+  }
+  
+  .header-right li {
+    display: flex; /* Use flexbox to create a flex container for the list item */
+    align-items: center; /* Align items vertically at the center (optional) */
+  }
+  
+  .header-right p {
+    font-family: sans-serif;
+    margin: 0; /* Remove default margin to avoid spacing issues */
+  }
+  
+  .header-right button {
+    font-family: sans-serif;
+    margin-left: 10px; /* Add some spacing between the paragraph and the buttons (optional) */
+  }
+
+  .flex-container {
+    display: flex;
+    align-items: center;
+  }
