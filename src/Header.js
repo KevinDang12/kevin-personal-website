@@ -10,17 +10,17 @@ export default function Header(props) {
     <div className="header">
         <ul className="header-left">
             <li className="logo">
-                <a>Notepad</a>
+                <p>Notepad</p>
             </li>
         </ul>
       
         {signedIn && 
             <ul className="header-right">
                 <li>
-                <div class="flex-container">
-                    <p>{name}</p>
-                    <Button onClick={handleSave}>Save</Button>
-                    <Button variant="success" onClick={handleSignOut}>Sign Out</Button>
+                <div className="flex-container">
+                    <p>Hello, {name}</p>
+                    <Button variant="success" onClick={handleSave}>Save</Button>
+                    <Button variant="danger" onClick={handleSignOut}>Sign out</Button>
                 </div>
                 </li>
             </ul>
