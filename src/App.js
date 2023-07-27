@@ -1,10 +1,12 @@
 import {useEffect, useState} from 'react';
-import jwt_decode from "jwt-decode";
 import './App.css';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Header';
-import { GoogleLogin } from '@react-oauth/google';
+import { LoginSocialFacebook } from 'reactjs-social-login';
+import { FacebookLoginButton } from 'react-social-login-buttons';
+import { LoginSocialGoogle } from 'reactjs-social-login';
+import { GoogleLoginButton } from 'react-social-login-buttons';
 
 export default function App() {
 
@@ -12,6 +14,9 @@ export default function App() {
   const [ signedIn, setSignedIn ] = useState(false);
   const [ title, setTitle ] = useState("");
   const [ note, setNote ] = useState("");
+
+  const google_client_id = '773818320096-obluqspdkvpqla9lqvm83hf4od62fh9s.apps.googleusercontent.com';
+  const facebook_app_id = '713742283893467';
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -24,61 +29,55 @@ export default function App() {
     }
   };
 
-  async function handleCallbackResponse(response) {
-    console.log("Encoded JWT ID token: " + response.credential);
-
-    const idToken = response.credential;
-
-    localStorage.setItem('googleAuthToken', idToken);
+  async function handleCallbackResponse(response, provider) {
+    let userObject = response.data;
     setSignedIn(true);
 
-    let userObject = jwt_decode(idToken);
-    const googleUserId = userObject.sub;
+    let id = '';
+    let first_name = '';
+    let last_name = '';
 
-    console.log("Google User ID: " + googleUserId);
+    if (provider === 'google') {
+      id = userObject.sub;
+      first_name = userObject.given_name;
+      last_name = userObject.family_name;
+    } else if (provider === 'facebook') {
+      id = userObject.userID;
+      first_name = userObject.first_name;
+      last_name = userObject.last_name;
+    }
 
-    const first_name = userObject.given_name;
-    const last_name = userObject.family_name;
-    const email = userObject.email;
+    localStorage.setItem('googleAuthToken', id);
+
+    console.log(provider + " User ID: " + id);
 
     const user = {
-      id: googleUserId,
+      id: id,
       first_name: first_name,
       last_name: last_name,
-      email: email,
+      provider: provider,
       title: "",
       note: "Enter your note here",
     };
-
-    let userExists = true;
 
     try {
       const response = await axios.get('http://localhost:5000/api/notes');
       const data = response.data;
 
-      const foundUser = data.find(user => user.id === googleUserId);
+      const foundUser = data.find(user => user.id === id);
 
       if (!foundUser) {
-        userExists = false;
+        await axios.post('http://localhost:5000/api/notes', user)
+        .catch(err => {
+          console.log(err);
+        });
       }
-
-      console.log(data);
 
     } catch (error) {
       console.error('Error fetching additional user data:', error);
     }
 
-    if (!userExists) {
-      await axios.post('http://localhost:5000/api/notes', user)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    }
-
-    await axios.get('http://localhost:5000/api/notes/' + googleUserId)
+    await axios.get('http://localhost:5000/api/notes/' + id)
       .then(res => {
         console.log(res.data);
         setUser(res.data);
@@ -97,15 +96,12 @@ export default function App() {
   }
 
   useEffect(() => {
-    const token = localStorage.getItem('googleAuthToken');
+    const id = localStorage.getItem('googleAuthToken');
     
-    if (token) {
+    if (id) {
       setSignedIn(true);
-      const decodedToken = jwt_decode(token);
-      console.log(decodedToken);
-      const googleUserId = decodedToken.sub;
 
-      axios.get('http://localhost:5000/api/notes/' + googleUserId)
+      axios.get('http://localhost:5000/api/notes/' + id)
       .then(res => {
         setUser(res.data);
         setNote(res.data.note);
@@ -115,7 +111,7 @@ export default function App() {
         console.log(err);
       });
     }
-  }, [signedIn])
+  }, [])
 
   /**
    * Save the notes to the database
@@ -154,15 +150,32 @@ export default function App() {
           <>
             <h1 className='Title'>Welcome to your Notepad</h1>
              <div className='GoogleLogin'>
-              <GoogleLogin
-                onSuccess={credentialResponse => {
-                  console.log(credentialResponse);
-                  handleCallbackResponse(credentialResponse);
-                }}
-                onError={() => {
-                  console.log('Login Failed');
-                }}
-              />
+             <LoginSocialGoogle
+              client_id={google_client_id}
+              onResolve={(res) => {
+                console.log(res);
+                handleCallbackResponse(res, 'google');
+              }}
+              onReject={(err) => {
+                console.log(err);
+              }}
+             >
+                <GoogleLoginButton />
+             </LoginSocialGoogle>
+             </div>
+             <div className='FaceBookLogin'>
+              <LoginSocialFacebook
+                  appId={facebook_app_id}
+                  onResolve={(res) => {
+                    console.log(res);
+                    handleCallbackResponse(res, 'facebook');
+                  }}
+                  onReject={(err) => {
+                    console.log(err);
+                  }}
+                >
+                  <FacebookLoginButton />
+                </LoginSocialFacebook>
              </div>
           </>
           }
