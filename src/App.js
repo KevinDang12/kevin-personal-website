@@ -3,10 +3,8 @@ import './App.css';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Header';
-import { LoginSocialFacebook } from 'reactjs-social-login';
-import { FacebookLoginButton } from 'react-social-login-buttons';
-import { LoginSocialGoogle } from 'reactjs-social-login';
-import { GoogleLoginButton } from 'react-social-login-buttons';
+import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
+import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
 
 export default function App() {
 
@@ -15,12 +13,8 @@ export default function App() {
   const [ title, setTitle ] = useState("");
   const [ note, setNote ] = useState("");
 
-  const google_client_id = '773818320096-obluqspdkvpqla9lqvm83hf4od62fh9s.apps.googleusercontent.com';
-  const facebook_app_id = '713742283893467';
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-
     // Check the name of the input field and update the state accordingly
     if (name === 'title') {
       setTitle(value);
@@ -29,33 +23,24 @@ export default function App() {
     }
   };
 
-  async function handleCallbackResponse(response, provider) {
+  function handleFacebookLogin(provider) {
+    window.location.href = `http://localhost:5000/auth/${provider}`;
+  }
+
+  async function handleCallbackResponse(response) {
     let userObject = response.data;
     setSignedIn(true);
 
-    let id = '';
-    let first_name = '';
-    let last_name = '';
-
-    if (provider === 'google') {
-      id = userObject.sub;
-      first_name = userObject.given_name;
-      last_name = userObject.family_name;
-    } else if (provider === 'facebook') {
-      id = userObject.userID;
-      first_name = userObject.first_name;
-      last_name = userObject.last_name;
-    }
+    const id = userObject.sub;
+    const first_name = userObject.given_name;
+    const last_name = userObject.family_name;
 
     localStorage.setItem('googleAuthToken', id);
-
-    console.log(provider + " User ID: " + id);
 
     const user = {
       id: id,
       first_name: first_name,
       last_name: last_name,
-      provider: provider,
       title: "",
       note: "Enter your note here",
     };
@@ -90,12 +75,70 @@ export default function App() {
   }
 
   function handleSignOut() {
-    localStorage.removeItem('googleAuthToken');
+    const id = localStorage.getItem('googleAuthToken');
+    if (id) {
+      localStorage.removeItem('googleAuthToken');
+    }
+    window.location.href = 'http://localhost:5000/logout';
     setUser({});
     setSignedIn(false);
   }
 
   useEffect(() => {
+    const getUser = async (id, first_name, last_name) => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/notes');
+        const data = response.data;
+        console.log(data);
+
+        const foundUser = data.find(user => user.id === id);
+
+        if (!foundUser) {
+          const user = {
+            id: id,
+            first_name: first_name,
+            last_name: last_name,
+            title: "",
+            note: "Enter your note here",
+          };
+          
+          await axios.post('http://localhost:5000/api/notes', user)
+          .catch(err => {
+            console.log(err);
+          });
+        }
+
+        await axios.get('http://localhost:5000/api/notes/' + id)
+        .then(res => {
+          console.log(res.data);
+          setUser(res.data);
+          setNote(res.data.note);
+          setTitle(res.data.title);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+        } catch (error) {
+          console.error('Error fetching additional user data:', error);
+        }
+      };
+
+    axios.get('http://localhost:5000/api/user/profile', { withCredentials: true })
+      .then((res) => {
+        if (res.data) {
+          console.log(res.data);
+          const id = res.data.id;
+          const first_name = res.data.name.givenName;
+          const last_name = res.data.name.familyName;
+          getUser(id, first_name, last_name);
+          setSignedIn(true);
+        }
+      })
+      .catch((err) => {
+        console.error('Failed to fetch user profile:', err);
+      });
+
     const id = localStorage.getItem('googleAuthToken');
     
     if (id) {
@@ -134,6 +177,8 @@ export default function App() {
       });
   }
 
+  const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+
   // If we have no user: show the login button
   // If we have a user: show the logout button
   return (
@@ -151,10 +196,10 @@ export default function App() {
             <h1 className='Title'>Welcome to your Notepad</h1>
              <div className='GoogleLogin'>
              <LoginSocialGoogle
-              client_id={google_client_id}
+              client_id={GOOGLE_CLIENT_ID}
               onResolve={(res) => {
                 console.log(res);
-                handleCallbackResponse(res, 'google');
+                handleCallbackResponse(res);
               }}
               onReject={(err) => {
                 console.log(err);
@@ -164,18 +209,9 @@ export default function App() {
              </LoginSocialGoogle>
              </div>
              <div className='FaceBookLogin'>
-              <LoginSocialFacebook
-                  appId={facebook_app_id}
-                  onResolve={(res) => {
-                    console.log(res);
-                    handleCallbackResponse(res, 'facebook');
-                  }}
-                  onReject={(err) => {
-                    console.log(err);
-                  }}
-                >
-                  <FacebookLoginButton />
-                </LoginSocialFacebook>
+              <div>
+                <FacebookLoginButton onClick={() => handleFacebookLogin("facebook")}/>
+              </div>
              </div>
           </>
           }
