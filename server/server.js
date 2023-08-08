@@ -5,30 +5,36 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '../.env') });
-const { encryptData, decryptData } = require('./cipher');
 
+const { encryptData, decryptData } = require('./cipher');
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
+const FILE = 'saveFile.json';
+
+require('dotenv').config({ path: path.join(__dirname, '../.env') });
 
 app.use(express.json());
 app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true,
 }));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 const crypto = require('crypto');
 const secretKey = crypto.randomBytes(32).toString('hex');
+
 app.use(session({
     secret: secretKey,
     resave: false,
     saveUninitialized: true,
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-const FILE = 'saveFile.json';
-
+/**
+ * Passport Facebook Strategy
+ */
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
@@ -51,9 +57,16 @@ passport.deserializeUser((obj, done) => {
     done(null, obj);
 });
 
-// Auth routes
+/* Auth routes */
+
+/**
+ * GET Request when the user clicks the login button
+ */
 app.get('/auth/facebook', passport.authenticate('facebook'));
 
+/**
+ * GET Request when the user is redirected back to the app
+ */
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: 'http://localhost:3000', failureRedirect: 'http://localhost:3000' }),
   (req, res) => {
@@ -61,6 +74,9 @@ app.get('/auth/facebook/callback',
   }
 );
 
+/**
+ * GET Request to check if the user is authenticated
+ */
 app.get('/api/user/profile', (req, res) => {
     if (req.isAuthenticated()) {
         // The user is authenticated, send the profile stored in the session
@@ -70,7 +86,10 @@ app.get('/api/user/profile', (req, res) => {
         res.json(null);
     }
 });
-  
+
+/**
+ * GET Request when the user clicks the logout button
+ */
 app.get('/logout', async (req, res) => {
     req.logout((err) => {
         if (err) {
@@ -108,7 +127,7 @@ const write = (notes) => {
 };
 
 /**
- * GET Request when the user finds the list of boards
+ * GET Request when the user finds the list of users
  * from the backend
  */
 app.get('/api/notes', (req, res) => {
@@ -121,18 +140,30 @@ app.get('/api/notes', (req, res) => {
     res.send(notes);
 });
 
+app.get('/api/status', (req, res) => {
+    res.status(200).send('The server is running');
+});
+
+/**
+ * GET Request when the user finds a specific user and their notes
+ * from the backend
+ */
 app.get('/api/notes/:id', (req, res) => {
     const notes = read();
     const user = notes.find((b) => b.id === req.params.id);
 
     if (!user) { // 404 object not found
-        res.status(404).send('The board with the given ID was not found.');
+        res.status(404).send('The user with the given ID was not found.');
     }
     user.title = decryptData(user.title, user.id);
     user.note = decryptData(user.note, user.id);
     res.send(user);
 });
 
+/**
+ * POST Request when the user creates a new note
+ * Save the note to the save file
+ */
 app.post('/api/notes', (req, res) => {
     let notes = [];
     const user = req.body;
@@ -148,6 +179,10 @@ app.post('/api/notes', (req, res) => {
     res.send(notes);
 });
 
+/**
+ * PUT Request when the user updates a note
+ * Update the note in the save file
+ */
 app.put('/api/notes/:id', (req, res) => {
     const notes = read();
     const user = notes.find((b) => b.id === req.params.id);

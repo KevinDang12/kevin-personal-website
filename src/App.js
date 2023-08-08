@@ -7,15 +7,16 @@ import { LoginSocialGoogle } from 'reactjs-social-login';
 import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
 
 /**
- * React App that includes Notepad Component and the Login Component
+ * The React App that includes the Notepad Component and the Login Component
  * @returns The React Component
  */
 export default function App() {
 
-  const [ user, setUser ] = useState({});
+  const [ profile, setProfile ] = useState({});
   const [ signedIn, setSignedIn ] = useState(false);
   const [ title, setTitle ] = useState("");
   const [ note, setNote ] = useState("");
+  const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
   /**
    * Update the value of the state
@@ -34,8 +35,20 @@ export default function App() {
   /**
    * Redirect the user to the backend to sign into Facebook
    */
-  function handleFacebookLogin() {
-    window.location.href = `http://localhost:5000/auth/facebook`;
+  async function handleFacebookLogin() {
+    const backendUrl = 'http://localhost:5000'; // Replace with your backend URL
+
+    fetch(`${backendUrl}/api/status`)
+      .then(response => {
+        if (response.ok) {
+          window.location.href = `http://localhost:5000/auth/facebook`;
+        } else {
+          alert('Unable to sign in with Google. Please try again later.')
+        }
+      })
+      .catch(error => {
+        console.error('Error while checking server status:', error);
+      });
   }
 
   /**
@@ -45,22 +58,11 @@ export default function App() {
    */
   async function handleGoogleLogin(response) {
     let userObject = response.data;
-    setSignedIn(true);
 
     const id = userObject.sub;
     const first_name = userObject.given_name;
     const last_name = userObject.family_name;
 
-    // Allow the user to stay signed in with Google
-    localStorage.setItem('googleAuthToken', id);
-
-    const user = {
-      id: id,
-      first_name: first_name,
-      last_name: last_name,
-      title: "",
-      note: "Enter your note here",
-    };
 
     try {
       const response = await axios.get('http://localhost:5000/api/notes');
@@ -68,26 +70,40 @@ export default function App() {
 
       const foundUser = data.find(user => user.id === id);
 
+      // Create a new user if the user does not exist
       if (!foundUser) {
+        const user = {
+          id: id,
+          first_name: first_name,
+          last_name: last_name,
+          title: "",
+          note: "Enter your note here",
+        };
         await axios.post('http://localhost:5000/api/notes', user)
         .catch(err => {
-          console.log(err);
+          console.error(err);
         });
       }
 
+      setSignedIn(true);
+
+      // Allow the user to stay signed in with Google
+      localStorage.setItem('googleAuthToken', id);
+
     } catch (error) {
+      alert('Unable to sign in with Google. Please try again later.');
+      setSignedIn(false);
       console.error('Error fetching additional user data:', error);
     }
 
     await axios.get('http://localhost:5000/api/notes/' + id)
       .then(res => {
-        console.log(res.data);
-        setUser(res.data);
+        setProfile(res.data);
         setNote(res.data.note);
         setTitle(res.data.title);
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
   }
 
@@ -103,7 +119,7 @@ export default function App() {
     } else {
       window.location.href = 'http://localhost:5000/logout';
     }
-    setUser({});
+    setProfile({});
     setSignedIn(false);
   }
 
@@ -113,11 +129,16 @@ export default function App() {
    * user in the backend and create a notepad for them
    */
   useEffect(() => {
+    /**
+     * Get the user's notes from the backend using the user's ID
+     * @param {*} id The user's ID
+     * @param {*} first_name The user's first name
+     * @param {*} last_name The user's last name
+     */
     const getUser = async (id, first_name, last_name) => {
       try {
         const response = await axios.get('http://localhost:5000/api/notes');
         const data = response.data;
-        console.log(data);
 
         const foundUser = data.find(user => user.id === id);
 
@@ -132,19 +153,18 @@ export default function App() {
           
           await axios.post('http://localhost:5000/api/notes', user)
           .catch(err => {
-            console.log(err);
+            console.error(err);
           });
         }
 
         await axios.get('http://localhost:5000/api/notes/' + id)
         .then(res => {
-          console.log(res.data);
-          setUser(res.data);
+          setProfile(res.data);
           setNote(res.data.note);
           setTitle(res.data.title);
         })
         .catch(err => {
-          console.log(err);
+          console.error(err);
         });
 
         } catch (error) {
@@ -155,7 +175,6 @@ export default function App() {
     axios.get('http://localhost:5000/api/user/profile', { withCredentials: true })
       .then((res) => {
         if (res.data) {
-          console.log(res.data);
           const id = res.data.id;
           const first_name = res.data.name.givenName;
           const last_name = res.data.name.familyName;
@@ -174,12 +193,12 @@ export default function App() {
 
       axios.get('http://localhost:5000/api/notes/' + id)
       .then(res => {
-        setUser(res.data);
+        setProfile(res.data);
         setNote(res.data.note);
         setTitle(res.data.title);
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
     }
   }, [])
@@ -189,22 +208,19 @@ export default function App() {
    */
   function handleSave() {
     const userUpdate = {
-      id: user.id,
+      id: profile.id,
       note: note,
       title: title,
     };
 
-    axios.put('http://localhost:5000/api/notes/' + user.id, userUpdate)
+    axios.put('http://localhost:5000/api/notes/' + profile.id, userUpdate)
       .then(res => {
         alert('Your note is saved.');
-        console.log(res.data);
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
   }
-
-  const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
   return (
     <div>
@@ -212,7 +228,7 @@ export default function App() {
         handleSave={handleSave}
         handleSignOut={handleLogout}
         signedIn={signedIn}
-        name={user.first_name}
+        name={profile.first_name}
       />
       <div className="App">
         <div className='Notepad'>
@@ -223,11 +239,10 @@ export default function App() {
              <LoginSocialGoogle
               client_id={GOOGLE_CLIENT_ID}
               onResolve={(res) => {
-                console.log(res);
                 handleGoogleLogin(res);
               }}
               onReject={(err) => {
-                console.log(err);
+                console.error(err);
               }}
              >
                 <GoogleLoginButton />

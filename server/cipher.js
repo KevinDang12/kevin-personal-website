@@ -11,14 +11,20 @@ function generateSalt() {
 
 /**
  * Generate a unique hash ID
- * @param {*} uniqueID 
- * @returns 
+ * @param {*} uniqueID The unique ID to hash
+ * @returns A buffer containing the hashed ID
  */
 function hashUniqueID(uniqueID) {
   const hashedID = crypto.createHash('sha256').update(uniqueID).digest('hex');
   return Buffer.from(hashedID, 'hex');
 }
 
+/**
+ * Encrypt the data using the unique ID
+ * @param {*} data The data to encrypt
+ * @param {*} uniqueID The unique ID to encrypt the data with
+ * @returns An object containing the salt, encrypted data, and tag
+ */
 function encryptData(data, uniqueID) {
   const salt = generateSalt();
   const hashedKey = hashUniqueID(uniqueID);
@@ -36,6 +42,12 @@ function encryptData(data, uniqueID) {
   };
 }
 
+/**
+ * Decrypt the data using the unique ID
+ * @param {*} encryptedDataObj The encrypted data object
+ * @param {*} uniqueID The unique ID to decrypt the data with
+ * @returns The decrypted data
+ */
 function decryptData(encryptedDataObj, uniqueID) {
   const { salt, encryptedData, tag } = encryptedDataObj;
   const hashedKey = hashUniqueID(uniqueID);
