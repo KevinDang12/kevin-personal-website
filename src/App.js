@@ -3,9 +3,13 @@ import './App.css';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Header';
-import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
+import { LoginSocialGoogle } from 'reactjs-social-login';
 import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
 
+/**
+ * React App that includes Notepad Component and the Login Component
+ * @returns The React Component
+ */
 export default function App() {
 
   const [ user, setUser ] = useState({});
@@ -13,9 +17,13 @@ export default function App() {
   const [ title, setTitle ] = useState("");
   const [ note, setNote ] = useState("");
 
+  /**
+   * Update the value of the state
+   * @param {*} event Check which text component to update
+   */
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    // Check the name of the input field and update the state accordingly
+    // Check the name of the input field
     if (name === 'title') {
       setTitle(value);
     } else if (name === 'note') {
@@ -23,11 +31,19 @@ export default function App() {
     }
   };
 
-  function handleFacebookLogin(provider) {
-    window.location.href = `http://localhost:5000/auth/${provider}`;
+  /**
+   * Redirect the user to the backend to sign into Facebook
+   */
+  function handleFacebookLogin() {
+    window.location.href = `http://localhost:5000/auth/facebook`;
   }
 
-  async function handleCallbackResponse(response) {
+  /**
+   * Handle the login process for a Google user
+   * @param {*} response The user's information
+   * in the response after being authenticated
+   */
+  async function handleGoogleLogin(response) {
     let userObject = response.data;
     setSignedIn(true);
 
@@ -35,6 +51,7 @@ export default function App() {
     const first_name = userObject.given_name;
     const last_name = userObject.family_name;
 
+    // Allow the user to stay signed in with Google
     localStorage.setItem('googleAuthToken', id);
 
     const user = {
@@ -74,16 +91,27 @@ export default function App() {
       });
   }
 
-  function handleSignOut() {
+  /**
+   * Handle the logout functionality for Facebook and Google
+   * Google: remove the googleAuthToken from the browser's local storage
+   * Facebook: Redirect the user to the logout in the backend
+   */
+  function handleLogout() {
     const id = localStorage.getItem('googleAuthToken');
     if (id) {
       localStorage.removeItem('googleAuthToken');
+    } else {
+      window.location.href = 'http://localhost:5000/logout';
     }
-    window.location.href = 'http://localhost:5000/logout';
     setUser({});
     setSignedIn(false);
   }
 
+  /**
+   * Check if a user is signed in and retrieve the notes
+   * If the user does not have any notes, then store the new
+   * user in the backend and create a notepad for them
+   */
   useEffect(() => {
     const getUser = async (id, first_name, last_name) => {
       try {
@@ -157,10 +185,9 @@ export default function App() {
   }, [])
 
   /**
-   * Save the notes to the database
+   * Save the notes to a save file in the backend
    */
   function handleSave() {
-
     const userUpdate = {
       id: user.id,
       note: note,
@@ -179,13 +206,11 @@ export default function App() {
 
   const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
-  // If we have no user: show the login button
-  // If we have a user: show the logout button
   return (
-    <>
+    <div>
       <Header
         handleSave={handleSave}
-        handleSignOut={handleSignOut}
+        handleSignOut={handleLogout}
         signedIn={signedIn}
         name={user.first_name}
       />
@@ -199,7 +224,7 @@ export default function App() {
               client_id={GOOGLE_CLIENT_ID}
               onResolve={(res) => {
                 console.log(res);
-                handleCallbackResponse(res);
+                handleGoogleLogin(res);
               }}
               onReject={(err) => {
                 console.log(err);
@@ -210,7 +235,7 @@ export default function App() {
              </div>
              <div className='FaceBookLogin'>
               <div>
-                <FacebookLoginButton onClick={() => handleFacebookLogin("facebook")}/>
+                <FacebookLoginButton onClick={handleFacebookLogin}/>
               </div>
              </div>
           </>
@@ -235,6 +260,6 @@ export default function App() {
           </div>
         }
       </div>
-    </>
+    </div>
   );
 }

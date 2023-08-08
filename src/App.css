@@ -1,8 +1,8 @@
 .App {
   display: flex;
-  align-items: center; /* To center items vertically */
-  justify-content: center; /* To center items horizontally */
-  height: 80vh;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
   align-items: center;
   margin: 0;
 }
@@ -64,17 +64,15 @@
 
 .textArea {
   display: flex;
-  flex-direction: column; /* Align flex items vertically */
-  position: fixed;
+  flex-direction: column;
 }
 
 .textArea input,
 .textArea textarea {
-  margin: 10px; /* Optional: Add some spacing between the input field and the textarea */
+  margin: 10px;
 }
 
 .textArea textarea {
-  resize: vertical; /* Allow vertical resizing */
-  min-height: 300px; /* Set a maximum height for the textarea */
-  max-height: 500px; /* Set a maximum height for the textarea */
+  resize: vertical;
+  max-height: 300px;
 }
