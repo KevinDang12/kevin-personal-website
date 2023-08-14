@@ -1,7 +1,7 @@
 .header {
-    background-color: rgb(2, 190, 247);
+    background-color: #464daf;
     height: 4.5em;
-    line-height: 4em;
+    line-height: 4.5em;
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -16,22 +16,19 @@
 
 .header>ul>li {
     display: inline;
-    margin-right: 1.5em;
 }
 
-.header>ul>li>p {
+.header>ul>li>a {
     font-family: sans-serif;
     font-weight: bold;
-    font-size: 1.2em;
-    color: rgba(0, 0, 0, 0.8);
-    text-decoration: none;
+    font-size: 2em;
 }
 
-.header>ul>li.logo {
-    font-size: 1.5em;
-    color: rgba(0, 0, 0, 0.8);
-    font-weight: bold;
+.title {
+    color: white;
     text-decoration: none;
+    cursor: default;
+    pointer-events: none;
 }
 
 .header-left {
@@ -53,6 +50,7 @@
     font-family: sans-serif;
     margin: 0;
     font-size: 1em;
+    color: white;
 }
 
 .header-right button {
@@ -63,4 +61,72 @@
 .flex-container {
     display: flex;
     align-items: center;
+}
+
+.mobile-menu {
+    position: fixed;
+    background-color: #464daf;
+    height: 4.5em;
+    line-height: 4.5em;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    z-index: 2;
+}
+
+.Navbutton {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  width: 70px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.Navbutton:hover {
+  background-color: #666;
+}
+
+.menu-items {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #333;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  width: 100%;
+  min-width: 200px;
+  text-align: left;
+}
+
+.menu-items.show {
+  display: block;
+}
+
+.menu-items p, h2 {
+  text-decoration: none;
+  color: #fff;
+}
+
+.menu-items p {
+  padding-left: 10px;
+}
+
+.menu-items h2 {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding: 10px;
+}
+
+.menu-button:hover {
+  background-color: #666;
 }
