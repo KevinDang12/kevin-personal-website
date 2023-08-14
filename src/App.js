@@ -1,10 +1,9 @@
-import {useEffect, useState} from 'react';
-import './App.css';
+import {useEffect, useState, useRef} from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Header';
-import { LoginSocialGoogle } from 'reactjs-social-login';
-import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
+import LoginPage from './components/LoginPage';
+import NotepadPage from './components/NotepadPage';
 
 /**
  * The React App that includes the Notepad Component and the Login Component
@@ -16,13 +15,28 @@ export default function App() {
   const [ signedIn, setSignedIn ] = useState(false);
   const [ title, setTitle ] = useState("");
   const [ note, setNote ] = useState("");
-  const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+  const [showMenu, setShowMenu] = useState(false);
+  const textareaRef = useRef(null);
+
+  /**
+   * Toggle the menu to show or hide
+   */
+  function toggleMenu() {
+    setShowMenu(!showMenu);
+  };
+
+  /**
+   * Hide the menu when the user clicks on the menu buttons
+   */
+  function handleMenuClick() {
+      setShowMenu(false);
+  };
 
   /**
    * Update the value of the state
    * @param {*} event Check which text component to update
    */
-  const handleInputChange = (event) => {
+  function handleInputChange(event) {
     const { name, value } = event.target;
     // Check the name of the input field
     if (name === 'title') {
@@ -36,7 +50,7 @@ export default function App() {
    * Redirect the user to the backend to sign into Facebook
    */
   async function handleFacebookLogin() {
-    const backendUrl = 'http://localhost:5000'; // Replace with your backend URL
+    const backendUrl = 'http://localhost:5000';
 
     fetch(`${backendUrl}/api/status`)
       .then(response => {
@@ -62,7 +76,6 @@ export default function App() {
     const id = userObject.sub;
     const first_name = userObject.given_name;
     const last_name = userObject.family_name;
-
 
     try {
       const response = await axios.get('http://localhost:5000/api/notes');
@@ -113,11 +126,16 @@ export default function App() {
    * Facebook: Redirect the user to the logout in the backend
    */
   function handleLogout() {
-    const id = localStorage.getItem('googleAuthToken');
-    if (id) {
+    handleMenuClick();
+    const googleId = localStorage.getItem('googleAuthToken');
+    if (googleId) {
       localStorage.removeItem('googleAuthToken');
-    } else {
+    }
+
+    const facebookId = localStorage.getItem('facebookAuthToken');
+    if (facebookId) {
       window.location.href = 'http://localhost:5000/logout';
+      localStorage.removeItem('facebookAuthToken');
     }
     setProfile({});
     setSignedIn(false);
@@ -180,15 +198,18 @@ export default function App() {
           const last_name = res.data.name.familyName;
           getUser(id, first_name, last_name);
           setSignedIn(true);
+          localStorage.setItem('facebookAuthToken', id);
         }
       })
       .catch((err) => {
         console.error('Failed to fetch user profile:', err);
       });
 
-    const id = localStorage.getItem('googleAuthToken');
+    const googleId = localStorage.getItem('googleAuthToken');
+    const facebookId = localStorage.getItem('facebookAuthToken');
     
-    if (id) {
+    if (googleId || facebookId) {
+      const id = googleId ? googleId : facebookId;
       setSignedIn(true);
 
       axios.get('http://localhost:5000/api/notes/' + id)
@@ -201,12 +222,30 @@ export default function App() {
         console.error(err);
       });
     }
-  }, [])
+  }, []);
+
+  /**
+   * Check the number of new lines in the string
+   * @param {*} str The string to check
+   * @returns The number of new lines in the string
+   */
+  function checkNewLines(str) {
+    const count = str.split('\n').length - 1;
+    return count;
+  }
+
+  function handleTextareaResize() {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = '480px';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  };
 
   /**
    * Save the notes to a save file in the backend
    */
   function handleSave() {
+    handleMenuClick();
     const userUpdate = {
       id: profile.id,
       note: note,
@@ -224,57 +263,34 @@ export default function App() {
 
   return (
     <div>
-      <Header
-        handleSave={handleSave}
-        handleSignOut={handleLogout}
-        signedIn={signedIn}
-        name={profile.first_name}
-      />
-      <div className="App">
-        <div className='Notepad'>
-          { !signedIn && 
-          <>
-            <h1 className='Title'>Welcome to your Notepad</h1>
-             <div className='GoogleLogin'>
-             <LoginSocialGoogle
-              client_id={GOOGLE_CLIENT_ID}
-              onResolve={(res) => {
-                handleGoogleLogin(res);
-              }}
-              onReject={(err) => {
-                console.error(err);
-              }}
-             >
-                <GoogleLoginButton />
-             </LoginSocialGoogle>
-             </div>
-             <div className='FaceBookLogin'>
-              <div>
-                <FacebookLoginButton onClick={handleFacebookLogin}/>
-              </div>
-             </div>
-          </>
-          }
-        </div>
-        { signedIn &&
-          <div className='textArea'>
-            <input 
-            name='title'
-            type='text' 
-            placeholder="Untitled"
-            onChange={handleInputChange}
-            value={title}
-            />
-            <textarea
-              name='note'
-              value={note}
-              onChange={handleInputChange}
-              rows={20}
-              cols={100}
-            />
-          </div>
-        }
+      { !signedIn &&
+        <LoginPage 
+          handleGoogleLogin={handleGoogleLogin}
+          handleFacebookLogin={handleFacebookLogin}
+        />
+      }
+      { signedIn &&
+      <div>
+        <Header
+          handleSave={handleSave}
+          handleSignOut={handleLogout}
+          toggleMenu={toggleMenu}
+          showMenu={showMenu}
+          signedIn={signedIn}
+          name={profile.first_name}
+        />
+        <NotepadPage 
+          title={title}
+          note={note}
+          setTitle={setTitle}
+          setNote={setNote}
+          textareaRef={textareaRef}
+          handleInputChange={handleInputChange}
+          handleTextareaResize={handleTextareaResize}
+          checkNewLines={checkNewLines}
+        />
       </div>
+      }
     </div>
   );
 }
