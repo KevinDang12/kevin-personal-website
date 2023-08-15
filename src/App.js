@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Header';
 import LoginPage from './components/LoginPage';
 import NotepadPage from './components/NotepadPage';
+import LoadingPage from './components/LoadingPage';
 
 /**
  * The React App that includes the Notepad Component and the Login Component
@@ -15,7 +16,9 @@ export default function App() {
   const [ signedIn, setSignedIn ] = useState(false);
   const [ title, setTitle ] = useState("");
   const [ note, setNote ] = useState("");
-  const [showMenu, setShowMenu] = useState(false);
+  const [ loading, setLoading ] = useState(false);
+  const [ loadPage, setLoadPage ] = useState(true);
+  const [ showMenu, setShowMenu ] = useState(false);
   const textareaRef = useRef(null);
 
   /**
@@ -50,6 +53,7 @@ export default function App() {
    * Redirect the user to the backend to sign into Facebook
    */
   async function handleFacebookLogin() {
+    setLoading(true);
     const backendUrl = 'http://localhost:5000';
 
     fetch(`${backendUrl}/api/status`)
@@ -57,11 +61,14 @@ export default function App() {
         if (response.ok) {
           window.location.href = `http://localhost:5000/auth/facebook`;
         } else {
-          alert('Unable to sign in with Google. Please try again later.')
+          alert('Unable to sign in with Facebook. Please try again later.');
+          setLoading(false);
         }
       })
       .catch(error => {
+        alert('Unable to sign in with Facebook. Please try again later.');
         console.error('Error while checking server status:', error);
+        setLoading(false);
       });
   }
 
@@ -71,6 +78,7 @@ export default function App() {
    * in the response after being authenticated
    */
   async function handleGoogleLogin(response) {
+    setLoading(true);
     let userObject = response.data;
 
     const id = userObject.sub;
@@ -107,6 +115,7 @@ export default function App() {
       alert('Unable to sign in with Google. Please try again later.');
       setSignedIn(false);
       console.error('Error fetching additional user data:', error);
+      setLoading(false);
     }
 
     await axios.get('http://localhost:5000/api/notes/' + id)
@@ -139,6 +148,8 @@ export default function App() {
     }
     setProfile({});
     setSignedIn(false);
+    setLoading(false);
+    setLoadPage(true);
   }
 
   /**
@@ -190,7 +201,8 @@ export default function App() {
         }
       };
 
-    axios.get('http://localhost:5000/api/user/profile', { withCredentials: true })
+    if (!(localStorage.getItem('facebookAuthToken'))) {
+      axios.get('http://localhost:5000/api/user/profile', { withCredentials: true })
       .then((res) => {
         if (res.data) {
           const id = res.data.id;
@@ -204,6 +216,7 @@ export default function App() {
       .catch((err) => {
         console.error('Failed to fetch user profile:', err);
       });
+    }
 
     const googleId = localStorage.getItem('googleAuthToken');
     const facebookId = localStorage.getItem('facebookAuthToken');
@@ -222,6 +235,7 @@ export default function App() {
         console.error(err);
       });
     }
+    setLoadPage(false);
   }, []);
 
   /**
@@ -263,34 +277,39 @@ export default function App() {
 
   return (
     <div>
-      { !signedIn &&
-        <LoginPage 
-          handleGoogleLogin={handleGoogleLogin}
-          handleFacebookLogin={handleFacebookLogin}
-        />
-      }
-      { signedIn &&
-      <div>
-        <Header
-          handleSave={handleSave}
-          handleSignOut={handleLogout}
-          toggleMenu={toggleMenu}
-          showMenu={showMenu}
-          signedIn={signedIn}
-          name={profile.first_name}
-        />
-        <NotepadPage 
-          title={title}
-          note={note}
-          setTitle={setTitle}
-          setNote={setNote}
-          textareaRef={textareaRef}
-          handleInputChange={handleInputChange}
-          handleTextareaResize={handleTextareaResize}
-          checkNewLines={checkNewLines}
-        />
-      </div>
-      }
+      { !loadPage ? 
+        <div>
+          { !signedIn &&
+          <LoginPage 
+            handleGoogleLogin={handleGoogleLogin}
+            handleFacebookLogin={handleFacebookLogin}
+            loading={loading}
+          />
+        }
+        { signedIn &&
+        <div>
+          <Header
+            handleSave={handleSave}
+            handleSignOut={handleLogout}
+            toggleMenu={toggleMenu}
+            showMenu={showMenu}
+            signedIn={signedIn}
+            name={profile.first_name}
+          />
+          <NotepadPage 
+            title={title}
+            note={note}
+            setTitle={setTitle}
+            setNote={setNote}
+            textareaRef={textareaRef}
+            handleInputChange={handleInputChange}
+            handleTextareaResize={handleTextareaResize}
+            checkNewLines={checkNewLines}
+          />
+        </div>
+        }
+      </div> 
+      : <LoadingPage />}
     </div>
   );
 }

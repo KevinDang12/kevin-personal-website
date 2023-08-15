@@ -1,44 +1,50 @@
 .Login-Page {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    align-items: center;
-    margin: 0;
-    background-color: #474c63;
-    background: linear-gradient(-90deg, #53516d, #343155);
-    background-size: 500% 500%;
-    animation: gradient 10s ease infinite;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  margin: 0;
+  background: linear-gradient(-90deg, #53516d, #343155);
+  background-size: 500% 500%;
+  animation: gradient 10s ease infinite;
+}
   
-  @keyframes gradient {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
   }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
   
-  .LoginButton {
-    padding: 4px;
-  }
+.LoginButton {
+  padding: 4px;
+}
   
-  .Title, .Options {
-    color: white;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .Title {
-    font-size: 32px;
-    font-family: 'Segoe UI';
-  }
-  
-  .Options {
-    font-size: 24px;
-    font-family: 'Segoe UI';
-  }
+.Title, .Options {
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.Title {
+  font-size: 32px;
+  font-family: 'Segoe UI';
+}
+
+.Options {
+  font-size: 24px;
+  font-family: 'Segoe UI';
+}
+
+.loader {
+  padding: 4px;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+}

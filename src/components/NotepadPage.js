@@ -7,9 +7,9 @@ import './NotepadPage.css';
  */
 export default function NotepadPage(props) {
 
-    const { title, note, handleInputChange, handleTextareaResize, textareaRef, checkNewLines } = props;
-    
-    const [rows, setRows] = useState(20);
+  const { title, note, handleInputChange, handleTextareaResize, textareaRef, checkNewLines } = props;
+  
+  const [rows, setRows] = useState(20);
 
   useEffect(() => {
     const updateRows = () => {
@@ -28,30 +28,30 @@ export default function NotepadPage(props) {
     };
   }, []);
 
-    return (
-        <div className='Notepad'>
-            <div className='Notepad-Title'>
-                <input 
-                    name='title'
-                    type='text' 
-                    placeholder="Untitled"
-                    onChange={handleInputChange}
-                    value={title}
-                />
-            </div>
-            <div className='lines'>
-                <div className='Page'>
-                    <textarea
-                        name='note'
-                        value={note}
-                        onInput={handleTextareaResize}
-                        onChange={handleInputChange}
-                        autoFocus
-                        rows={checkNewLines(note) < rows ? rows : checkNewLines(note) + 1}
-                        ref={textareaRef}
-                    />
-                </div>
-            </div>
+  return (
+    <div className='Notepad'>
+      <div className='Notepad-Title'>
+        <input 
+            name='title'
+            type='text' 
+            placeholder="Untitled"
+            onChange={handleInputChange}
+            value={title}
+        />
+      </div>
+      <div className='lines'>
+        <div className='Page'>
+          <textarea
+              name='note'
+              value={note}
+              onInput={handleTextareaResize}
+              onChange={handleInputChange}
+              autoFocus
+              rows={checkNewLines(note) < rows ? rows : checkNewLines(note) + 1}
+              ref={textareaRef}
+          />
         </div>
-    );
+      </div>
+    </div>
+  );
 }
