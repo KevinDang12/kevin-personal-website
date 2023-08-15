@@ -236,7 +236,7 @@ export default function App() {
 
   function handleTextareaResize() {
     if (textareaRef.current) {
-      textareaRef.current.style.height = '480px';
+      textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   };

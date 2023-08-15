@@ -1,50 +1,52 @@
 .Notepad {
-    padding-top: 4.5em;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-  }
+  padding-top: 4.5em;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
   
-  .Notepad-Title {
-    text-align: center;
-    padding: 0 0 0 5%;
-    background-color: white;
-  }
+.Notepad-Title {
+  text-align: center;
+  padding: 0 0 0 5%;
+  background-color: #f5f5f4;
+}
   
-  .lines {
-    background-size: 24px 24px;
-    background-image: 
-    linear-gradient(#5ec4ff80 0.1em, transparent 0.1em);
-    box-sizing: border-box;
-  }
+.lines {
+  background-size: 24px 24px;
+  background-image: 
+  linear-gradient(#5ec4ff80 0.1em, transparent 0.1em);
+  box-sizing: border-box;
+  background-color: #f5f5f4;
+}
   
-  .Page {
-    padding: 0 0 0 5%;
-  }
+.Page {
+  margin: 0 0 0 5%;
+  border-left: 3px solid red;
+}
   
-  .Page textarea {
-    font-size: 16px;
-    font-family: 'Segoe UI';
-    line-height: 24px;
-    padding-left: 5px;
-    border: none;
-    outline: none;
-    width: 100%;
-    border-left: 3px solid red;
-    resize: none;
-    background: transparent;
-    overflow: hidden;
-  }
+.Page textarea {
+  font-size: 16px;
+  font-family: 'Segoe UI';
+  line-height: 24px;
+  padding-left: 5px;
+  border: none;
+  outline: none;
+  width: 100%;
+  resize: none;
+  background: transparent;
+  overflow: hidden;
+}
   
-  .Notepad-Title input {
-    border: none;
-    outline: none;
-    border-left: red 3px solid;
-    font-size: 32px;
-    font-family: 'Segoe UI';
-    padding: 10px 0 10px 5px;
-    width: 100%;
-    font-weight: bold;
-  }
+.Notepad-Title input {
+  border: none;
+  outline: none;
+  border-left: red 3px solid;
+  font-size: 32px;
+  font-family: 'Segoe UI';
+  padding: 10px 0 10px 5px;
+  width: 100%;
+  font-weight: bold;
+  background-color: #f5f5f4;
+}
   
