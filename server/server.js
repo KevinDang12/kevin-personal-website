@@ -166,13 +166,13 @@ app.get('/api/notes/:id', (req, res) => {
  */
 app.post('/api/notes', (req, res) => {
     let notes = [];
-    const user = req.body;
+    let user = req.body;
 
     if (fs.existsSync(FILE)) {
         notes = read();
     }
 
-    user.title = encryptData(user.title, user.id); 
+    user.title = encryptData(user.title, user.id);
     user.note = encryptData(user.note, user.id);
     notes.push(user);
     write(notes);
