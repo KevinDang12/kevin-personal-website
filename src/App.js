@@ -98,7 +98,7 @@ export default function App() {
           first_name: first_name,
           last_name: last_name,
           title: "",
-          note: "Enter your note here",
+          note: "Enter your notes here!",
         };
         await axios.post('http://localhost:5000/api/notes', user)
         .catch(err => {
@@ -149,7 +149,7 @@ export default function App() {
     setProfile({});
     setSignedIn(false);
     setLoading(false);
-    setLoadPage(true);
+    setLoadPage(false);
   }
 
   /**
@@ -248,6 +248,9 @@ export default function App() {
     return count;
   }
 
+  /**
+   * Resize the textarea to fit the content
+   */
   function handleTextareaResize() {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
