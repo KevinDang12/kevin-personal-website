@@ -32,23 +32,23 @@ export default function NotepadPage(props) {
     <div className='Notepad'>
       <div className='Notepad-Title'>
         <input 
-            name='title'
-            type='text' 
-            placeholder="Untitled"
-            onChange={handleInputChange}
-            value={title}
+          name='title'
+          type='text' 
+          placeholder="Untitled"
+          onChange={handleInputChange}
+          value={title}
         />
       </div>
       <div className='lines'>
         <div className='Page'>
           <textarea
-              name='note'
-              value={note}
-              onInput={handleTextareaResize}
-              onChange={handleInputChange}
-              autoFocus
-              rows={checkNewLines(note) < rows ? rows : checkNewLines(note) + 1}
-              ref={textareaRef}
+            name='note'
+            value={note}
+            onInput={handleTextareaResize}
+            onChange={handleInputChange}
+            autoFocus
+            rows={checkNewLines(note) < rows ? rows : checkNewLines(note) + 1}
+            ref={textareaRef}
           />
         </div>
       </div>

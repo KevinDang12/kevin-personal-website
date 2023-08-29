@@ -9,13 +9,34 @@ const path = require('path');
 const { encryptData, decryptData } = require('./cipher');
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
+
+const _dirname = path.dirname('');
+const buildPath = path.join(_dirname, '../build');
 const FILE = 'saveFile.json';
+const BASE_URL = '/notepad';
+
+app.use(express.static(buildPath));
+
+/**
+ * Display the Front-end when the users are
+ * on the following pathname
+ */
+app.get(/^(?!\/(api|auth|logout)).+/, (req, res) => {
+  res.sendFile(
+      path.join(__dirname, '../build/index.html'),
+      function(err) {
+        if (err) {
+          res.status(500).send(err);
+        }
+      },
+  );
+});
 
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
 
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: BASE_URL,
     credentials: true,
 }));
 
@@ -68,9 +89,9 @@ app.get('/auth/facebook', passport.authenticate('facebook'));
  * GET Request when the user is redirected back to the app
  */
 app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: 'http://localhost:3000', failureRedirect: 'http://localhost:3000' }),
+  passport.authenticate('facebook', { successRedirect: BASE_URL, failureRedirect: BASE_URL }),
   (req, res) => {
-    res.redirect('/'); // Redirect to the React app or any desired URL after successful login
+    res.redirect('/');
   }
 );
 
@@ -97,7 +118,7 @@ app.get('/logout', async (req, res) => {
             return res.status(500).json({ message: 'Logout failed' });
         }
     });
-    res.redirect('http://localhost:3000'); // Redirect the user to the home page or any other desired URL after logout
+    res.redirect(BASE_URL);
 });
 
 /**

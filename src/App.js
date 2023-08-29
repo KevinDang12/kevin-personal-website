@@ -5,6 +5,10 @@ import Header from './Header';
 import LoginPage from './components/LoginPage';
 import NotepadPage from './components/NotepadPage';
 import LoadingPage from './components/LoadingPage';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+const BASE_URL = window.location.origin;
+const SUBDOMAIN = "/notepad";
 
 /**
  * The React App that includes the Notepad Component and the Login Component
@@ -54,12 +58,11 @@ export default function App() {
    */
   async function handleFacebookLogin() {
     setLoading(true);
-    const backendUrl = 'http://localhost:5000';
 
-    fetch(`${backendUrl}/api/status`)
+    fetch(`${BASE_URL}/api/status`)
       .then(response => {
         if (response.ok) {
-          window.location.href = `http://localhost:5000/auth/facebook`;
+          window.location.href = `${BASE_URL}/auth/facebook`;
         } else {
           alert('Unable to sign in with Facebook. Please try again later.');
           setLoading(false);
@@ -86,7 +89,7 @@ export default function App() {
     const last_name = userObject.family_name;
 
     try {
-      const response = await axios.get('http://localhost:5000/api/notes');
+      const response = await axios.get(`${BASE_URL}/api/notes`);
       const data = response.data;
 
       const foundUser = data.find(user => user.id === id);
@@ -100,7 +103,7 @@ export default function App() {
           title: "",
           note: "Enter your notes here!",
         };
-        await axios.post('http://localhost:5000/api/notes', user)
+        await axios.post(`${BASE_URL}/api/notes`, user)
         .catch(err => {
           console.error(err);
         });
@@ -118,7 +121,7 @@ export default function App() {
       setLoading(false);
     }
 
-    await axios.get('http://localhost:5000/api/notes/' + id)
+    await axios.get(`${BASE_URL}/api/notes/` + id)
       .then(res => {
         setProfile(res.data);
         setNote(res.data.note);
@@ -143,7 +146,7 @@ export default function App() {
 
     const facebookId = localStorage.getItem('facebookAuthToken');
     if (facebookId) {
-      window.location.href = 'http://localhost:5000/logout';
+      window.location.href = `${BASE_URL}/logout`;
       localStorage.removeItem('facebookAuthToken');
     }
     setProfile({});
@@ -166,7 +169,7 @@ export default function App() {
      */
     const getUser = async (id, first_name, last_name) => {
       try {
-        const response = await axios.get('http://localhost:5000/api/notes');
+        const response = await axios.get(`${BASE_URL}/api/notes`);
         const data = response.data;
 
         const foundUser = data.find(user => user.id === id);
@@ -180,13 +183,13 @@ export default function App() {
             note: "Enter your note here",
           };
           
-          await axios.post('http://localhost:5000/api/notes', user)
+          await axios.post(`${BASE_URL}/api/notes`, user)
           .catch(err => {
             console.error(err);
           });
         }
 
-        await axios.get('http://localhost:5000/api/notes/' + id)
+        await axios.get(`${BASE_URL}/api/notes/` + id)
         .then(res => {
           setProfile(res.data);
           setNote(res.data.note);
@@ -202,7 +205,7 @@ export default function App() {
       };
 
     if (!(localStorage.getItem('facebookAuthToken'))) {
-      axios.get('http://localhost:5000/api/user/profile', { withCredentials: true })
+      axios.get(`${BASE_URL}/api/user/profile`, { withCredentials: true })
       .then((res) => {
         if (res.data) {
           const id = res.data.id;
@@ -225,7 +228,7 @@ export default function App() {
       const id = googleId ? googleId : facebookId;
       setSignedIn(true);
 
-      axios.get('http://localhost:5000/api/notes/' + id)
+      axios.get(`${BASE_URL}/api/notes/` + id)
       .then(res => {
         setProfile(res.data);
         setNote(res.data.note);
@@ -269,7 +272,7 @@ export default function App() {
       title: title,
     };
 
-    axios.put('http://localhost:5000/api/notes/' + profile.id, userUpdate)
+    axios.put(`${BASE_URL}/api/notes/` + profile.id, userUpdate)
       .then(res => {
         alert('Your note is saved.');
       })
@@ -279,40 +282,49 @@ export default function App() {
   }
 
   return (
-    <div>
-      { !loadPage ? 
-        <div>
-          { !signedIn &&
-          <LoginPage 
-            handleGoogleLogin={handleGoogleLogin}
-            handleFacebookLogin={handleFacebookLogin}
-            loading={loading}
-          />
-        }
-        { signedIn &&
-        <div>
-          <Header
-            handleSave={handleSave}
-            handleSignOut={handleLogout}
-            toggleMenu={toggleMenu}
-            showMenu={showMenu}
-            signedIn={signedIn}
-            name={profile.first_name}
-          />
-          <NotepadPage 
-            title={title}
-            note={note}
-            setTitle={setTitle}
-            setNote={setNote}
-            textareaRef={textareaRef}
-            handleInputChange={handleInputChange}
-            handleTextareaResize={handleTextareaResize}
-            checkNewLines={checkNewLines}
-          />
-        </div>
-        }
-      </div> 
-      : <LoadingPage />}
-    </div>
+    <Router>
+      <div>
+        <Routes>
+          <Route path={SUBDOMAIN} element={
+            <div>
+              { !loadPage ? 
+                <div>
+                  { !signedIn &&
+                  <LoginPage 
+                    handleGoogleLogin={handleGoogleLogin}
+                    handleFacebookLogin={handleFacebookLogin}
+                    loading={loading}
+                  />
+                }
+                { signedIn &&
+                <div>
+                  <Header
+                    handleSave={handleSave}
+                    handleSignOut={handleLogout}
+                    toggleMenu={toggleMenu}
+                    showMenu={showMenu}
+                    signedIn={signedIn}
+                    name={profile.first_name}
+                  />
+                  <NotepadPage 
+                    title={title}
+                    note={note}
+                    setTitle={setTitle}
+                    setNote={setNote}
+                    textareaRef={textareaRef}
+                    handleInputChange={handleInputChange}
+                    handleTextareaResize={handleTextareaResize}
+                    checkNewLines={checkNewLines}
+                  />
+                </div>
+                }
+              </div> 
+                : <LoadingPage />
+              }
+            </div>
+          }/>
+        </Routes>
+      </div>
+    </Router>
   );
 }
