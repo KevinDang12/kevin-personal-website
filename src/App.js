@@ -6,9 +6,10 @@ import LoginPage from './components/LoginPage';
 import NotepadPage from './components/NotepadPage';
 import LoadingPage from './components/LoadingPage';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import NotFoundPage from './components/NotFoundPage';
 
 const BASE_URL = window.location.origin;
-const SUBDOMAIN = "/notepad";
+const SUBDOMAIN = "/";
 
 /**
  * The React App that includes the Notepad Component and the Login Component
@@ -297,32 +298,34 @@ export default function App() {
                   />
                 }
                 { signedIn &&
-                <div>
-                  <Header
-                    handleSave={handleSave}
-                    handleSignOut={handleLogout}
-                    toggleMenu={toggleMenu}
-                    showMenu={showMenu}
-                    signedIn={signedIn}
-                    name={profile.first_name}
-                  />
-                  <NotepadPage 
-                    title={title}
-                    note={note}
-                    setTitle={setTitle}
-                    setNote={setNote}
-                    textareaRef={textareaRef}
-                    handleInputChange={handleInputChange}
-                    handleTextareaResize={handleTextareaResize}
-                    checkNewLines={checkNewLines}
-                  />
-                </div>
+                  <div>
+                    <Header
+                      handleSave={handleSave}
+                      handleSignOut={handleLogout}
+                      toggleMenu={toggleMenu}
+                      showMenu={showMenu}
+                      signedIn={signedIn}
+                      name={profile.first_name}
+                    />
+                    <NotepadPage 
+                      title={title}
+                      note={note}
+                      setTitle={setTitle}
+                      setNote={setNote}
+                      textareaRef={textareaRef}
+                      handleInputChange={handleInputChange}
+                      handleTextareaResize={handleTextareaResize}
+                      checkNewLines={checkNewLines}
+                    />
+                  </div>
                 }
-              </div> 
+                </div> 
                 : <LoadingPage />
               }
             </div>
-          }/>
+            }
+          />
+          <Route path={'*'} element={<NotFoundPage />}/>
         </Routes>
       </div>
     </Router>
