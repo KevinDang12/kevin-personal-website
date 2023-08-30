@@ -13,7 +13,7 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const _dirname = path.dirname('');
 const buildPath = path.join(_dirname, '../build');
 const FILE = 'saveFile.json';
-const BASE_URL = '/notepad';
+const BASE_URL = '/';
 
 app.use(express.static(buildPath));
 
