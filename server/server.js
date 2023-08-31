@@ -44,6 +44,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const crypto = require('crypto');
 const secretKey = crypto.randomBytes(32).toString('hex');
 
+/**
+ * Use express-session to store the user's information
+ */
 app.use(session({
     secret: secretKey,
     resave: false,
@@ -69,11 +72,12 @@ passport.use(new FacebookStrategy({
   }
 ));
 
-// Serialize and deserialize user
+// Serialize user
 passport.serializeUser((user, done) => {
     done(null, user);
 });
-  
+
+// Deserialize user
 passport.deserializeUser((obj, done) => {
     done(null, obj);
 });
@@ -89,7 +93,7 @@ app.get('/auth/facebook', passport.authenticate('facebook'));
  * GET Request when the user is redirected back to the app
  */
 app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: BASE_URL, failureRedirect: BASE_URL }),
+  passport.authenticate('facebook', { successRedirect: `/notepad`, failureRedirect: `/signin` }),
   (req, res) => {
     res.redirect('/');
   }
@@ -118,7 +122,7 @@ app.get('/logout', async (req, res) => {
             return res.status(500).json({ message: 'Logout failed' });
         }
     });
-    res.redirect(BASE_URL);
+    res.redirect(`/signin`);
 });
 
 /**
@@ -143,7 +147,6 @@ const read = () => {
 const write = (notes) => {
     fs.writeFile(FILE, JSON.stringify(notes), function(err) {
         if (err) throw err;
-        console.log('Saved!');
     });
 };
 
@@ -161,6 +164,9 @@ app.get('/api/notes', (req, res) => {
     res.send(notes);
 });
 
+/**
+ * GET Request when the user finds the status of the server
+ */
 app.get('/api/status', (req, res) => {
     res.status(200).send('The server is running');
 });

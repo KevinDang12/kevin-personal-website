@@ -3,9 +3,14 @@ import './Header.css';
 import {Button} from 'react-bootstrap';
 import MediaQuery from 'react-responsive';
 
+/**
+ * The Header Component for the Notepad
+ * @param {*} props  The properties for the Header Component
+ * @returns The React Header Component for saving and signing out
+ */
 export default function Header(props) {
 
-    const { handleSignOut, handleSave, toggleMenu, showMenu, name } = props;
+    const { handleLogout, handleSave, name, toggleMenu, showMenu, signedIn } = props;
 
     return (
         <div>
@@ -17,6 +22,7 @@ export default function Header(props) {
                         </li>
                     </ul>
                     <ul className="header-right">
+                        { signedIn &&
                         <li>
                             <div className="flex-container">
                                 <p>Hello {name}</p>
@@ -29,11 +35,11 @@ export default function Header(props) {
                                 <Button
                                     className='button'
                                     variant="primary"
-                                    onClick={handleSignOut}>
+                                    onClick={handleLogout}>
                                     Sign out
                                 </Button>
                             </div>
-                        </li>
+                        </li> }
                     </ul>
                 </div>
             </MediaQuery>
@@ -50,7 +56,7 @@ export default function Header(props) {
                         <li className='menu-button' onClick={handleSave}>
                             <p >Save</p>
                         </li>
-                        <li className='menu-button' onClick={handleSignOut}>
+                        <li className='menu-button' onClick={handleLogout}>
                             <p>Sign out</p>
                         </li>
                     </ul>
