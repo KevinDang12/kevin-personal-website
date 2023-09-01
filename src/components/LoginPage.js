@@ -12,7 +12,7 @@ const BASE_URL = window.location.origin;
  * Handles the Google and Facebook Login
  * @returns The React Login Component
  */
-export default function LoginPage(props) {
+export default function LoginPage() {
 
     const [ loading, setLoading ] = useState(false);
 
