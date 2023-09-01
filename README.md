@@ -5,7 +5,7 @@ It allows users to sign in with Google or Facebook to create and save their note
 
 The Notepad web app is hosted on AWS. It can be accessed [here](https://notepad.kevindang12.com/signin).
 
-The users can also access their notes on an Android Notepad app, which can be found in this [repository](https://github.com/KevinDang12/android-notepad-auth).
+The users' notes are also accessible from the Android Notepad app, which can be found in this [repository](https://github.com/KevinDang12/android-notepad-auth).
 
 ![Website](https://github.com/KevinDang12/react-notepad/assets/90794211/36264423-a097-4ee4-b5eb-f14cea2c5a1d)
 
