@@ -5,8 +5,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import LoadingPage from './LoadingPage';
 import { Button } from 'react-bootstrap';
+import toast, { Toaster } from 'react-hot-toast';
 
 const BASE_URL = window.location.origin;
+
+const notesSaved = () => toast('Your note is saved.');
 
 /**
  * The NotepadPage Component to allow the user to write notes
@@ -155,7 +158,7 @@ export default function NotepadPage() {
 
     axios.put(`${BASE_URL}/api/notes/` + id, userUpdate)
       .then(res => {
-        alert('Your note is saved.');
+        notesSaved();
       })
       .catch(err => {
         console.error(err);
@@ -263,6 +266,7 @@ export default function NotepadPage() {
 
   return (
     <div>
+      <Toaster />
       <Header
         showMenu={showMenu}
         signedIn={signedIn}

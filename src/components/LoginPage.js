@@ -5,8 +5,12 @@ import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-butto
 import { Oval } from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import toast, { Toaster } from 'react-hot-toast';
 
 const BASE_URL = window.location.origin;
+
+const facebookSigninError = () => toast('Unable to sign in with Facebook. Please try again later.');
+const googleSigninError = () => toast('Unable to sign in with Google. Please try again later.');
 
 /**
  * Handles the Google and Facebook Login
@@ -38,11 +42,11 @@ export default function LoginPage() {
             if (response) {
                 window.location.href = `${BASE_URL}/auth/facebook`;
             } else {
-                alert('Unable to sign in with Facebook. Please try again later.');
+                facebookSigninError();
             }
         })
         .catch(error => {
-            alert('Unable to sign in with Facebook. Please try again later.');
+            facebookSigninError();
             console.error('Error while checking server status:', error);
             setLoading(false);
         });
@@ -69,11 +73,11 @@ export default function LoginPage() {
                 localStorage.setItem('googleLastName', last_name);
                 redirectToNotepad();
             } else {
-                alert('Unable to sign in with Google. Please try again later.');
+                googleSigninError();
             }
         })
         .catch(error => {
-            alert('Unable to sign in with Google. Please try again later.');
+            googleSigninError();
             console.error('Error while checking server status:', error);
             setLoading(false);
         });
@@ -81,6 +85,7 @@ export default function LoginPage() {
 
     return (
         <div className='Login-Page'>
+            <Toaster />
             { loggedIn ?
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
                     <h1 className='Title'>You Are Already Logged In</h1>
