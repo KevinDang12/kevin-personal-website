@@ -1,5 +1,5 @@
 import React from 'react';
-import './Header.css';
+import './NotepadHeader.css';
 import {Button} from 'react-bootstrap';
 import MediaQuery from 'react-responsive';
 
@@ -15,7 +15,7 @@ export default function Header(props) {
     return (
         <div>
             <MediaQuery minWidth={769}>
-                <div className="header">
+                <div className="note-header">
                     <ul className="header-left">
                         <li className="logo">
                             <a className='title' href="/">Notepad</a>

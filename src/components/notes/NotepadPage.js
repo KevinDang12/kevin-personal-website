@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './NotepadPage.css';
-import Header from '../Header';
+import Header from '../../NotepadHeader';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import LoadingPage from './LoadingPage';
@@ -225,6 +225,7 @@ export default function NotepadPage() {
   function loadNotesData() {
     const googleId = localStorage.getItem('googleId');
     const facebookId = localStorage.getItem('facebookAuthToken');
+
     if (googleId || facebookId) {
       const id = googleId ? googleId : facebookId;
       setSignedIn(true);
