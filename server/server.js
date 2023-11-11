@@ -12,7 +12,8 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 
 const _dirname = path.dirname('');
 const buildPath = path.join(_dirname, '../build');
-const FILE = 'saveFile.json';
+const NOTE_FILE = 'notes.json';
+const MINESWEEPER_FILE = 'minesweeper.json';
 const BASE_URL = '/';
 
 app.use(express.static(buildPath));
@@ -130,9 +131,9 @@ app.get('/logout', async (req, res) => {
  * of users and saved notes
  * @return {*} The list of users and their notes
  */
-const read = () => {
+const read = (file) => {
     try {
-      const data = fs.readFileSync(FILE, 'utf8');
+      const data = fs.readFileSync(file, 'utf8');
       return JSON.parse(data);
     } catch (err) {
       console.error(err);
@@ -144,8 +145,8 @@ const read = () => {
  * new save file if it does not exists with the save data
  * @param {*} notes The user and their notes to save to the save file.
  */
-const write = (notes) => {
-    fs.writeFile(FILE, JSON.stringify(notes), function(err) {
+const write = (notes, file) => {
+    fs.writeFile(file, JSON.stringify(notes), function(err) {
         if (err) throw err;
     });
 };
@@ -156,10 +157,10 @@ const write = (notes) => {
  */
 app.get('/api/notes', (req, res) => {
     let notes = [];
-    if (!fs.existsSync(FILE)) {
-        write([]);
+    if (!fs.existsSync(NOTE_FILE)) {
+        write([], NOTE_FILE);
     } else {
-        notes = read();
+        notes = read(NOTE_FILE);
     }
     res.send(notes);
 });
@@ -176,7 +177,7 @@ app.get('/api/status', (req, res) => {
  * from the backend
  */
 app.get('/api/notes/:id', (req, res) => {
-    const notes = read();
+    const notes = read(NOTE_FILE);
     const user = notes.find((b) => b.id === req.params.id);
 
     if (!user) { // 404 object not found
@@ -195,14 +196,14 @@ app.post('/api/notes', (req, res) => {
     let notes = [];
     let user = req.body;
 
-    if (fs.existsSync(FILE)) {
-        notes = read();
+    if (fs.existsSync(NOTE_FILE)) {
+        notes = read(NOTE_FILE);
     }
 
     user.title = encryptData(user.title, user.id);
     user.note = encryptData(user.note, user.id);
     notes.push(user);
-    write(notes);
+    write(notes, NOTE_FILE);
     res.send(notes);
 });
 
@@ -211,7 +212,7 @@ app.post('/api/notes', (req, res) => {
  * Update the note in the save file
  */
 app.put('/api/notes/:id', (req, res) => {
-    const notes = read();
+    const notes = read(NOTE_FILE);
     const user = notes.find((b) => b.id === req.params.id);
 
     if (!user) { // 404 object not found
@@ -220,8 +221,98 @@ app.put('/api/notes/:id', (req, res) => {
     
     user.title = encryptData(req.body.title, user.id);
     user.note = encryptData(req.body.note, user.id);
-    write(notes);
+    write(notes, NOTE_FILE);
     res.send(user);
+});
+
+/**
+ * GET Request when the user finds the list of boards
+ * from the backend
+ */
+app.get('/api/boards', (req, res) => {
+    const boards = read(MINESWEEPER_FILE);
+    res.send(boards);
+});
+
+/**
+ * GET Request when the user gets a board using
+ * an id
+ */
+app.get('/api/boards/:id', (req, res) => {
+    const boards = read(MINESWEEPER_FILE);
+  
+    const board = boards.find((b) => b.id === req.params.id);
+  
+    if (!board) { // 404 object not found
+      res.status(404).send('The board with the given ID was not found.');
+    }
+  
+    res.send(board);
+});
+
+/**
+ * POST Request add a save minesweeper game to the back-end
+ */
+app.post('/api/boards', (req, res) => {
+    let boards = [];
+  
+    const unixTimestamp = Math.floor(Date.now());
+  
+    const board = {
+      id: req.body.id,
+      boardSize: req.body.boardSize,
+      endGame: req.body.endGame,
+      firstClick: req.body.firstClick,
+      mineCounter: req.body.mineCounter,
+      name: req.body.name,
+      unixTime: unixTimestamp,
+      paused: req.body.paused,
+      counter: req.body.counter,
+      totalMines: req.body.totalMines,
+      boardData: req.body.boardData,
+      start: req.body.start,
+    };
+  
+    if (fs.existsSync(MINESWEEPER_FILE)) {
+      boards = read(MINESWEEPER_FILE);
+    }
+  
+    boards.push(board);
+  
+    write(boards, MINESWEEPER_FILE);
+  
+    res.send(board);
+});
+
+/**
+ * PUT Request update an existing minesweeper save game
+ */
+app.put('/api/boards/:id', (req, res) => {
+    const boards = read(MINESWEEPER_FILE);
+  
+    const board = boards.find((b) => b.id === req.params.id);
+  
+    if (!board) {
+      return res.status(404).send('The board with the given ID was not found.');
+    }
+  
+    const unixTimestamp = Math.floor(Date.now());
+  
+    board.unixTime = unixTimestamp;
+    board.boardSize = req.body.boardSize;
+    board.counter = req.body.counter;
+    board.endGame = req.body.endGame;
+    board.firstClick = req.body.firstClick;
+    board.mineCounter = req.body.mineCounter;
+    board.name = req.body.name;
+    board.paused = req.body.paused;
+    board.totalMines = req.body.totalMines;
+    board.boardData = req.body.boardData;
+    board.start = req.body.start;
+  
+    write(boards, MINESWEEPER_FILE);
+  
+    res.send(board);
 });
   
 const port = process.env.PORT || 5000;

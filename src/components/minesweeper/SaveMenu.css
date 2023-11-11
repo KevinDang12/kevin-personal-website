@@ -1,0 +1,24 @@
+.save-files>table>tbody>tr:hover {
+    background-color: gray;
+    color: white;
+}
+
+.float-container {
+    padding: 20px;
+}
+
+.float-child-left {
+    width: 50%;
+    float: left;
+    padding-left: 100px;
+}
+
+.float-child-right {
+    width: 50%;
+    float: right;
+    padding-right: 100px;
+}
+
+.save-files {
+    text-align: center;
+}
