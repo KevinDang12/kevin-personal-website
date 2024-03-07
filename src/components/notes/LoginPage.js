@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './LoginPage.css';
 import { LoginSocialGoogle } from 'reactjs-social-login';
-import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
+import { GoogleLoginButton } from 'react-social-login-buttons';
 import { Oval } from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
@@ -9,11 +9,10 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const BASE_URL = window.location.origin;
 
-const facebookSigninError = () => toast('Unable to sign in with Facebook. Please try again later.');
 const googleSigninError = () => toast('Unable to sign in with Google. Please try again later.');
 
 /**
- * Handles the Google and Facebook Login
+ * Handles the Google Login
  * @returns The React Login Component
  */
 export default function LoginPage() {
@@ -22,7 +21,7 @@ export default function LoginPage() {
 
     const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
     const navigate = useNavigate();
-    const loggedIn = localStorage.getItem('googleId') || localStorage.getItem('facebookAuthToken');
+    const loggedIn = localStorage.getItem('googleId');
 
     /**
      * Redirect the user to the notepad page
@@ -30,27 +29,6 @@ export default function LoginPage() {
     function redirectToNotepad() {
         navigate('/notepad');
     };
-
-    /**
-     * Redirect the user to the backend to sign into Facebook
-     */
-    async function handleFacebookLogin() {
-        setLoading(true);
-
-        fetch(`${BASE_URL}/api/status`)
-        .then(response => {
-            if (response) {
-                window.location.href = `${BASE_URL}/auth/facebook`;
-            } else {
-                facebookSigninError();
-            }
-        })
-        .catch(error => {
-            facebookSigninError();
-            console.error('Error while checking server status:', error);
-            setLoading(false);
-        });
-    }
 
     /**
      * Handle the login process for a Google user
@@ -114,11 +92,6 @@ export default function LoginPage() {
                         >
                             <GoogleLoginButton/>
                         </LoginSocialGoogle>
-                    </div>
-                    <div className='LoginButton'>
-                        <div>
-                            <FacebookLoginButton onClick={handleFacebookLogin}/>
-                        </div>
                     </div>
                     <div className='loader'>
                         <div>
