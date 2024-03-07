@@ -37,25 +37,6 @@ export default function NotepadPage() {
    */
   useEffect(() => {
     setLoading(true);
-    if (!localStorage.getItem('facebookAuthToken') && !localStorage.getItem('googleId')) {
-      axios.get(`${BASE_URL}/api/user/profile`, { withCredentials: true })
-      .then((res) => {
-          res = res.data;
-          if (res) {
-            const id = res.id;
-            const first_name = res.name.givenName;
-            const last_name = res.name.familyName;
-            getUser(id, first_name, last_name);
-            setSignedIn(true);
-            setToken(id);
-            localStorage.setItem('facebookAuthToken', id);
-          }
-      })
-      .catch((err) => {
-          console.error('Failed to fetch user profile:', err);
-      });
-    }
-    
     if (localStorage.getItem('googleId')) {
       const id = localStorage.getItem('googleId');
       const first_name = localStorage.getItem('googleFirstName');
@@ -118,9 +99,8 @@ export default function NotepadPage() {
   };
 
   /**
-   * Handle the logout functionality for Facebook and Google
+   * Handle the logout functionality for Google
    * Google: remove the googleId from the browser's local storage
-   * Facebook: Redirect the user to the logout in the backend
    */
   function handleLogout() {
       setLoading(true);
@@ -129,17 +109,7 @@ export default function NotepadPage() {
       if (googleId) {
         localStorage.removeItem('googleId');
       }
-
-      const facebookId = localStorage.getItem('facebookAuthToken');
-      let facebookLogOut = false;
-      if (facebookId) {
-        window.location.href = `${BASE_URL}/logout`;
-        localStorage.removeItem('facebookAuthToken');
-        facebookLogOut = true;
-      }
-      if (!facebookLogOut) {
-        redirectToHome();
-      }
+      redirectToHome();
       setId("");
       setName("");
       setSignedIn(false);
@@ -178,25 +148,26 @@ export default function NotepadPage() {
 
       const foundUser = data.find(user => user.id === id);
 
-      if (!foundUser) {
-      const user = {
-          id: id,
-          first_name: first_name,
-          last_name: last_name,
-          title: "",
-          note: "Enter your note here",
-      };
+      if (foundUser === null || typeof foundUser === 'undefined') {
+        const user = {
+            id: id,
+            first_name: first_name,
+            last_name: last_name,
+            title: "",
+            note: "Enter your note here",
+        };
       
-      await axios.post(`${BASE_URL}/api/notes`, user)
-      .catch(err => {
-          console.error(err);
-      });
+        await axios.post(`${BASE_URL}/api/notes`, user)
+        .catch(err => {
+            console.error(err);
+        });
       }
 
       await axios.get(`${BASE_URL}/api/notes/` + id)
       .then(res => {
           res = res.data;
           setId(res.id);
+          setName(res.first_name);
           setNote(res.note);
           setTitle(res.title);
       })
@@ -224,10 +195,9 @@ export default function NotepadPage() {
    */
   function loadNotesData() {
     const googleId = localStorage.getItem('googleId');
-    const facebookId = localStorage.getItem('facebookAuthToken');
 
-    if (googleId || facebookId) {
-      const id = googleId ? googleId : facebookId;
+    if (googleId) {
+      const id = googleId;
       setSignedIn(true);
 
       axios.get(`${BASE_URL}/api/notes/` + id)

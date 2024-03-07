@@ -7,8 +7,6 @@ const fs = require('fs');
 const path = require('path');
 
 const { encryptData, decryptData } = require('./cipher');
-const passport = require('passport');
-const FacebookStrategy = require('passport-facebook').Strategy;
 
 const _dirname = path.dirname('');
 const buildPath = path.join(_dirname, '../build');
@@ -54,51 +52,7 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
-
-/**
- * Passport Facebook Strategy
- */
-passport.use(new FacebookStrategy({
-    clientID: process.env.FACEBOOK_APP_ID,
-    clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: process.env.CALLBACK_URL_FACEBOOK,
-    profileFields: ['id', 'displayName', 'name'],
-    enableProof: true
-  },
-  (accessToken, refreshToken, profile, done) => {
-    profile.accessToken = accessToken;
-    return done(null, profile);
-  }
-));
-
-// Serialize user
-passport.serializeUser((user, done) => {
-    done(null, user);
-});
-
-// Deserialize user
-passport.deserializeUser((obj, done) => {
-    done(null, obj);
-});
-
 /* Auth routes */
-
-/**
- * GET Request when the user clicks the login button
- */
-app.get('/auth/facebook', passport.authenticate('facebook'));
-
-/**
- * GET Request when the user is redirected back to the app
- */
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: `/notepad`, failureRedirect: `/signin` }),
-  (req, res) => {
-    res.redirect('/');
-  }
-);
 
 /**
  * GET Request to check if the user is authenticated
@@ -180,12 +134,13 @@ app.get('/api/notes/:id', (req, res) => {
     const notes = read(NOTE_FILE);
     const user = notes.find((b) => b.id === req.params.id);
 
-    if (!user) { // 404 object not found
+    if (user === null || typeof user === 'undefined') { // 404 object not found
         res.status(404).send('The user with the given ID was not found.');
+    } else {
+        user.title = decryptData(user.title, user.id);
+        user.note = decryptData(user.note, user.id);
+        res.send(user);
     }
-    user.title = decryptData(user.title, user.id);
-    user.note = decryptData(user.note, user.id);
-    res.send(user);
 });
 
 /**
@@ -217,12 +172,12 @@ app.put('/api/notes/:id', (req, res) => {
 
     if (!user) { // 404 object not found
         res.status(404).send('The board with the given ID was not found.');
+    } else {
+        user.title = encryptData(req.body.title, user.id);
+        user.note = encryptData(req.body.note, user.id);
+        write(notes, NOTE_FILE);
+        res.send(user);
     }
-    
-    user.title = encryptData(req.body.title, user.id);
-    user.note = encryptData(req.body.note, user.id);
-    write(notes, NOTE_FILE);
-    res.send(user);
 });
 
 /**
@@ -245,9 +200,9 @@ app.get('/api/boards/:id', (req, res) => {
   
     if (!board) { // 404 object not found
       res.status(404).send('The board with the given ID was not found.');
+    } else {
+        res.send(board);
     }
-  
-    res.send(board);
 });
 
 /**
