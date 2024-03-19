@@ -1,0 +1,9 @@
+FROM node:alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+# Expose port to access server
+EXPOSE 3200
+# Command to run our app
+CMD [ "npm", "run", "start" ]

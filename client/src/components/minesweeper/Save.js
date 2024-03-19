@@ -7,6 +7,8 @@ import {v4 as uuid} from 'uuid';
 import {Jump} from './Jump';
 import PropTypes from 'prop-types';
 
+const BASE_URL = "http://localhost:5000";
+
 Save.propTypes = {
   id: PropTypes.string,
   saveError: PropTypes.func.isRequired,
@@ -86,7 +88,7 @@ export default function Save(props) {
       counter: counter,
     };
 
-    let url = `${window.location.origin}/api/boards/`;
+    let url = `${BASE_URL}/api/boards/`;
     let func = axios.post;
 
     if (urlId) {

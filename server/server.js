@@ -12,32 +12,11 @@ const _dirname = path.dirname('');
 const buildPath = path.join(_dirname, '../build');
 const NOTE_FILE = 'notes.json';
 const MINESWEEPER_FILE = 'minesweeper.json';
-const BASE_URL = '/';
 
 app.use(express.static(buildPath));
 
-/**
- * Display the Front-end when the users are
- * on the following pathname
- */
-app.get(/^(?!\/(api|auth|logout)).+/, (req, res) => {
-  res.sendFile(
-      path.join(__dirname, '../build/index.html'),
-      function(err) {
-        if (err) {
-          res.status(500).send(err);
-        }
-      },
-  );
-});
-
-require('dotenv').config({ path: path.join(__dirname, '../.env') });
-
 app.use(express.json());
-app.use(cors({
-    origin: BASE_URL,
-    credentials: true,
-}));
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 const crypto = require('crypto');

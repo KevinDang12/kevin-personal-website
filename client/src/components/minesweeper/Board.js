@@ -11,6 +11,8 @@ import {useStopwatch} from 'react-timer-hook';
 import PropTypes from 'prop-types';
 import toast, { Toaster } from 'react-hot-toast';
 
+const BASE_URL = "http://localhost:5000";
+
 const gameSaved = () => toast('Your game is saved.');
 const gameNotSaved = () => toast('Unable to save game');
 
@@ -69,7 +71,7 @@ function Board(props) {
    */
   useEffect(() => {
     if (id) {
-      axios.get(`${window.location.origin}/api/boards/` + id)
+      axios.get(`${BASE_URL}/api/boards/` + id)
           .then((result) => {
             const {
               boardData,
@@ -382,7 +384,7 @@ function Board(props) {
   const getBoards = async () => {
     try {
       setSaveError(false);
-      const data = await axios.get(`${window.location.origin}/api/boards/`)
+      const data = await axios.get(`${BASE_URL}/api/boards/`)
           .then(({data}) => data);
       setBoards(data);
     } catch (err) {

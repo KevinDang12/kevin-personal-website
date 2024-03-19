@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import toast, { Toaster } from 'react-hot-toast';
 
-const BASE_URL = window.location.origin;
+const BASE_URL = "http://localhost:5000";
 
 const googleSigninError = () => toast('Unable to sign in with Google. Please try again later.');
 
