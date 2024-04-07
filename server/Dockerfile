@@ -1,6 +1,7 @@
-FROM node:latest
+FROM node:alpine
 WORKDIR /app
-COPY server/package*.json ./
+COPY package*.json ./
 RUN npm install
-COPY server .
+COPY . .
+EXPOSE 5000
 CMD [ "npm", "run", "start"]

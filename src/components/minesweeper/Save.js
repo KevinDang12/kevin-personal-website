@@ -7,7 +7,7 @@ import {v4 as uuid} from 'uuid';
 import {Jump} from './Jump';
 import PropTypes from 'prop-types';
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "http://notepad.kevindang12.com:5000";
 
 Save.propTypes = {
   id: PropTypes.string,

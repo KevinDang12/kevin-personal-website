@@ -7,7 +7,7 @@ import LoadingPage from './LoadingPage';
 import { Button } from 'react-bootstrap';
 import toast, { Toaster } from 'react-hot-toast';
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "http://notepad.kevindang12.com:5000";
 
 const notesSaved = () => toast('Your note is saved.');
 

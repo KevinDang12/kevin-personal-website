@@ -2,40 +2,24 @@ version: '3'
 services:
   nginx:
     restart: always
-    image:
-      'nginx:latest'
+    image: 'nginx:latest'
+    container_name: react-notepad-client
     build:
-      dockerfile: Dockerfile.dev
-      context: ./nginx
+      dockerfile: Dockerfile
+      context: ./
     ports:
-      - '3050:3051'
+      - '80:80'
     depends_on:
       - api
-      - client
   api:
+    container_name: react-notepad-server
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./server
     ports:
       - '5000:5000'
-    volumes:
-      - '/app/node_modules'
-      - './server:/app'
     environment:
       - REACT_APP_GOOGLE_CLIENT_ID=process.env.REACT_APP_GOOGLE_CLIENT_ID
       - GOOGLE_CLIENT_SECRET=process.env.GOOGLE_CLIENT_SECRET
       - CALLBACK_URL_GOOGLE=process.env.CALLBACK_URL_GOOGLE
     restart: always
-  client:
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./client
-    ports:
-      - "3200:3000"
-    links:
-      - api
-    volumes:
-      - '/app/node_modules'
-      - './client:/app'
-    command: npm run start
-    tty: true

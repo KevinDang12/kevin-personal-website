@@ -15,6 +15,23 @@ const MINESWEEPER_FILE = 'minesweeper.json';
 
 app.use(express.static(buildPath));
 
+/**
+ * Display the Front-end when the users are
+ * on the following pathname
+ */
+// app.get(/^(?!\/(api|auth|logout)).+/, (req, res) => {
+//   res.sendFile(
+//       path.join(__dirname, '../build/index.html'),
+//       function(err) {
+//         if (err) {
+//           res.status(500).send(err);
+//         }
+//       },
+//   );
+// });
+
+require('dotenv').config({ path: path.join(__dirname, '../.env') });
+
 app.use(express.json());
 app.use(cors());
 
@@ -164,8 +181,13 @@ app.put('/api/notes/:id', (req, res) => {
  * from the backend
  */
 app.get('/api/boards', (req, res) => {
-    const boards = read(MINESWEEPER_FILE);
-    res.send(boards);
+    let minesweeper = [];
+    if (!fs.existsSync(MINESWEEPER_FILE)) {
+        write([], MINESWEEPER_FILE);
+    } else {
+        minesweeper = read(MINESWEEPER_FILE);
+    }
+    res.send(minesweeper);
 });
 
 /**

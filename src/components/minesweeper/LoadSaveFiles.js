@@ -5,6 +5,8 @@ import {Button} from 'react-bootstrap';
 import {date} from './GameLogic.js';
 import './LoadSaveFiles.css';
 
+const BASE_URL = "http://notepad.kevindang12.com:5000";
+
 /**
  * Get the list of Boards from the backend server
  * and load a minesweeper game
@@ -21,10 +23,8 @@ export default function LoadSaveFiles() {
    */
   const getBoards = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/boards/`);
-      if (response && response.data) {
-        setBoards(response.data);
-      }
+      const response = await axios.get(`${BASE_URL}/api/boards/`);
+      setBoards(response.data);
     } catch (err) {
       console.log(err);
     } finally {
