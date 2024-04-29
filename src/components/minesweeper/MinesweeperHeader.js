@@ -17,14 +17,16 @@ export default function Header() {
       <ul className="header-left">
         <li className="logo">
           {(location.pathname === (url)) ?
-          <Link to={url + '/game'}>Minesweeper</Link> :
-          <p>Minesweeper</p>
+            <Link to={url + '/game'}>Minesweeper</Link> :
+            <p className='logo-text'>Minesweeper</p>
           }
         </li>
       </ul>
 
       <ul className="header-right">
-        <li><Link data-testid="load-link" to={url}>Load</Link></li>
+        <li className='load'>
+          <Link data-testid="load-link" to={url}>Load</Link>
+        </li>
       </ul>
     </div>
   );
