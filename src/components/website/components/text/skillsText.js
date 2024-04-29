@@ -1,0 +1,9 @@
+export const HEADER = `My Skills`;
+export const JS = `JavaScript`;
+export const REACT = `React`;
+export const JAVA = `Java`;
+export const ANDROID = `Android`;
+export const PYTHON = `Python`;
+export const SQL = `SQL`;
+export const C = `C`;
+export const CPP = `C++`;

@@ -4,6 +4,7 @@ import LoginPage from './components/notes/LoginPage';
 import NotepadPage from './components/notes/NotepadPage';
 import Board from './components/minesweeper/Board';
 import Header from './components/minesweeper/MinesweeperHeader';
+import Website from './components/website/components/Website';
 import LoadSaveFiles from './components/minesweeper/LoadSaveFiles';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NotFoundPage from './components/notes/NotFoundPage';
@@ -20,6 +21,7 @@ export default function App() {
       <Routes>
         <Route path={"/signin"} element={<LoginPage />}/>
         <Route path={'/notepad'} element={<NotepadPage />}/>
+        <Route path={'/kevin-website'} element={<Website />}/>
         <Route exact path={url} element={
           <div>
             <Header />

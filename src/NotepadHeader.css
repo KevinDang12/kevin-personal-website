@@ -1,7 +1,7 @@
 .note-header {
     background-color: #464daf;
     height: 4.5em;
-    line-height: 4.5em;
+    line-height: 4em;
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -12,10 +12,6 @@
     display: inline;
     margin: 0;
     list-style-type: none;
-}
-
-.note-header>ul>li {
-    display: inline;
 }
 
 .note-header>ul>li>a {
@@ -93,7 +89,7 @@
   background-color: #666;
 }
 
-.menu-items {
+.mobile-menu .menu-items {
   display: none;
   position: absolute;
   top: 100%;
@@ -107,20 +103,21 @@
   text-align: left;
 }
 
-.menu-items.show {
+.mobile-menu .menu-items.show {
   display: block;
 }
 
-.menu-items p, h2 {
+.mobile-menu .menu-items p, .mobile-menu h2 {
   text-decoration: none;
   color: #fff;
 }
 
-.menu-items p {
+.mobile-menu .menu-items p {
+  cursor: pointer;
   padding-left: 10px;
 }
 
-.menu-items h2 {
+.mobile-menu .menu-items h2 {
   align-items: center;
   justify-content: center;
   display: flex;
