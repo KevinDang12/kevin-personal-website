@@ -98,7 +98,7 @@ function Board(props) {
             console.log(err);
           });
     }
-  }, [id]);
+  }, [id, resetTimer]);
 
   /**
    * Check if the timer has exceeded 60 minutes
