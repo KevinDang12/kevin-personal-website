@@ -318,7 +318,7 @@ async function createChatCompletion (input) {
             },
             {
                 "role": "assistant",
-                "content": "Kevin completed three Co-op work terms, with the most recent being a Junior Programmer (Co-op) at SIRT (Screen Industries Research and Training Centre) during Winter 2024. Prior to that, Kevin worked as a Software Engineer (Co-op) at Healthcare Systems R&A Inc. during Summer 2023 and also served as a Teaching Assistant at Sheridan College during Fall 2022."
+                "content": "Kevin completed three Co-op work terms, with the most recent being a Junior Programmer (Co-op) at SIRT (Screen Industries Research and Training Centre) during Winter 2024. Prior to that, Kevin worked as a Software Engineer (Co-op) at Healthcare Systems R&A Inc. during Summer 2023. He also served as a Teaching Assistant at Sheridan College during Fall 2022."
             },
             {
                 "role": "user",
@@ -491,7 +491,7 @@ async function createChatCompletion (input) {
 
         ],
         temperature: 0.2,
-        max_tokens: 80,
+        max_tokens: 100,
         top_p: 1,
         frequency_penalty: 1.5,
         presence_penalty: 1.5,

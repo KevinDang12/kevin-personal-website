@@ -3,7 +3,7 @@ import './Chatbot.css'
 import axios from 'axios';
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaXmark } from "react-icons/fa6";
-import { MdOutlineChat } from "react-icons/md";
+import { RiOpenaiFill } from "react-icons/ri";
 
 /**
  * Chatbot component
@@ -48,6 +48,12 @@ export default function Chatbot() {
     setMessages([...messages, prompt, response.data])
   }
 
+  function handleKeyPressed (e) {
+    if (e.key === 'Enter') {
+      handleSend();
+    }
+  }
+
   /**
    * Scroll to the bottom of the chat when a new message is sent
    */
@@ -58,7 +64,7 @@ export default function Chatbot() {
   /**
    * Scroll to the bottom of the chat
    */
-  const scrollToBottom = () => {
+  function scrollToBottom () {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
     
@@ -79,15 +85,15 @@ export default function Chatbot() {
         <div ref={messagesEndRef} />
         </div>
         <div className="footer">
-          <input type="text" value={prompt} placeholder='Ask me anything...' onChange={e => setPrompt(e.target.value)} />
-          <button onClick={handleSend}><FaArrowRightLong /></button>
+          <input className='prompt-box' type="text" onKeyDown={handleKeyPressed} value={prompt} placeholder='Ask me anything...' onChange={e => setPrompt(e.target.value)} />
+          <button className='send-prompt' onClick={handleSend}><FaArrowRightLong /></button>
         </div>
       </div>
       <br />
       <div className="pop">
-          <button onClick={toggle}>
-            {chatopen ? <FaXmark /> : <MdOutlineChat />}
-          </button>
+        <button className='openai-button' onClick={toggle}>
+          {chatopen ? <FaXmark className='icon'/> : <RiOpenaiFill className='icon'/>}
+        </button>
       </div>
     </div>
   )
