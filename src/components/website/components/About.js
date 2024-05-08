@@ -58,7 +58,7 @@ export default function About() {
           <h1 data-testid="aboutHeader">{aboutText.ABOUT_HEADER}</h1>
           <h5>{aboutText.ABOUT_PARAGRAPH_ONE}</h5>
         </div>
-        <Parallax blur={{min: -5, max: 5}} bgImage={about} strength={200}>
+        <Parallax blur={{min: 20, max: -20}} bgImage={about} strength={200}>
           <div style={styles.about}/>
         </Parallax>
       </MediaQuery>

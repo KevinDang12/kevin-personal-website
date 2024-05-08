@@ -66,7 +66,7 @@ export default function Teach() {
             <li>{sirtText.DESCRIPTION_THREE}</li>
           </ul>
         </div>
-        <Parallax blur={{min: 20, max: -20}} bgImage={unity} strength={200}>
+        <Parallax bgImage={unity} strength={350}>
           <div style={styles.sirt}/>
         </Parallax>
       </MediaQuery>

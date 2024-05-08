@@ -65,7 +65,7 @@ export default function Teach() {
             <li>{teachText.DESCRIPTION_THREE}</li>
           </ul>
         </div>
-        <Parallax bgImage={code} strength={450}>
+        <Parallax bgImage={code} strength={500}>
           <div style={styles.teach}/>
         </Parallax>
       </MediaQuery>
