@@ -66,7 +66,7 @@ export default function Work() {
             <li>{researchText.DESCRIPTION_FOUR}</li>
           </ul>
         </div>
-        <Parallax bgImage={data} strength={300}>
+        <Parallax bgImage={data} strength={450}>
           <div style={styles.research}/>
         </Parallax>
       </MediaQuery>

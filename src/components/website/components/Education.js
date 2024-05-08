@@ -63,7 +63,7 @@ export default function Education() {
             <p key={index}>{course}</p>
           ))}
         </div>
-        <Parallax bgImage={education} strength={-300}>
+        <Parallax bgImage={education} strength={500}>
           <div style={styles.education}/>
         </Parallax>
       </MediaQuery>

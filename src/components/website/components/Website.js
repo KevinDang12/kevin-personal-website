@@ -78,15 +78,13 @@ function Website() {
       <div style={styles.dividerWhite}/>
 
       <div style={styles.dividerBeige}/>
-        <Sirt/>
+        <section id="work">
+          <Sirt/>
+        </section>
       <div style={styles.dividerBeige}/>
 
       <div style={styles.dividerLightGreen}/>
-
-      <section id="work">
         <Research/>
-      </section>
-
       <div style={styles.dividerLightGreen}/>
 
       <div style={styles.dividerLightBlue}/>

@@ -88,7 +88,7 @@ export default function Contact() {
             </tbody>
           </table>
         </div>
-        <Parallax blur={{min: 10, max: -25}} bgImage={contact} strength={-250}>
+        <Parallax blur={{min: 15, max: -30}} bgImage={contact} strength={-150}>
           <div style={styles.contact}/>
         </Parallax>
       </MediaQuery>

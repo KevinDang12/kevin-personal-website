@@ -41,7 +41,7 @@ export default function Home() {
         <h2>{homeText.HOME_SUBHEADER}</h2>
         <h2>{homeText.HOME_DESCRIPTION}</h2>
       </div>
-      <Parallax blur={{min: -20, max: 20}} bgImage={keyboard}>
+      <Parallax blur={{min: -25, max: 25}} bgImage={keyboard}>
         <div style={styles.background}/>
       </Parallax>
     </div>
