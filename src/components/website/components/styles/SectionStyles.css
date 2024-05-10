@@ -1,0 +1,226 @@
+.left-content {
+    padding-left: 60px;
+    width: 80%;
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.right-content {
+    padding-right: 60px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.blue-section {
+    position: absolute;
+    text-align: center;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+    background-color: rgb(9, 0, 81);
+    z-index: 1;
+    width: 60%;
+    height: 100vh;
+    right: 0%;
+}
+
+.blue-background {
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    text-align: center;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: rgb(9, 0, 81);
+    z-index: 1;
+    width: 100%;
+    max-width: 100%;
+    min-height: 80vh;
+    font-family: Inter, sans-serif;
+}
+
+.white-section {
+    position: absolute;
+    text-align: center;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(0, 0, 0);
+    background-color: rgb(250, 253, 254);
+    z-index: 1;
+    width: 60%;
+    height: 100vh;
+}
+
+.white-title {
+    font-family: Inter, sans-serif;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 0;
+    margin-right: auto;
+    align-items: start;
+}
+
+.white-body {
+    font-family: Inter, sans-serif;
+    color: white;
+    font-size: 22px;
+    font-weight: normal;
+    text-align: left;
+    align-items: start;
+}
+
+.black-title {
+    font-family: Inter, sans-serif;
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 0;
+    margin-right: auto;
+    align-items: start;
+}
+
+.black-body {
+    font-family: Inter, sans-serif;
+    color: black;
+    font-size: 22px;
+    font-weight: normal;
+    text-align: left;
+    align-items: start;
+}
+
+.education-section {
+    position: absolute;
+    text-align: center;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(0, 0, 0);
+    background-color: rgb(250, 253, 254);
+    z-index: 1;
+    width: 50%;
+    height: 100vh;
+}
+
+.section-header {
+    font-family: Inter, sans-serif;
+    color: black;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 0;
+    margin-right: auto;
+    align-items: start;
+}
+
+.section-title {
+    font-family: Inter, sans-serif;
+    color: black;
+    font-size: 24px;
+    font-weight: normal;
+    text-align: left;
+    align-items: end;
+}
+
+.section-body {
+    font-family: Inter, sans-serif;
+    color: black;
+    font-size: 20px;
+    font-weight: normal;
+    text-align: left;
+    align-items: end;
+}
+
+.section-image {
+    padding: 0px;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    z-index: -1;
+}
+
+.blue-section-small {
+    margin: 0px;
+    text-align: center;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    background-color: rgb(9, 0, 81);
+    z-index: 1;
+    width: 100%;
+    min-height: 50vh;
+}
+
+.white-section-small {
+    margin: 0px;
+    text-align: center;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    background-color: rgb(250, 253, 254);
+    width: 100%;
+    min-height: 50vh;
+}
+
+.description {
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    color: rgb(255, 255, 255);
+    text-align: left;
+    align-items: start;
+    width: 50%;
+    margin-left: 20px;
+    margin-right: auto;
+}
+
+.project-content {
+    flex-direction: row;
+    display: flex;
+}
+
+.project-title {
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    color: rgb(255, 255, 255);
+    text-align: right;
+    width: 50%;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 40%;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.right-column {
+    width: 60%;
+    margin-left: 20px;
+    margin-right: auto;
+}
+
+.link {
+    font-family: Inter, sans-serif;
+    color: rgb(255, 255, 255);
+    text-align: left;
+    align-items: start;
+}

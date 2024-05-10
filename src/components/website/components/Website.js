@@ -1,7 +1,5 @@
-import './Website.css';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './Navbar';
 import Home from './Home';
 import About from './About';
 import Sirt from './Sirt';
@@ -12,49 +10,7 @@ import Projects from './Projects';
 import Education from './Education';
 import Contact from './Contact';
 import Chatbot from './chatbot/Chatbot';
-
-const styles = {
-  dividerWhite: {
-    width: '100%',
-    height: '50px',
-  },
-
-  dividerBeige: {
-    width: '100%',
-    backgroundColor: '#d8d8b2',
-    height: '50px',
-  },
-
-  dividerBlue: {
-    width: '100%',
-    backgroundColor: '#f2f7fb',
-    height: '50px',
-  },
-
-  dividerRed: {
-    width: '100%',
-    backgroundColor: '#f3abab',
-    height: '100px',
-  },
-
-  dividerLightBlue: {
-    width: '100%',
-    backgroundColor: '#9fdcdc',
-    height: '50px',
-  },
-
-  dividerLightGreen: {
-    width: '100%',
-    backgroundColor: '#90ee90',
-    height: '50px',
-  },
-
-  dividerPurple: {
-    width: '100%',
-    backgroundColor: '#d2beff',
-    height: '50px',
-  },
-};
+import './styles/Website.css';
 
 /**
  * The Web Portfolio which contains all the components
@@ -63,55 +19,55 @@ const styles = {
 function Website() {
   return (
     <div>
-      <Header/>
-
       <section id="home">
         <Home/>
       </section>
 
-      <div style={styles.dividerWhite}/>
+      <div className='gray'/>
 
       <section id="about">
         <About/>
       </section>
 
-      <div style={styles.dividerWhite}/>
+      <div className='gray'/>
 
-      <div style={styles.dividerBeige}/>
-        <section id="work">
-          <Sirt/>
-        </section>
-      <div style={styles.dividerBeige}/>
+      <div className='blue'/>
+      
+      <section id="work">
+        <Sirt/>
+      </section>
 
-      <div style={styles.dividerLightGreen}/>
+      <div className='blue'/>
+
+      <div className='gray'/>
         <Research/>
-      <div style={styles.dividerLightGreen}/>
+      <div className='gray'/>
 
-      <div style={styles.dividerLightBlue}/>
+      <div className='blue'/>
         <Teach/>
-      <div style={styles.dividerLightBlue}/>
+      <div className='blue'/>
 
       <section id="skills">
         <Skills/>
       </section>
 
       <section id="projects">
-        <div style={styles.dividerRed}/>
+        <div className='blue'/>
       </section>
 
       <Projects/>
 
-      <div style={styles.dividerRed}/>
+      <div className='blue'/>
 
-      <div style={styles.dividerBlue}/>
+      <div className='gray'/>
 
       <section id="education">
         <Education/>
       </section>
 
-      <div style={styles.dividerBlue}/>
+      <div className='gray'/>
 
-      <div style={styles.dividerPurple}/>
+      <div className='blue'/>
 
       <section id="contact">
         <Contact/>

@@ -1,5 +1,4 @@
-export const TITLE = 'Work Experience';
-export const JOB_TITLE = `Junior Programmer`;
+export const JOB_TITLE = `Junior Programmer (Co-op)`;
 export const COMPANY = `Screen Industries Research and Training Centre`;
 export const DURATION = `Winter 2024`;
 export const DESCRIPTION_ONE = `Develop a mobile app using Unity and C#
