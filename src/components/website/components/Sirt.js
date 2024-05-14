@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {Parallax} from 'react-parallax';
 import MediaQuery from 'react-responsive';
-import unity from '../resources/Unity1.jpg';
+import unity from '../resources/Unity.jpg';
 import * as sirtText from './text/sirtText';
 import './styles/SectionStyles.css';
 import './styles/Scroll.css';
