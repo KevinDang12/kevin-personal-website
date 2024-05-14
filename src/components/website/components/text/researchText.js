@@ -1,4 +1,4 @@
-export const JOB_TITLE = 'Software Engineer';
+export const JOB_TITLE = 'Software Engineer (Co-op)';
 export const COMPANY = 'Healthcare Systems R&A Inc.';
 export const DURATION = 'Summer 2023';
 export const DESCRIPTION_ONE = `Contributed to a Brain-Computer Interface 

@@ -1,135 +1,104 @@
-import React from 'react';
-import {Parallax} from 'react-parallax';
-import MediaQuery from 'react-responsive';
+import React, { useState, useEffect, useRef } from 'react';
 import resume from '../resources/Resume.pdf';
-import contact from '../resources/Contact.png';
 import * as contactText from './text/contactText';
+import './styles/Contact.css';
+import toast, { Toaster } from 'react-hot-toast';
 
-const styles = {
-  contact: {
-    padding: '0px',
-    width: '100vw',
-    height: '50vh',
-    maxWidth: '100%',
-    zIndex: -1,
-  },
-
-  contactSection: {
-    margin: '0px',
-    padding: '0px',
-    textAlign: 'center',
-    flexDirection: 'column',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'black',
-    backgroundColor: '#d2beff',
-    zIndex: 1,
-    width: '100%',
-    height: '50vh',
-  },
-
-  contactSectionSmall: {
-    margin: '0px',
-    padding: '0px',
-    textAlign: 'center',
-    flexDirection: 'column',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'black',
-    backgroundColor: '#d2beff',
-    zIndex: 1,
-    width: '100%',
-    minHeight: '50vh',
-  },
-};
+const emailCopy = () => toast('Email copied to clipboard.');
 
 /**
  * The Contact Page
  * @return {JSX.Element} Contact Page
  */
 export default function Contact() {
-  return (
-    <div className={'contact'}>
-      <MediaQuery minWidth={769}>
-        <div style={styles.contactSection}>
-          <h1>{contactText.TITLE}</h1>
-          <h5>{contactText.EMAIL}</h5>
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  <h5>
-                    <a data-testid="github" href={contactText.GITHUB_LINK}
-                      target="_blank" rel="noreferrer">{contactText.GITHUB}</a>
-                  </h5>
-                </td>
-                <td>
-                  <h5>
-                    <a data-testid="linkedin" href={contactText.LINKEDIN_LINK}
-                      target="_blank" rel="noreferrer">
-                      {contactText.LINKEDIN}
-                    </a>
-                  </h5>
-                </td>
-                <td>
-                  <h5>
-                    <a
-                      data-testid="resume"
-                      href={resume}
-                      target="_blank"
-                      rel="noreferrer">
-                      {contactText.RESUME}
-                    </a>
-                  </h5>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <Parallax blur={{min: 15, max: -30}} bgImage={contact} strength={-150}>
-          <div style={styles.contact}/>
-        </Parallax>
-      </MediaQuery>
 
-      <MediaQuery maxWidth={768}>
-        <div style={styles.contactSectionSmall}>
-          <h1>{contactText.TITLE}</h1>
-          <h5>{contactText.EMAIL}</h5>
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  <h5>
-                    <a data-testid="github" href={contactText.GITHUB_LINK}
-                      target="_blank" rel="noreferrer">{contactText.GITHUB}</a>
-                  </h5>
-                </td>
-                <td>
-                  <h5>
-                    <a data-testid="linkedin" href={contactText.LINKEDIN_LINK}
-                      target="_blank" rel="noreferrer">
-                      {contactText.LINKEDIN}
-                    </a>
-                  </h5>
-                </td>
-                <td>
-                  <h5>
-                    <a
-                      data-testid="resume"
-                      href={resume}
-                      target="_blank"
-                      rel="noreferrer">
-                      {contactText.RESUME}
-                    </a>
-                  </h5>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </MediaQuery>
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const refToTrack = useRef(null);
+  const percentage = 0.7;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const rect = refToTrack.current.getBoundingClientRect();
+      setScrollPosition(rect.y);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return (
+    <div className='contact'>
+      <Toaster />
+      <div className={scrollPosition <= window.innerHeight * percentage ? 'blue-divider' : 'white'}/>
+      <div className={scrollPosition <= window.innerHeight * percentage ? 'contact-section' : 'contact-clear'} ref={refToTrack}>
+        <h1 className='contact-header'>{contactText.TITLE}</h1>
+        <br />
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <h5>
+                  <button
+                    className='contact-button'
+                    onClick={() => {
+                      navigator.clipboard.writeText(contactText.EMAIL_LINK);
+                      emailCopy();
+                    }}>
+                    {contactText.EMAIL}
+                  </button>
+                </h5>
+              </td>
+              <td>
+                <h5>
+                  <a
+                    data-testid="github"
+                    href={contactText.GITHUB_LINK}
+                    target="_blank"
+                    rel="noreferrer">
+                      <button className='contact-button'>
+                        {contactText.GITHUB}
+                      </button>
+                  </a>
+                </h5>
+              </td>
+              <td>
+                <h5>
+                  <a 
+                    data-testid="linkedin" 
+                    href={contactText.LINKEDIN_LINK}
+                    target="_blank"
+                    rel="noreferrer">
+                      <button className='contact-button'>
+                        {contactText.LINKEDIN}
+                      </button>
+                  </a>
+                </h5>
+              </td>
+              <td>
+                <h5>
+                  <a
+                    data-testid="resume"
+                    href={resume}
+                    target="_blank"
+                    rel="noreferrer">
+                      <button className='contact-button'>
+                        {contactText.RESUME}
+                      </button>
+                  </a>
+                </h5>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p className='update'>
+          Last updated May 2024
+          <br/>
+          Hosted on AWS. Built using React.
+        </p>
+      </div>
     </div>
   );
 }

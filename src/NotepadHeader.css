@@ -83,10 +83,9 @@
   background-color: #333;
   color: #fff;
   transition: background-color 0.3s ease;
-}
-
-.Navbutton:hover {
-  background-color: #666;
+  &:hover {
+    background-color: #666;
+  }
 }
 
 .mobile-menu .menu-items {
@@ -122,8 +121,7 @@
   justify-content: center;
   display: flex;
   padding: 10px;
-}
-
-.menu-button:hover {
-  background-color: #666;
+  &:hover {
+    background-color: #666;
+  }
 }

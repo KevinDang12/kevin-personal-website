@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import './Navbar.css';
 import MediaQuery from 'react-responsive';
 import * as headerText from './text/headerText';
+import './styles/Navbar.css';
 
 /**
  * Navbar component

@@ -1,0 +1,68 @@
+.skill-section {
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    text-align: center;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    background-color: rgb(250, 253, 254);
+    z-index: 1;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    transition: background-color 0.5s ease-out;
+}
+
+.skills-header {
+    font-family: Inter, sans-serif;
+    color: black;
+    font-size: 32px;
+    transition: font-size 0.2s;
+    transform-origin: left;
+    &:hover {
+        font-size: 40px;
+        transition: font-size 0.2s;
+    }
+}
+
+.card-row {
+    display: flex;
+    flex-flow: row wrap;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.circle {
+    border-radius: 50%;
+    background-color: transparent;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    display: flex;
+    border: 10px;
+    font-size: 50px;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.5s ease-out;
+    &:hover {
+        color: rgb(250, 253, 254);
+    }
+}
+
+.skill-icon {
+    width: 150px;
+    height: 150px;
+}
+
+.divider {
+    width: 100%;
+    background-color: rgb(250, 253, 254);
+    height: 50px;
+    transition: background-color 0.5s ease-out;
+}
