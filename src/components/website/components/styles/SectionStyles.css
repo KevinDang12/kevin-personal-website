@@ -23,13 +23,11 @@
     background-color: rgb(9, 0, 81);
     z-index: 1;
     width: 60%;
-    height: 100vh;
+    min-height: 100vh;
     right: 0%;
 }
 
 .blue-background {
-    margin: 0px;
-    padding: 0px;
     position: relative;
     text-align: center;
     flex-direction: column;
@@ -41,8 +39,49 @@
     z-index: 1;
     width: 100%;
     max-width: 100%;
-    min-height: 80vh;
+    min-height: 100vh;
     font-family: Inter, sans-serif;
+    transition: background-color 0.5s ease;
+}
+
+.project-clear {
+    position: relative;
+    text-align: center;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: rgb(250, 253, 254);
+    z-index: 1;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    font-family: Inter, sans-serif;
+    transition: background-color 0.5s ease;
+}
+
+.carousel-show {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.carousel-hide {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.project-header {
+    font-family: Inter, sans-serif;
+    color: white;
+    font-size: 32px;
+    padding-bottom: 20px;
+    transition: font-size 0.2s;
+    transform-origin: left;
+    &:hover {
+        font-size: 40px;
+        transition: font-size 0.2s;
+    }
 }
 
 .white-section {
@@ -56,7 +95,7 @@
     background-color: rgb(250, 253, 254);
     z-index: 1;
     width: 60%;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .white-title {
@@ -68,15 +107,27 @@
     margin-left: 0;
     margin-right: auto;
     align-items: start;
+    transition: font-size 0.2s;
+    transform-origin: left;
+    &:hover {
+        font-size: 28px;
+        transition: font-size 0.2s;
+    }
 }
 
 .white-body {
     font-family: Inter, sans-serif;
     color: white;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: normal;
     text-align: left;
     align-items: start;
+    transition: font-size 0.2s;
+    transform-origin: left;
+    &:hover {
+        font-size: 22px;
+        transition: font-size 0.2s;
+    }
 }
 
 .black-title {
@@ -88,15 +139,27 @@
     margin-left: 0;
     margin-right: auto;
     align-items: start;
+    transition: font-size 0.2s;
+    transform-origin: left;
+    &:hover {
+        font-size: 28px;
+        transition: font-size 0.2s;
+    }
 }
 
 .black-body {
     font-family: Inter, sans-serif;
     color: black;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: normal;
     text-align: left;
     align-items: start;
+    transition: font-size 0.2s;
+    transform-origin: left;
+    &:hover {
+        font-size: 22px;
+        transition: font-size 0.2s;
+    }
 }
 
 .education-section {
@@ -110,7 +173,7 @@
     background-color: rgb(250, 253, 254);
     z-index: 1;
     width: 50%;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .section-header {
@@ -122,6 +185,12 @@
     margin-left: 0;
     margin-right: auto;
     align-items: start;
+    transition: font-size 0.2s;
+    transform-origin: left;
+    &:hover {
+        font-size: 32px;
+        transition: font-size 0.2s;
+    }
 }
 
 .section-title {
@@ -131,6 +200,13 @@
     font-weight: normal;
     text-align: left;
     align-items: end;
+    transform-origin: left;
+    transition: font-size 0.2s;
+    transform-origin: left;
+    &:hover {
+        font-size: 28px;
+        transition: font-size 0.2s;
+    }
 }
 
 .section-body {
@@ -140,12 +216,18 @@
     font-weight: normal;
     text-align: left;
     align-items: end;
+    transition: font-size 0.2s;
+    transform-origin: left;
+    &:hover {
+        font-size: 24px;
+        transition: font-size 0.2s;
+    }
 }
 
 .section-image {
     padding: 0px;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     max-width: 100%;
     z-index: -1;
 }
@@ -184,7 +266,7 @@
     text-align: left;
     align-items: start;
     width: 50%;
-    margin-left: 20px;
+    margin-left: 0;
     margin-right: auto;
 }
 
@@ -200,13 +282,13 @@
     text-align: right;
     width: 50%;
     margin-left: auto;
-    margin-right: 20px;
+    margin-right: 0;
 }
 
 .left-column {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     width: 40%;
     margin-left: auto;
     margin-right: 20px;
@@ -223,4 +305,10 @@
     color: rgb(255, 255, 255);
     text-align: left;
     align-items: start;
+}
+
+.vertical-line {
+    width: 2px;
+    min-height: 100%;
+    background-color: rgb(250, 253, 254);
 }

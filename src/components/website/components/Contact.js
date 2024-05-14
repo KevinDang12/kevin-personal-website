@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import resume from '../resources/Resume.pdf';
 import * as contactText from './text/contactText';
 import './styles/Contact.css';
@@ -11,11 +11,30 @@ const emailCopy = () => toast('Email copied to clipboard.');
  * @return {JSX.Element} Contact Page
  */
 export default function Contact() {
+
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const refToTrack = useRef(null);
+  const percentage = 0.7;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const rect = refToTrack.current.getBoundingClientRect();
+      setScrollPosition(rect.y);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <div className='contact'>
       <Toaster />
-      <div className='contact-section'>
-        <h1 className='font'>{contactText.TITLE}</h1>
+      <div className={scrollPosition <= window.innerHeight * percentage ? 'blue-divider' : 'white'}/>
+      <div className={scrollPosition <= window.innerHeight * percentage ? 'contact-section' : 'contact-clear'} ref={refToTrack}>
+        <h1 className='contact-header'>{contactText.TITLE}</h1>
         <br />
         <table>
           <tbody>

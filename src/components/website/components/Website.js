@@ -23,51 +23,45 @@ function Website() {
         <Home/>
       </section>
 
-      <div className='gray'/>
+      <div className='white'/>
 
       <section id="about">
         <About/>
       </section>
 
-      <div className='gray'/>
+      <div className='white'/>
 
-      <div className='blue'/>
+      {/* <div className='blue'/> */}
       
       <section id="work">
         <Sirt/>
       </section>
 
-      <div className='blue'/>
+      {/* <div className='blue'/> */}
 
-      <div className='gray'/>
+      <div className='white'/>
         <Research/>
-      <div className='gray'/>
+      <div className='white'/>
 
-      <div className='blue'/>
-        <Teach/>
-      <div className='blue'/>
+      {/* <div className='blue'/> */}
+      <Teach/>
+      {/* <div className='blue'/> */}
 
       <section id="skills">
         <Skills/>
       </section>
-
+      
       <section id="projects">
-        <div className='blue'/>
+        <Projects/>
       </section>
 
-      <Projects/>
-
-      <div className='blue'/>
-
-      <div className='gray'/>
+      <div className='white'/>
 
       <section id="education">
         <Education/>
       </section>
 
-      <div className='gray'/>
-
-      <div className='blue'/>
+      <div className='white'/>
 
       <section id="contact">
         <Contact/>

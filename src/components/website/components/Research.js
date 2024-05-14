@@ -18,11 +18,11 @@ export default function Work() {
             <h2 className='black-title'>{researchText.JOB_TITLE}</h2>
             <h3 className='black-title'>{researchText.COMPANY}</h3>
             <h3 className='black-title'>{researchText.DURATION}</h3>
-            <ul className="black-body">
-              <li>{researchText.DESCRIPTION_ONE}</li>
-              <li>{researchText.DESCRIPTION_TWO}</li>
-              <li>{researchText.DESCRIPTION_THREE}</li>
-              <li>{researchText.DESCRIPTION_FOUR}</li>
+            <ul>
+              <li className="black-body">{researchText.DESCRIPTION_ONE}</li>
+              <li className="black-body">{researchText.DESCRIPTION_TWO}</li>
+              <li className="black-body">{researchText.DESCRIPTION_THREE}</li>
+              <li className="black-body">{researchText.DESCRIPTION_FOUR}</li>
             </ul>
           </div>
         </div>

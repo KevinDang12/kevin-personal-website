@@ -1,4 +1,4 @@
-export const WHITE = 'rgb(255, 255, 255)'
+export const WHITE = 'rgb(250, 253, 254)'
 export const YELLOW = 'rgb(247, 223, 30)'
 export const TURQUOISE = 'rgb(96, 219, 252)'
 export const ORANGE = 'rgb(234, 109, 0)'

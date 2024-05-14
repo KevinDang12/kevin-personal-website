@@ -1,0 +1,85 @@
+.unscrolled {
+  position: absolute;
+  text-align: center;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(255, 255, 255);
+  background-color: rgb(250, 253, 254);
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  right: 0%;
+  transition: background-color 0.5s ease;
+}
+
+.gray-section {
+  position: absolute;
+  text-align: center;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(255, 255, 255);
+  background-color: rgb(23, 21, 20);
+  z-index: 1;
+  width: 60%;
+  height: 100vh;
+  right: 0%;
+  transition: background-color 0.5s ease;
+}
+
+.black-section {
+  position: absolute;
+  text-align: center;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(255, 255, 255);
+  background-color: rgb(15, 15, 15);
+  z-index: 1;
+  width: 60%;
+  height: 100vh;
+  right: 0%;
+  transition: background-color 0.5s ease;
+}
+
+.hidden {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.show {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.gray {
+  width: 100%;
+  background-color: rgb(23, 21, 20);
+  height: 50px;
+  transition: background-color 0.5s ease;
+}
+
+.black {
+  width: 100%;
+  background-color: rgb(15, 15, 15);
+  height: 50px;
+  transition: background-color 0.5s ease;
+}
+
+.blue-divider {
+  width: 100%;
+  background-color: rgb(9, 0, 81);;
+  height: 50px;
+  transition: background-color 0.5s ease;
+}
+
+.white {
+  width: 100%;
+  background-color: rgb(250, 253, 254);
+  height: 50px;
+  transition: background-color 0.5s ease;
+}

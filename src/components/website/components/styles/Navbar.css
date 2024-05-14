@@ -8,10 +8,9 @@
   position: absolute;
   z-index: 2;
   transition: background-color 0.25s ease-out;
-}
-
-.header:hover {
-  background-color: rgba(60, 60, 60, 0.3);
+  &:hover {
+    background-color: rgba(60, 60, 60, 0.3);
+  }
 }
 
 .header>ul {
@@ -33,25 +32,25 @@
   text-decoration: none;
   padding: 15px 20px;
   position: relative;
-}
+  
+  &:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: #fff;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+  }
 
-.header>ul>li>a:after {    
-  background: none repeat scroll 0 0 transparent;
-  bottom: 0;
-  content: "";
-  display: block;
-  height: 2px;
-  left: 50%;
-  position: absolute;
-  background: #fff;
-  transition: width 0.3s ease 0s, left 0.3s ease 0s;
-  width: 0;
-}
-
-.header>ul>li>a:hover:after {
-  color: white;
-  width: 100%; 
-  left: 0;
+  &:hover:after {
+    color: white;
+    width: 100%; 
+    left: 0;
+  }
 }
 
 .header-right {

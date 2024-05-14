@@ -23,11 +23,11 @@ li {
 
 .blue {
   width: 100%;
-  background-color: #090051;
+  background-color: rgb(9, 0, 81);
   height: 50px;
 }
 
-.gray {
+.white {
   width: 100%;
   background-color: rgb(250, 253, 254);
   height: 50px;

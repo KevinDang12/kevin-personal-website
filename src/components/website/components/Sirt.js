@@ -1,31 +1,51 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {Parallax} from 'react-parallax';
 import MediaQuery from 'react-responsive';
-import unity from '../resources/Unity.jpg';
+import unity from '../resources/Unity1.jpg';
 import * as sirtText from './text/sirtText';
 import './styles/SectionStyles.css';
+import './styles/Scroll.css';
 
 /**
  * The Work Page
  * @return {JSX.Element} Work Page
  */
 export default function Teach() {
+
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const refToTrack = useRef(null);
+  const percentage = 0.7;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const rect = refToTrack.current.getBoundingClientRect();
+      setScrollPosition(rect.y);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <div>
+      <div className={scrollPosition <= window.innerHeight * percentage ? 'gray' : 'white'}/>
       <MediaQuery minWidth={769}>
-        <div className='blue-section'>
+        <div className={scrollPosition <= window.innerHeight * percentage ? 'gray-section' : 'unscrolled'} ref={refToTrack}>
           <div className='left-content'>
             <h2 className='white-title'>{sirtText.JOB_TITLE}</h2>
             <h3 className='white-title'>{sirtText.COMPANY}</h3>
             <h3 className='white-title'>{sirtText.DURATION}</h3>
-            <ul className="white-body">
-              <li>{sirtText.DESCRIPTION_ONE}</li>
-              <li>{sirtText.DESCRIPTION_TWO}</li>
-              <li>{sirtText.DESCRIPTION_THREE}</li>
+            <ul>
+              <li className="white-body">{sirtText.DESCRIPTION_ONE}</li>
+              <li className="white-body">{sirtText.DESCRIPTION_TWO}</li>
+              <li className="white-body">{sirtText.DESCRIPTION_THREE}</li>
             </ul>
           </div>
         </div>
-        <Parallax bgImage={unity} strength={350}>
+        <Parallax className={scrollPosition <= window.innerHeight * percentage ? 'show' : 'hidden'} bgImage={unity} strength={350}>
           <div className='section-image'/>
         </Parallax>
       </MediaQuery>
@@ -42,6 +62,7 @@ export default function Teach() {
           </ul>
         </div>
       </MediaQuery>
+      <div className={scrollPosition <= window.innerHeight * percentage ? 'gray' : 'white'}/>
     </div>
   );
 }

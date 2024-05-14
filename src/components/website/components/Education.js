@@ -20,9 +20,9 @@ export default function Education() {
             <p className='section-body'>{educationText.DESCRIPTION}</p>
             <p className='section-body'>{educationText.DURATION}</p>
             <h3 className='section-title'>{educationText.COURSES}</h3>
-            <ul className='section-body'>
+            <ul>
               {educationText.COURSE_LIST.map((course, index) => (
-                <li key={index}>{course}</li>
+                <li key={index} className='section-body'>{course}</li>
               ))}
             </ul>
           </div>

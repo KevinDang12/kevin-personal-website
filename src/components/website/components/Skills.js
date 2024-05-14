@@ -5,8 +5,8 @@ import { IoLogoJavascript } from "react-icons/io";
 import { FaReact, FaJava, FaAndroid, FaPython } from "react-icons/fa";
 import { BsFiletypeSql } from "react-icons/bs";
 import { SiCoursera, SiCplusplus } from "react-icons/si";
-import './styles/Skills.css';
 import * as colors from './text/colors.js';
+import './styles/Skills.css';
 
 /**
  * The Skills Page
@@ -18,6 +18,7 @@ export default function Skills() {
 
   return (
     <div>
+      <div className='divider' style={{backgroundColor: backgroundColor}}/>
       <MediaQuery minWidth={769}>
         <div className='skill-section' style={{backgroundColor: backgroundColor}}>
           <h1 className='skills-header'>{skillsText.HEADER}</h1>
@@ -133,6 +134,7 @@ export default function Skills() {
           </div>
         </div>
       </MediaQuery>
+      <div className='divider' style={{backgroundColor: backgroundColor}}/>
     </div>
   );
 }

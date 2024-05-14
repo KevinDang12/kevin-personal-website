@@ -20,6 +20,12 @@
     font-family: Inter, sans-serif;
     color: black;
     font-size: 32px;
+    transition: font-size 0.2s;
+    transform-origin: left;
+    &:hover {
+        font-size: 40px;
+        transition: font-size 0.2s;
+    }
 }
 
 .card-row {
@@ -35,8 +41,8 @@
 .circle {
     border-radius: 50%;
     background-color: transparent;
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     margin: 10px;
     display: flex;
     border: 10px;
@@ -44,14 +50,19 @@
     align-items: center;
     justify-content: center;
     transition: background-color 0.5s ease-out;
-}
-
-.circle:hover {
-    /* background-color: rgb(62, 168, 255); */
-    color: rgb(250, 253, 254);
+    &:hover {
+        color: rgb(250, 253, 254);
+    }
 }
 
 .skill-icon {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
+}
+
+.divider {
+    width: 100%;
+    background-color: rgb(250, 253, 254);
+    height: 50px;
+    transition: background-color 0.5s ease-out;
 }
