@@ -229,7 +229,6 @@
     width: 100vw;
     min-height: 100vh;
     max-width: 100%;
-    z-index: -1;
 }
 
 .blue-section-small {
@@ -268,6 +267,12 @@
     width: 50%;
     margin-left: 0;
     margin-right: auto;
+    transition: font-size 0.2s;
+    transform-origin: left;
+    &:hover {
+        font-size: 18px;
+        transition: font-size 0.2s;
+    }
 }
 
 .project-content {
@@ -283,6 +288,12 @@
     width: 50%;
     margin-left: auto;
     margin-right: 0;
+    transition: font-size 0.2s;
+    transform-origin: left;
+    &:hover {
+        font-size: 28px;
+        transition: font-size 0.2s;
+    }
 }
 
 .left-column {

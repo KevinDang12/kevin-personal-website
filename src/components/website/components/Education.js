@@ -27,7 +27,7 @@ export default function Education() {
             </ul>
           </div>
         </div>
-        <Parallax bgImage={education} strength={500}>
+        <Parallax blur={{min: 20, max: -20}} bgImage={education} strength={500}>
           <div className='section-image'/>
         </Parallax>
       </MediaQuery>
