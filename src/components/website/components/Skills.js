@@ -4,7 +4,7 @@ import * as skillsText from './text/skillsText';
 import { IoLogoJavascript } from "react-icons/io";
 import { FaReact, FaJava, FaAndroid, FaPython } from "react-icons/fa";
 import { BsFiletypeSql } from "react-icons/bs";
-import { SiCoursera, SiCplusplus } from "react-icons/si";
+import { SiCsharp , SiCplusplus } from "react-icons/si";
 import * as colors from './text/colors.js';
 import './styles/Skills.css';
 
@@ -66,7 +66,7 @@ export default function Skills() {
                 className='circle'
                 onMouseEnter={() => setBackgroundColor(colors.DARK_BLUE)}
                 onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <SiCoursera className='skill-icon'/>
+                <SiCsharp className='skill-icon'/>
               </div>
               <div
                 className='circle'
@@ -123,7 +123,7 @@ export default function Skills() {
                 className='circle'
                 onMouseEnter={() => setBackgroundColor(colors.DARK_BLUE)}
                 onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-              <SiCoursera className='skill-icon'/>
+              <SiCsharp className='skill-icon'/>
             </div>
             <div
                 className='circle'
