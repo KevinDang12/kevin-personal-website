@@ -13,13 +13,22 @@ import './styles/Scroll.css';
 export default function Teach() {
 
   const [scrollPosition, setScrollPosition] = useState(0);
-  const refToTrack = useRef(null);
+  const refToTrack1 = useRef(null);
+  const refToTrack2 = useRef(null);
   const percentage = 0.7;
 
   useEffect(() => {
     const handleScroll = () => {
-      const rect = refToTrack.current.getBoundingClientRect();
-      setScrollPosition(rect.y);
+      // console.log(refToTrack1.current);
+      if (refToTrack1.current !== null) {
+        const rect1 = refToTrack1.current.getBoundingClientRect();
+        setScrollPosition(rect1.y);
+      }
+      
+      if (refToTrack2.current !== null) {
+        const rect2 = refToTrack2.current.getBoundingClientRect();
+        setScrollPosition(rect2.y);
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -33,7 +42,7 @@ export default function Teach() {
     <div>
       <div className={scrollPosition <= window.innerHeight * percentage ? 'gray' : 'white'}/>
       <MediaQuery minWidth={769}>
-        <div className={scrollPosition <= window.innerHeight * percentage ? 'gray-section' : 'unscrolled'} ref={refToTrack}>
+        <div className={scrollPosition <= window.innerHeight * percentage ? 'gray-section' : 'unscrolled'} ref={refToTrack1}>
           <div className='left-content'>
             <h2 className='white-title'>{sirtText.JOB_TITLE}</h2>
             <h3 className='white-title'>{sirtText.COMPANY}</h3>
@@ -51,7 +60,7 @@ export default function Teach() {
       </MediaQuery>
 
       <MediaQuery maxWidth={768}>
-        <div className='sirt-section-small'>
+        <div className='sirt-section-small' ref={refToTrack2}>
           <h2>{sirtText.JOB_TITLE}</h2>
           <h2>{sirtText.COMPANY}</h2>
           <h2>{sirtText.DURATION}</h2>
