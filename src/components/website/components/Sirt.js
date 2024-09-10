@@ -19,7 +19,6 @@ export default function Teach() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // console.log(refToTrack1.current);
       if (refToTrack1.current !== null) {
         const rect1 = refToTrack1.current.getBoundingClientRect();
         setScrollPosition(rect1.y);
