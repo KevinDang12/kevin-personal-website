@@ -6,6 +6,7 @@ export const NOTEPAD_ANDROID_LINK = "https://youtube.com/shorts/YoSnYonojhg";
 export const STEAM_REVIEW_LINK = "https://steamreviewsummarizer.com/";
 export const HERE = 'here';
 export const NOTEPAD = 'Notepad App';
+export const STEAM_REVIEW = 'Steam Review Summarizer';
 export const DESCRIPTION = [
   `A cross-platform notepad app, they are synced to a Notepad web app, a Desktop Notepad app, and an Android Notepad app`,
   `The notepad web app is hosted on AWS and it can be accessed `,

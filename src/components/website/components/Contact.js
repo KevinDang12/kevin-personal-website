@@ -94,7 +94,7 @@ export default function Contact() {
           </tbody>
         </table>
         <p className='update'>
-          Last updated May 2024
+          Last updated September 2024
           <br/>
           Hosted on AWS. Built using React.
         </p>
