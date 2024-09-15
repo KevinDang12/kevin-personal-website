@@ -16,15 +16,13 @@ export default function Education() {
         <div className='education-section'>
           <div className='right-content'>
             <h1 className='section-header' data-testid="educationHeader">{educationText.TITLE}</h1>
-            <h2 className='section-title'>{educationText.SCHOOL}</h2>
-            <p className='section-body'>{educationText.DESCRIPTION}</p>
-            <p className='section-body'>{educationText.DURATION}</p>
-            <h3 className='section-title'>{educationText.COURSES}</h3>
-            <ul>
-              {educationText.COURSE_LIST.map((course, index) => (
-                <li key={index} className='section-body'>{course}</li>
-              ))}
-            </ul>
+            <h2 className='section-title'>{educationText.UNIVERSITY}</h2>
+            <p className='section-body'>{educationText.DESCRIPTION[0]}</p>
+            <p className='section-body'>{educationText.UNIVERSITY_DURATION}</p>
+            <br/>
+            <h2 className='section-title'>{educationText.COLLEGE}</h2>
+            <p className='section-body'>{educationText.DESCRIPTION[1]}</p>
+            <p className='section-body'>{educationText.COLLEGE_DURATION}</p>
           </div>
         </div>
         <Parallax blur={{min: 20, max: -20}} bgImage={education} strength={500}>
@@ -34,13 +32,13 @@ export default function Education() {
       <MediaQuery maxWidth={768}>
         <div className='education-section-small'>
           <h1 data-testid="educationHeaderMobile">{educationText.TITLE}</h1>
-          <h2>{educationText.SCHOOL}</h2>
-          <p>{educationText.DESCRIPTION}</p>
-          <p>{educationText.DURATION}</p>
-          <h3>{educationText.COURSES}</h3>
-          {educationText.COURSE_LIST.map((course, index) => (
-            <p key={index}>{course}</p>
-          ))}
+          <h2>{educationText.UNIVERSITY}</h2>
+          <p>{educationText.DESCRIPTION[0]}</p>
+          <p>{educationText.UNIVERSITY_DURATION}</p>
+          <br/>
+          <h2>{educationText.COLLEGE}</h2>
+          <p>{educationText.DESCRIPTION[1]}</p>
+          <p>{educationText.COLLEGE_DURATION}</p>
         </div>
       </MediaQuery>
     </div>
