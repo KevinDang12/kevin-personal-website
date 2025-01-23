@@ -17,6 +17,9 @@
 .home-header {
     font-family: Inter, sans-serif;
     font-size: 32px;
+    @media only screen and (max-width: 768px) {
+        font-size: 20px;
+    }
 }
 
 .background {

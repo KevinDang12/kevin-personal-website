@@ -59,16 +59,16 @@ export default function Teach() {
       </MediaQuery>
 
       <MediaQuery maxWidth={768}>
-        <div className='teach-section-small' ref={refToTrack2}>
-          <h2>{teachText.JOB_TITLE}</h2>
-          <h2>{teachText.COMPANY}</h2>
-          <h2>{teachText.DURATION}</h2>
-          <ul className="text-align">
-            <li>{teachText.DESCRIPTION_ONE}</li>
-            <li>{teachText.DESCRIPTION_TWO}</li>
-            <li>{teachText.DESCRIPTION_THREE}</li>
-          </ul>
-        </div>
+      <div className={scrollPosition <= window.innerHeight * percentage ? 'black-section' : 'unscrolled'} ref={refToTrack2}>
+        <ul className='left-content'>
+          <h2 className='white-title'>{teachText.JOB_TITLE}</h2>
+          <h3 className='white-title'>{teachText.COMPANY}</h3>
+          <h3 className='white-title'>{teachText.DURATION}</h3>
+          <li className="white-body">{teachText.DESCRIPTION_ONE}</li>
+          <li className="white-body">{teachText.DESCRIPTION_TWO}</li>
+          <li className="white-body">{teachText.DESCRIPTION_THREE}</li>
+        </ul>
+      </div>
       </MediaQuery>
       <div className={scrollPosition <= window.innerHeight * percentage ? 'black' : 'white'}/>
     </div>

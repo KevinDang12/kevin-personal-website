@@ -1,5 +1,4 @@
 .unscrolled {
-  position: absolute;
   text-align: center;
   flex-direction: column;
   display: flex;
@@ -12,10 +11,12 @@
   height: 100vh;
   right: 0%;
   transition: background-color 0.5s ease;
+  @media only screen and (min-width: 769px) {
+    position: absolute;
+  }
 }
 
 .gray-section {
-  position: absolute;
   text-align: center;
   flex-direction: column;
   display: flex;
@@ -24,14 +25,16 @@
   color: rgb(255, 255, 255);
   background-color: rgb(23, 21, 20);
   z-index: 1;
-  width: 60%;
   height: 100vh;
   right: 0%;
   transition: background-color 0.5s ease;
+  @media only screen and (min-width: 769px) {
+    position: absolute;
+    width: 60%;
+  }
 }
 
 .black-section {
-  position: absolute;
   text-align: center;
   flex-direction: column;
   display: flex;
@@ -40,10 +43,13 @@
   color: rgb(255, 255, 255);
   background-color: rgb(15, 15, 15);
   z-index: 1;
-  width: 60%;
   height: 100vh;
   right: 0%;
   transition: background-color 0.5s ease;
+  @media only screen and (min-width: 769px) {
+    position: absolute;
+    width: 60%;
+  }
 }
 
 .hidden {

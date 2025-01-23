@@ -80,7 +80,7 @@ export default function Skills() {
       </MediaQuery>
 
       <MediaQuery maxWidth={768}>
-        <div className='skill-section'>
+        <div className='skill-section' style={{backgroundColor: backgroundColor}}>
           <h1>{skillsText.HEADER}</h1>
           <div className='card-row'>
             <div

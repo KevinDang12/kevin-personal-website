@@ -59,14 +59,14 @@ export default function Teach() {
       </MediaQuery>
 
       <MediaQuery maxWidth={768}>
-        <div className='sirt-section-small' ref={refToTrack2}>
-          <h2>{sirtText.JOB_TITLE}</h2>
-          <h2>{sirtText.COMPANY}</h2>
-          <h2>{sirtText.DURATION}</h2>
-          <ul className="text-align">
-            <li>{sirtText.DESCRIPTION_ONE}</li>
-            <li>{sirtText.DESCRIPTION_TWO}</li>
-            <li>{sirtText.DESCRIPTION_THREE}</li>
+        <div className={scrollPosition <= window.innerHeight * percentage ? 'gray-section' : 'unscrolled'} ref={refToTrack2}>
+          <ul className="left-content">
+            <h2 className='white-title'>{sirtText.JOB_TITLE}</h2>
+            <h2 className='white-title'>{sirtText.COMPANY}</h2>
+            <h2 className='white-title'>{sirtText.DURATION}</h2>
+            <li className="white-body">{sirtText.DESCRIPTION_ONE}</li>
+            <li className="white-body">{sirtText.DESCRIPTION_TWO}</li>
+            <li className="white-body">{sirtText.DESCRIPTION_THREE}</li>
           </ul>
         </div>
       </MediaQuery>
