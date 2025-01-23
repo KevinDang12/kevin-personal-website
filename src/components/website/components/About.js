@@ -25,9 +25,11 @@ export default function About() {
       </MediaQuery>
 
       <MediaQuery maxWidth={768}>
-        <div className='about-section-small'>
-          <h1 data-testid="aboutHeaderMobile">{aboutText.ABOUT_HEADER}</h1>
-          <h5>{aboutText.ABOUT_PARAGRAPH_ONE}</h5>
+        <div className='white-section'>
+          <div className='right-content'>
+            <h1 className='black-title' data-testid="aboutHeaderMobile">{aboutText.ABOUT_HEADER}</h1>
+            <h5 className='black-body'>{aboutText.ABOUT_PARAGRAPH_ONE}</h5>
+          </div>
         </div>
       </MediaQuery>
     </div>

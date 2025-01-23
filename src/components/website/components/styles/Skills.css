@@ -53,6 +53,10 @@
     &:hover {
         color: rgb(250, 253, 254);
     }
+    @media only screen and (max-width: 768px) {
+        width: 100px;
+        height: 100px;
+    }
 }
 
 .skill-icon {
