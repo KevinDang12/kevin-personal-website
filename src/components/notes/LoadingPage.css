@@ -1,9 +1,0 @@
-.LoadPage {
-    background: linear-gradient(-90deg, #53516d, #343155);
-    background-size: 500% 500%;
-    animation: gradient 10s ease infinite;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}

@@ -15,6 +15,10 @@ export default function Chatbot() {
   const [ prompt, setPrompt] = useState('');
   const messagesEndRef = useRef(null);
 
+  // const local = 'http://localhost:5000'; // window.location.origin
+  // const local = "http://127.0.0.1:5000/personal-website-aaeb4/us-central1/app";
+  const local = "https://us-central1-personal-website-aaeb4.cloudfunctions.net/app";
+
   /**
    * Hide chatbot
    */
@@ -43,8 +47,8 @@ export default function Chatbot() {
     if (prompt === '') return;
     const text = prompt;
     setPrompt('');
-    setMessages([...messages, prompt])
-    const response = await axios.post(`${window.location.origin}/api/openai`, { text });
+    setMessages([...messages, prompt]);
+    const response = await axios.post(`${local}/api/openai`, { text });
     setMessages([...messages, prompt, response.data])
   }
 

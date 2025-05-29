@@ -159,7 +159,7 @@ export default function Contact() {
           </table>
         </MediaQuery>
         <p className='update'>
-          Last updated September 2024
+          Last updated February 2025
           <br/>
           Hosted on AWS. Built using React.
         </p>
