@@ -159,9 +159,9 @@ export default function Contact() {
           </table>
         </MediaQuery>
         <p className='update'>
-          Last updated May 2025
+          Last updated July 2025
           <br/>
-          Hosted on AWS. Built using React.
+          Hosted on Firebase. Built using React.
         </p>
       </div>
     </div>

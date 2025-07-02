@@ -39,6 +39,9 @@ export default function Navbar() {
               <a href="#projects">{headerText.PROJECTS}</a>
             </li>
             <li>
+              <a href="#hobbies">{headerText.HOBBIES}</a>
+            </li>
+            <li>
               <a href="#education">{headerText.EDUCATION}</a>
             </li>
             <li>
@@ -77,6 +80,11 @@ export default function Navbar() {
             <li>
               <a href="#projects" onClick={handleMenuClick}>
                 {headerText.PROJECTS}
+              </a>
+            </li>
+            <li>
+              <a href="#hobbies" onClick={handleMenuClick}>
+                {headerText.HOBBIES}
               </a>
             </li>
             <li>

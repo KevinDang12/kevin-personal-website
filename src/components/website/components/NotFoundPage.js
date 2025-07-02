@@ -1,5 +1,5 @@
 import React from 'react';
-import './NotFoundPage.css';
+import './styles/NotFoundPage.css';
 
 /**
  * Element to display when a page is not found.

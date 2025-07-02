@@ -5,3 +5,4 @@ export const SKILLS = 'Skills';
 export const PROJECTS = 'Projects';
 export const EDUCATION = 'Education';
 export const CONTACT = 'Contact';
+export const HOBBIES = 'Hobbies';

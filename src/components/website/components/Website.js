@@ -11,6 +11,7 @@ import Education from './Education';
 import Contact from './Contact';
 import Chatbot from './chatbot/Chatbot';
 import './styles/Website.css';
+import Hobbies from './Hobbies';
 
 /**
  * The Web Portfolio which contains all the components
@@ -53,6 +54,10 @@ function Website() {
       
       <section id="projects">
         <Projects/>
+      </section>
+
+      <section id="hobbies">
+        <Hobbies/>
       </section>
 
       <div className='white'/>
