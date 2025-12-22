@@ -24,28 +24,28 @@ export default function Navbar() {
         <div className="header">
           <ul className="header-right">
             <li>
-              <a href="#home">{headerText.HOME}</a>
+              <a data-testid="home" href="#home">{headerText.HOME}</a>
             </li>
             <li>
-              <a href="#about">{headerText.ABOUT}</a>
+              <a data-testid="about" href="#about">{headerText.ABOUT}</a>
             </li>
             <li>
-              <a href="#work">{headerText.WORK}</a>
+              <a data-testid="work" href="#work">{headerText.WORK}</a>
             </li>
             <li>
-              <a href="#skills">{headerText.SKILLS}</a>
+              <a data-testid="skills" href="#skills">{headerText.SKILLS}</a>
             </li>
             <li>
-              <a href="#projects">{headerText.PROJECTS}</a>
+              <a data-testid="projects" href="#projects">{headerText.PROJECTS}</a>
             </li>
             <li>
-              <a href="#hobbies">{headerText.HOBBIES}</a>
+              <a data-testid="hobbies" href="#hobbies">{headerText.HOBBIES}</a>
             </li>
             <li>
-              <a href="#education">{headerText.EDUCATION}</a>
+              <a data-testid="education" href="#education">{headerText.EDUCATION}</a>
             </li>
             <li>
-              <a href="#contact">{headerText.CONTACT}</a>
+              <a data-testid="contact" href="#contact">{headerText.CONTACT}</a>
             </li>
           </ul>
         </div>

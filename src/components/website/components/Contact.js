@@ -44,6 +44,7 @@ export default function Contact() {
                 <td>
                   <h5>
                     <button
+                      data-testid="email"
                       className='contact-button'
                       onClick={() => {
                         navigator.clipboard.writeText(contactText.EMAIL_LINK);

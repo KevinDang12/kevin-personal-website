@@ -44,7 +44,7 @@ export default function Projects() {
             className={scrollPosition <= window.innerHeight * percentage ? 'carousel-show' : 'carousel-hide'}
             variant="light"
             height={700}
-            style={{width: '100%', padding: "0 5%"}}>
+            style={{width: '100%', padding: "0 5%", paddingBottom: "20px"}}>
             <Carousel.Item interval={6000}>
               <img src={gameList} style={{maxWidth: '100%'}} alt={''}/>
             </Carousel.Item>
@@ -57,7 +57,7 @@ export default function Projects() {
             className={scrollPosition <= window.innerHeight * percentage ? 'carousel-show' : 'carousel-hide'}
             variant="light"
             height={700}
-            style={{width: '100%', padding: "0 5%"}}>
+            style={{width: '100%', padding: "0 5%", paddingBottom: "20px"}}>
             <Carousel.Item interval={8000}>
               <img src={webNotepad} style={{maxWidth: '100%'}} alt={''}/>
             </Carousel.Item>

@@ -14,10 +14,8 @@ export default function Chatbot() {
   const [chatopen, setChatopen] = useState(false);
   const [ prompt, setPrompt] = useState('');
   const messagesEndRef = useRef(null);
-
-  // const local = 'http://localhost:5000'; // window.location.origin
-  // const local = "http://127.0.0.1:5000/personal-website-aaeb4/us-central1/app";
-  const local = "https://us-central1-personal-website-aaeb4.cloudfunctions.net/app";
+  
+  const local = process.env.REACT_APP_URL;
 
   /**
    * Hide chatbot
@@ -74,7 +72,7 @@ export default function Chatbot() {
     
   return (
     <div id='chatCon'>
-      <div className="chat-box" style={chatopen ? show : hide}>
+      <div data-testid="chat-box" className="chat-box" style={chatopen ? show : hide}>
         <div className="message-header">Ask me a question</div>
         <div className="msg-area">
           {
@@ -95,7 +93,7 @@ export default function Chatbot() {
       </div>
       <br />
       <div className="pop">
-        <button className='openai-button' onClick={toggle}>
+        <button data-testid='openai-button' className='openai-button' onClick={toggle}>
           {chatopen ? <FaXmark className='icon'/> : <RiOpenaiFill className='icon'/>}
         </button>
       </div>

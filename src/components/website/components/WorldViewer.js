@@ -12,7 +12,7 @@ function WorldModel() {
 export default function WorldViewer() {
   return (
     <div className="world-viewer-container">
-      <Canvas shadows camera={{ position: [200, 200, 200], fov: 50 }}>
+      <Canvas shadows dpr={Math.min(1.5, window.devicePixelRatio)} frameloop="demand" camera={{ position: [200, 200, 200], fov: 50 }}>
         <Environment preset="apartment" />
         <WorldModel />
 

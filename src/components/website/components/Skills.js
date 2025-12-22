@@ -28,25 +28,25 @@ export default function Skills() {
                 className='circle'
                 onMouseEnter={() => setBackgroundColor(colors.YELLOW)}
                 onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <IoLogoJavascript className='skill-icon'/>
+                <IoLogoJavascript data-testid="jsImage" className='skill-icon'/>
               </div>
               <div
                 className='circle'
                 onMouseEnter={() => setBackgroundColor(colors.TURQUOISE)}
                 onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <FaReact className='skill-icon'/>
+                <FaReact data-testid="reactImage" className='skill-icon'/>
               </div>
               <div
                 className='circle'
                 onMouseEnter={() => setBackgroundColor(colors.ORANGE)}
                 onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <FaJava className='skill-icon'/>
+                <FaJava data-testid="javaImage" className='skill-icon'/>
               </div>
               <div
                 className='circle'
                 onMouseEnter={() => setBackgroundColor(colors.GREEN)}
                 onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <FaAndroid className='skill-icon'/>
+                <FaAndroid data-testid="androidImage" className='skill-icon'/>
               </div>
             </div>
             <div className='card-row'>
@@ -54,25 +54,25 @@ export default function Skills() {
                 className='circle'
                 onMouseEnter={() => setBackgroundColor(colors.BLUE)}
                 onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <FaPython className='skill-icon'/>
+                <FaPython data-testid="pythonImage" className='skill-icon'/>
               </div>
               <div
                 className='circle'
                 onMouseEnter={() => setBackgroundColor(colors.RED)}
                 onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <BsFiletypeSql className='skill-icon'/>
+                <BsFiletypeSql data-testid="sqlImage" className='skill-icon'/>
               </div>
               <div
                 className='circle'
                 onMouseEnter={() => setBackgroundColor(colors.DARK_BLUE)}
                 onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <SiCsharp className='skill-icon'/>
+                <SiCsharp data-testid="cSharpImage" className='skill-icon'/>
               </div>
               <div
                 className='circle'
                 onMouseEnter={() => setBackgroundColor(colors.PURPLE)}
                 onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <SiCplusplus className='skill-icon'/>
+                <SiCplusplus data-testid="cppImage" className='skill-icon'/>
               </div>
             </div>
           </div>
