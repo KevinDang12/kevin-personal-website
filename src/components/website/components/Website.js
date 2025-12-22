@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './Navbar';
 import Home from './Home';
 import About from './About';
 import Sirt from './Sirt';
@@ -12,6 +13,7 @@ import Contact from './Contact';
 import Chatbot from './chatbot/Chatbot';
 import './styles/Website.css';
 import Hobbies from './Hobbies';
+import Work from './Work';
 
 /**
  * The Web Portfolio which contains all the components
@@ -20,32 +22,29 @@ import Hobbies from './Hobbies';
 function Website() {
   return (
     <div>
+      <Header/>
       <section id="home">
         <Home/>
       </section>
 
-      <div className='white'/>
-
-      <section id="about">
-        <About/>
-      </section>
-
-      <div className='white'/>
-
       {/* <div className='blue'/> */}
+
+      <section id='work'>
+        <Work />
+      </section>
       
-      <section id="work">
+      {/* <section id="work">
         <Sirt/>
       </section>
 
       {/* <div className='blue'/> */}
 
-      <div className='white'/>
+      {/* <div className='white'/>
         <Research/>
-      <div className='white'/>
+      <div className='white'/> */}
 
       {/* <div className='blue'/> */}
-      <Teach/>
+      {/* <Teach/> */}
       {/* <div className='blue'/> */}
 
       <section id="skills">

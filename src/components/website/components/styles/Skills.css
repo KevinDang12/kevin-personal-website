@@ -49,7 +49,7 @@
     font-size: 50px;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.5s ease-out;
+    transition: background-color 0.7s ease-out;
     &:hover {
         color: rgb(250, 253, 254);
     }
@@ -60,8 +60,8 @@
 }
 
 .skill-icon {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
 }
 
 .divider {

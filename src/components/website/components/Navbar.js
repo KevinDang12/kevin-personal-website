@@ -27,9 +27,6 @@ export default function Navbar() {
               <a data-testid="home" href="#home">{headerText.HOME}</a>
             </li>
             <li>
-              <a data-testid="about" href="#about">{headerText.ABOUT}</a>
-            </li>
-            <li>
               <a data-testid="work" href="#work">{headerText.WORK}</a>
             </li>
             <li>

@@ -160,7 +160,7 @@ export default function Contact() {
           </table>
         </MediaQuery>
         <p className='update'>
-          Last updated July 2025
+          Last updated December 2025
           <br/>
           Hosted on Firebase. Built using React.
         </p>

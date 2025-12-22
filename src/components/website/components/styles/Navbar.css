@@ -1,5 +1,5 @@
 .header {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #2A628F;
   height: 4em;
   line-height: 4em;
   width: 100%;
@@ -8,9 +8,6 @@
   position: absolute;
   z-index: 2;
   transition: background-color 0.25s ease-out;
-  &:hover {
-    background-color: rgba(60, 60, 60, 0.3);
-  }
 }
 
 .header>ul {
@@ -28,7 +25,7 @@
 .header>ul>li>a {
   font-family: sans-serif;
   font-weight: bold;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255);
   text-decoration: none;
   padding: 15px 20px;
   position: relative;

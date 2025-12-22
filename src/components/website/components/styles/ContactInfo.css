@@ -1,0 +1,40 @@
+.contact-info-container {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    margin-top: 0.75rem;
+}
+
+.contact-icon-link {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+    color: black;
+}
+
+.contact-icon-link:hover {
+    transform: scale(1.25);
+    filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+}
+
+.email-link:hover {
+    color: #EF4444;
+    cursor: pointer;
+}
+
+.resume-link:hover {
+    color: #16A34A;
+    cursor: pointer;
+}
+
+.github-link:hover {
+    color: #6B7280;
+    cursor: pointer;
+}
+
+.linkedin-link:hover {
+    color: #3B82F6;
+    cursor: pointer;
+}
+
