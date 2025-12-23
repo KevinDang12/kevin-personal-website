@@ -1,8 +1,9 @@
 import ContactInfo from "./ContactInfo.js";
 import { IconTerminal } from '@tabler/icons-react';
-import BlobCanvas from "../Blob/Blob.tsx";
+import BlobCanvas from "../Blob/BlobCanvas";
 import { ChevronDown } from "lucide-react";
 import './styles/Home.css';
+import fragmentShader from '../Blob/fragmentShader';
 
 export default function Home() {
   return (
@@ -13,9 +14,11 @@ export default function Home() {
                 src={profile}
                 alt=""
             /> */}
-        <div style={{ transform: 'translateY(-100px)' }}>
-          <IconTerminal size={350} className="terminal-icon" />
-        </div>
+        <a className="icon-container"
+          href="#work"
+        >
+          <IconTerminal className="terminal-icon" />
+        </a>
         <main className="home-main">
           {/* <IconTerminal size={300} className="terminal-icon" /> */}
           <h1 className="home-title">{`Hi, I'm`} <b>Kevin</b></h1>
@@ -25,9 +28,14 @@ export default function Home() {
           <ContactInfo />
         </main>
       </div>
-      <BlobCanvas />
+      <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, zIndex: -1 }}>
+        <BlobCanvas fragmentShader={fragmentShader} />
+        {/* <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+          <div style={{ width: '100vw', height: '100vh', backgroundColor: 'rgba(237, 237, 237, 0)' }}></div>
+        </div> */}
+      </div>
       <div className="resume-section">
-        <span className="resume-text">Resume</span>
+        <span className="resume-text">Continue</span>
         <a
           href="#work"
           className="resume-arrow"

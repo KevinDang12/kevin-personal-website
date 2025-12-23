@@ -1,9 +1,8 @@
 import React from 'react';
-import {Parallax} from 'react-parallax';
-import MediaQuery from 'react-responsive';
-import education from '../resources/Education.jpg';
 import * as educationText from './text/educationText';
 import './styles/SectionStyles.css';
+import SheridanLogo from '../resources/Sheridan.jpg';
+import YorkLogo from '../resources/YU.jpg';
 
 /**
  * The Education Page
@@ -11,38 +10,92 @@ import './styles/SectionStyles.css';
  */
 export default function Education() {
   return (
-    <div>
-      <MediaQuery minWidth={769}>
-        <div className='education-section'>
-          <div className='right-content'>
-            <h1 className='section-header' data-testid="educationHeader">{educationText.TITLE}</h1>
-            <h2 className='section-title'>{educationText.UNIVERSITY}</h2>
-            <p className='section-body'>{educationText.DESCRIPTION[0]}</p>
-            <p className='section-body'>{educationText.UNIVERSITY_DURATION}</p>
-            <br/>
-            <h2 className='section-title'>{educationText.COLLEGE}</h2>
-            <p className='section-body'>{educationText.DESCRIPTION[1]}</p>
-            <p className='section-body'>{educationText.COLLEGE_DURATION}</p>
+    <div
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2rem',
+        gap: '2rem',
+      }}
+    >
+      <h1 
+        style={{ 
+          fontSize: '2rem', 
+          fontWeight: 'bold',
+          marginBottom: '1rem'
+        }}
+        data-testid="educationHeader"
+      >
+        {educationText.TITLE}
+      </h1>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1.5rem',
+          width: '100%',
+          maxWidth: '800px',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            padding: '1.5rem',
+          }}
+        >
+          <img
+            src={YorkLogo}
+            alt="York University Logo"
+            className="education-logo"
+          />
+          <div style={{ padding: 0, flex: 1 }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+              {educationText.UNIVERSITY}
+            </h3>
+            <time style={{ display: 'block', fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem' }}>
+              September 2024 - Present
+            </time>
+            <p style={{ color: '#374151', fontWeight: '500', marginBottom: '0.75rem' }}>
+              Honours Bachelor of Science, Computer Science
+            </p>
+            <p style={{ marginBottom: '0.5rem' }}>
+              {educationText.DESCRIPTION[0]}
+            </p>
           </div>
         </div>
-        <Parallax blur={{min: 20, max: -20}} bgImage={education} strength={500}>
-          <div className='section-image'/>
-        </Parallax>
-      </MediaQuery>
-      <MediaQuery maxWidth={768}>
-        <div className='education-section'>
-          <div className='right-content'>
-            <h1 className='section-header' data-testid="educationHeader">{educationText.TITLE}</h1>
-            <h2 className='section-title'>{educationText.UNIVERSITY}</h2>
-            <p className='section-body'>{educationText.DESCRIPTION[0]}</p>
-            <p className='section-body'>{educationText.UNIVERSITY_DURATION}</p>
-            <br/>
-            <h2 className='section-title'>{educationText.COLLEGE}</h2>
-            <p className='section-body'>{educationText.DESCRIPTION[1]}</p>
-            <p className='section-body'>{educationText.COLLEGE_DURATION}</p>
+
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            padding: '1.5rem',
+          }}
+        >
+          <img
+            src={SheridanLogo}
+            alt="Sheridan College Logo"
+            className="education-logo"
+          />
+          <div style={{ padding: 0, flex: 1 }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+              {educationText.COLLEGE}
+            </h3>
+            <time style={{ display: 'block', fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem' }}>
+              September 2020 - April 2024
+            </time>
+            <p style={{ color: '#374151', fontWeight: '500', marginBottom: '0.75rem' }}>
+              Advanced Diploma, Computer Engineering Technology
+            </p>
+            <p style={{ marginBottom: '0.5rem' }}>
+              {educationText.DESCRIPTION[1]}
+            </p>
           </div>
         </div>
-      </MediaQuery>
+      </div>
     </div>
   );
 }

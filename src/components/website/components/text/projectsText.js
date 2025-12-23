@@ -9,11 +9,11 @@ export const NOTEPAD = 'Notepad App';
 export const STEAM_REVIEW = 'Steam Review Summarizer';
 export const DESCRIPTION = [
   `A cross-platform notepad app, they are synced to a Notepad web app, a Desktop Notepad app, and an Android Notepad app`,
-  `The notepad web app is hosted on AWS and it can be accessed `,
+  `The notepad web app is hosted on AWS.`,
   `The desktop notepad app can be downloaded from this `,
-  `A video demonstration of the Android Notepad app can be found `,
+  `A video demonstration of the Android Notepad app can be found below.`,
 ];
 export const STEAM_DESCRIPTION = [
   `A Steam Review Summarizer web app that summarizes reviews for Steam games using the Steam API and OpenAI GPT-3.5 model`,
-  `The Steam Review Summarizer is hosted on Firebase and it can be accessed `,
+  `The Steam Review Summarizer is hosted on Firebase.`,
 ];

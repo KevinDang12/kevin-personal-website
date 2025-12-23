@@ -2,7 +2,7 @@
 import React, { useMemo, useRef } from "react";
 import vertexShader from "./vertexShader";
 import fragmentShader from "./fragmentShader";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { MathUtils, ShaderMaterial, Mesh } from "three";
 import * as THREE from "three";
 
@@ -12,7 +12,7 @@ type Uniforms = {
   u_blur: { value: number };
 };
 
-const Blob: React.FC = () => {
+export const Blob: React.FC = ( { geometryArgs = [2.3, 20], scale = 1.5 }: { geometryArgs?: [number, number], scale?: number } ) => {
   const mesh = useRef<Mesh<THREE.IcosahedronGeometry, ShaderMaterial>>(null);
   const hover = useRef(false);
 
@@ -42,12 +42,12 @@ const Blob: React.FC = () => {
   return (
     <mesh
       ref={mesh}
-      scale={1.5}
+      scale={scale}
       position={[0, 0, 0]}
       onPointerOver={() => (hover.current = true)}
       onPointerOut={() => (hover.current = false)}
     >
-      <icosahedronGeometry args={[2, 20]} />
+      <icosahedronGeometry args={geometryArgs} />
       <shaderMaterial
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
@@ -57,15 +57,4 @@ const Blob: React.FC = () => {
   );
 };
 
-export default function BlobCanvas() {
-  return (
-    <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, zIndex: -1 }}>
-      <Canvas camera={{ position: [0, 0, 7] }}>
-        <Blob />
-      </Canvas>
-      <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
-        <div style={{ width: '100vw', height: '100vh', backgroundColor: 'rgba(237, 237, 237, 0)' }}></div>
-      </div>
-    </div>
-  );
-}
+export default Blob;
