@@ -1,7 +1,12 @@
+.hobbies {
+    margin-top: 5rem;
+    margin-bottom: 10rem;
+}
+
 .hobbies-section {
     margin: 0px;
-    padding: 0px;
-    text-align: center;
+    padding: 2rem;
+    text-align: left;
     flex-direction: column;
     display: flex;
     align-items: center;
@@ -17,8 +22,8 @@
 
 .hobbies-clear {
     margin: 0px;
-    padding: 0px;
-    text-align: center;
+    padding: 2rem;
+    text-align: left;
     flex-direction: column;
     display: flex;
     align-items: center;
@@ -34,16 +39,20 @@
 
 
 .hobbies-header {
+    margin-top: 5rem;
     font-family: Inter, sans-serif;
     color: white;
     font-size: 32px;
     transition: font-size 0.2s;
-    &:hover {
-        font-size: 40px;
-        transition: font-size 0.2s;
-    }
+    text-align: left;
+    transform-origin: left;
 }
 
 .hobbies-description {
-    width: 50%;
+    width: 70%;
+    text-align: left;
+}
+
+.white-body {
+    text-align: left;
 }

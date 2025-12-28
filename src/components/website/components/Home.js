@@ -1,9 +1,11 @@
+import React, { Suspense, lazy } from 'react';
 import ContactInfo from "./ContactInfo.js";
 import { IconTerminal } from '@tabler/icons-react';
-import BlobCanvas from "../Blob/BlobCanvas";
 import { ChevronDown } from "lucide-react";
 import './styles/Home.css';
 import fragmentShader from '../Blob/fragmentShader';
+
+const BlobCanvas = lazy(() => import("../Blob/BlobCanvas"));
 
 export default function Home() {
   return (
@@ -29,7 +31,9 @@ export default function Home() {
         </main>
       </div>
       <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, zIndex: -1 }}>
+        <Suspense fallback={null}>
         <BlobCanvas fragmentShader={fragmentShader} />
+        </Suspense>
         {/* <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
           <div style={{ width: '100vw', height: '100vh', backgroundColor: 'rgba(237, 237, 237, 0)' }}></div>
         </div> */}

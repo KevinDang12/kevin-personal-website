@@ -14,6 +14,7 @@ import Chatbot from './chatbot/Chatbot';
 import './styles/Website.css';
 import Hobbies from './Hobbies';
 import Work from './Work';
+import { Toaster } from 'react-hot-toast';
 
 /**
  * The Web Portfolio which contains all the components
@@ -22,6 +23,7 @@ import Work from './Work';
 function Website() {
   return (
     <div>
+      <Toaster position="bottom-center" />
       <Header/>
       <section id="home">
         <Home/>

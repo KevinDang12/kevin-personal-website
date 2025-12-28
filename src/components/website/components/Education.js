@@ -66,7 +66,7 @@ export default function Education() {
               {educationText.DESCRIPTION[0]}
             </p>
           </div>
-        </div>
+          </div>
 
         <div
           style={{

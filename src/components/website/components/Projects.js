@@ -1,14 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Carousel from 'react-bootstrap/Carousel';
+import React, { Suspense, lazy } from 'react';
 import webNotepad from '../resources/Web-Notepad.JPG';
-import desktopNotepad from '../resources/Desktop-Notepad.JPG';
-import androidNotepad from '../resources/Android-Notepad.jpg';
-import gameList from '../resources/GameList.JPG';
 import review from '../resources/Review.JPG';
 import * as projectsText from './text/projectsText';
-import BlobCanvas from '../Blob/BlobCanvas';
 import './styles/SectionStyles.css';
 import { Card, Button } from 'react-bootstrap';
+
+const BlobCanvas = lazy(() => import('../Blob/BlobCanvas'));
 
 /**
  * The Projects Page
@@ -38,10 +35,13 @@ export default function Projects() {
       style={{
         height: "120vh",
         position: "relative",
+        marginTop: "5rem",
       }}
     >
       <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, zIndex: -2 }}>
-        <BlobCanvas position={[5, 3, 8]} geometryArgs={[2, 5]} scale={2.5} />
+        <Suspense fallback={null}>
+          <BlobCanvas position={[5, 3, 8]} geometryArgs={[2, 5]} scale={2.5} />
+        </Suspense>
         <div 
           style={{ 
             position: 'absolute', 
@@ -71,12 +71,13 @@ export default function Projects() {
         <div
           style={{
             width: '100%',
-            maxWidth: 'calc(500px + 500px + 1.5rem)',
+            marginTop: '6rem',
+            maxWidth: 'calc(1000px + 1.5rem)',
             marginBottom: '3rem',
           }}
         >
           <h1 style={{ marginBottom: '0.5rem', textAlign: 'left' }}>Projects</h1>
-          <p style={{ margin: 0, textAlign: 'left' }}>Some of my selected side projects</p>
+          <p style={{ margin: 0, fontSize: '20px', textAlign: 'left' }}>Some of my selected side projects</p>
         </div>
         <div
           style={{
@@ -111,15 +112,18 @@ export default function Projects() {
             <Card.Title>{projectsText.STEAM_REVIEW}</Card.Title>
             <Card.Text>{projectsText.STEAM_DESCRIPTION[0]}. {projectsText.STEAM_DESCRIPTION[1]}</Card.Text>
             <div style={{ display: 'flex', gap: '10px', marginTop: 'auto' }}>
-              <Button style={{
-                backgroundColor: 'rgb(84, 159, 240)',
-                border: 'none',
-                borderRadius: '30px',
-                padding: '10px',
-                fontSize: '16px',
-                fontWeight: 'bold',
-                color: 'white',
-              }}>Website</Button>
+              <a href={projectsText.STEAM_REVIEW_LINK} target="_blank" rel="noreferrer">
+                <Button className="project-button-outline" style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0)',
+                  border: '1px solid rgb(83, 83, 83)',
+                  borderRadius: '30px',
+                  padding: '10px',
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                  color: 'black',
+                  transition: 'all 0.3s ease',
+                }}>Website</Button>
+              </a>
             </div>
           </Card.Body>
         </Card>
@@ -148,24 +152,31 @@ export default function Projects() {
             <Card.Title>{projectsText.NOTEPAD}</Card.Title>
             <Card.Text>{projectsText.DESCRIPTION[0]}. {projectsText.DESCRIPTION[1]} {projectsText.DESCRIPTION[3]}</Card.Text>
             <div style={{ display: 'flex', gap: '10px', marginTop: 'auto' }}>
-              <Button style={{
-                backgroundColor: 'rgb(84, 159, 240)',
-                border: 'none',
-                borderRadius: '30px',
-                padding: '10px',
-                fontSize: '16px',
-                fontWeight: 'bold',
-                color: 'white',
-              }}>Website</Button>
-              <Button style={{
-                backgroundColor: 'rgb(84, 159, 240)',
-                border: 'none',
-                borderRadius: '30px',
-                padding: '10px',
-                fontSize: '16px',
-                fontWeight: 'bold',
-                color: 'white',
-              }}>Video Demo</Button>
+              <a href={projectsText.NOTEPAD_WEB_LINK} target="_blank" rel="noreferrer">
+                <Button className="project-button-outline" style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0)',
+                  border: '1px solid rgb(83, 83, 83)',
+                  borderRadius: '30px',
+                  padding: '10px',
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                  color: 'black',
+                  transition: 'all 0.3s ease',
+                }}>Website</Button>
+              </a>
+
+              <a href={projectsText.NOTEPAD_ANDROID_LINK} target="_blank" rel="noreferrer">
+                <Button className="project-button-outline" style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0)',
+                  border: '1px solid rgb(83, 83, 83)',
+                  borderRadius: '30px',
+                  padding: '10px',
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                  color: 'black',
+                  transition: 'all 0.3s ease',
+                }}>Video Demo</Button>
+              </a>
             </div>
           </Card.Body>
         </Card>

@@ -137,10 +137,6 @@
     align-items: start;
     transition: font-size 0.2s;
     transform-origin: left;
-    &:hover {
-        font-size: 22px;
-        transition: font-size 0.2s;
-    }
     @media only screen and (max-width: 768px) {
         font-size: 12px;
     }
@@ -357,4 +353,10 @@
 
 .education-logo:hover {
     transform: scale(1.2);
+}
+
+.project-button-outline:hover {
+    background-color: rgb(84, 159, 240);
+    border-color: rgb(84, 159, 240);
+    color: white;
 }

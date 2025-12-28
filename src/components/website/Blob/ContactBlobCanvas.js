@@ -1,14 +1,12 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import Blob from './Blob.tsx'
+import ContactBlob from './ContactBlob.tsx'
 
-export default function BlobCanvas({
+export default function ContactBlobCanvas({
     position = [0, 0, 7],
-    backgroundColor = 'rgba(237, 237, 237, 0)',
-    geometryArgs = [2.3, 20],
-    scale = 1.5,
-    fragmentShader,
+    geometryArgs = [2.5, 25],
+    scale = 2.0,
 }) {
     const containerRef = useRef(null);
     const [isVisible, setIsVisible] = useState(true);
@@ -39,8 +37,9 @@ export default function BlobCanvas({
             frameloop={isVisible ? "always" : "demand"}
             dpr={Math.min(1.5, window.devicePixelRatio)}
         >
-          <Blob geometryArgs={geometryArgs} scale={scale} fragmentShader={fragmentShader} />
+          <ContactBlob geometryArgs={geometryArgs} scale={scale} />
         </Canvas>
       </div>
     );
 }
+

@@ -22,10 +22,6 @@
     font-size: 32px;
     transition: font-size 0.2s;
     transform-origin: left;
-    &:hover {
-        font-size: 40px;
-        transition: font-size 0.2s;
-    }
 }
 
 .card-row {

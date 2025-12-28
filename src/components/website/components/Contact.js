@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import resume from '../resources/Resume.pdf';
 import * as contactText from './text/contactText';
 import './styles/Contact.css';
-import toast, { Toaster } from 'react-hot-toast';
-import MediaQuery from 'react-responsive';
+import toast from 'react-hot-toast';
+import { IconMail, IconFileCv, IconBrandGithub, IconBrandLinkedin } from '@tabler/icons-react';
+
+const ContactBlobCanvas = lazy(() => import('../Blob/ContactBlobCanvas'));
 
 const emailCopy = () => toast('Email copied to clipboard.');
 
@@ -31,138 +33,79 @@ export default function Contact() {
   }, []);
 
   return (
-    <div className='contact'>
-      <Toaster />
+    <div className='contact' style={{ position: 'relative' }}>
       <div className={scrollPosition <= window.innerHeight * percentage ? 'blue-divider' : 'white'}/>
+      <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, zIndex: -2 }}>
+        <Suspense fallback={null}>
+          <ContactBlobCanvas 
+            position={[0, 0, 7]} 
+            geometryArgs={[2.5, 25]} 
+            scale={2.0}
+          />
+        </Suspense>
+        <div 
+          style={{ 
+            position: 'absolute', 
+            top: 0, 
+            right: 0, 
+            bottom: 0, 
+            left: 0, 
+            backdropFilter: 'blur(15px)',
+            WebkitBackdropFilter: 'blur(15px)',
+            pointerEvents: 'none',
+            zIndex: -1 
+          }}
+        />
+      </div>
       <div className={scrollPosition <= window.innerHeight * percentage ? 'contact-section' : 'contact-clear'} ref={refToTrack}>
         <h1 className='contact-header'>{contactText.TITLE}</h1>
-        <br />
-        <MediaQuery minWidth={769}>
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  <h5>
-                    <button
-                      data-testid="email"
-                      className='contact-button'
-                      onClick={() => {
-                        navigator.clipboard.writeText(contactText.EMAIL_LINK);
-                        emailCopy();
-                      }}>
-                      {contactText.EMAIL}
-                    </button>
-                  </h5>
-                </td>
-                <td>
-                  <h5>
-                    <a
-                      data-testid="github"
-                      href={contactText.GITHUB_LINK}
-                      target="_blank"
-                      rel="noreferrer">
-                        <button className='contact-button'>
-                          {contactText.GITHUB}
-                        </button>
-                    </a>
-                  </h5>
-                </td>
-                <td>
-                  <h5>
-                    <a 
-                      data-testid="linkedin" 
-                      href={contactText.LINKEDIN_LINK}
-                      target="_blank"
-                      rel="noreferrer">
-                        <button className='contact-button'>
-                          {contactText.LINKEDIN}
-                        </button>
-                    </a>
-                  </h5>
-                </td>
-                <td>
-                  <h5>
-                    <a
-                      data-testid="resume"
-                      href={resume}
-                      target="_blank"
-                      rel="noreferrer">
-                        <button className='contact-button'>
-                          {contactText.RESUME}
-                        </button>
-                    </a>
-                  </h5>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </MediaQuery>
-        
-        <MediaQuery maxWidth={768}>
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  <h5>
-                    <button
-                      className='contact-button'
-                      onClick={() => {
-                        navigator.clipboard.writeText(contactText.EMAIL_LINK);
-                        emailCopy();
-                      }}>
-                      {contactText.EMAIL}
-                    </button>
-                  </h5>
-                </td>
-                <td>
-                  <h5>
-                    <a
-                      data-testid="github"
-                      href={contactText.GITHUB_LINK}
-                      target="_blank"
-                      rel="noreferrer">
-                        <button className='contact-button'>
-                          {contactText.GITHUB}
-                        </button>
-                    </a>
-                  </h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h5>
-                    <a 
-                      data-testid="linkedin" 
-                      href={contactText.LINKEDIN_LINK}
-                      target="_blank"
-                      rel="noreferrer">
-                        <button className='contact-button'>
-                          {contactText.LINKEDIN}
-                        </button>
-                    </a>
-                  </h5>
-                </td>
-                <td>
-                  <h5>
-                    <a
-                      data-testid="resume"
-                      href={resume}
-                      target="_blank"
-                      rel="noreferrer">
-                        <button className='contact-button'>
-                          {contactText.RESUME}
-                        </button>
-                    </a>
-                  </h5>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </MediaQuery>
+        <div className='contact-buttons-container'>
+          <button
+            data-testid="email"
+            className='contact-button-neumorphic'
+            onClick={() => {
+              navigator.clipboard.writeText(contactText.EMAIL_LINK);
+              emailCopy();
+            }}>
+            <IconMail size={32} stroke={1.5} />
+            <span>{contactText.EMAIL}</span>
+          </button>
+          <a
+            data-testid="github"
+            href={contactText.GITHUB_LINK}
+            target="_blank"
+            rel="noreferrer"
+            className='contact-button-neumorphic-link'>
+            <button className='contact-button-neumorphic'>
+              <IconBrandGithub size={32} stroke={1.5} />
+              <span>{contactText.GITHUB}</span>
+            </button>
+          </a>
+          <a 
+            data-testid="linkedin" 
+            href={contactText.LINKEDIN_LINK}
+            target="_blank"
+            rel="noreferrer"
+            className='contact-button-neumorphic-link'>
+            <button className='contact-button-neumorphic'>
+              <IconBrandLinkedin size={32} stroke={1.5} />
+              <span>{contactText.LINKEDIN}</span>
+            </button>
+          </a>
+          <a
+            data-testid="resume"
+            href={resume}
+            target="_blank"
+            rel="noreferrer"
+            className='contact-button-neumorphic-link'>
+            <button className='contact-button-neumorphic'>
+              <IconFileCv size={32} stroke={1.5} />
+              <span>{contactText.RESUME}</span>
+            </button>
+          </a>
+        </div>
         <p className='update'>
-          Last updated December 2025
-          <br/>
-          Hosted on Firebase. Built using React.
+          Last updated December 2025 • Hosted on Firebase • Built using React.
         </p>
       </div>
     </div>
