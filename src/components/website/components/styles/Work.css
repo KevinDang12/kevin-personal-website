@@ -1,0 +1,141 @@
+.work-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2rem 2rem 5rem 2rem;
+    gap: 4rem;
+    font-family: sans-serif;
+    background-color: #E5E7EB;
+}
+
+@media (min-width: 640px) {
+    .work-container {
+        padding: 5rem;
+    }
+}
+
+.work-title {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    padding-top: 2rem;
+}
+
+@media (min-width: 768px) {
+    .work-title {
+        font-size: 28px;
+        padding-top: 3rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .work-title {
+        font-size: 32px;
+        padding-top: 4rem;
+    }
+}
+
+.work-item {
+    display: flex;
+    flex-direction: row;
+    gap: 3.75rem;
+    grid-row-start: 2;
+    align-items: center;
+    text-align: center;
+}
+
+.work-icon {
+    color: white;
+    border-radius: 100%;
+    padding: 2rem;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+    width: 6.25rem;
+    height: 6.25rem;
+}
+
+.work-icon:hover {
+    transform: scale(1.25);
+}
+
+@media (min-width: 768px) {
+    .work-icon {
+        width: 9.5rem;
+        height: 9.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .work-icon {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+.unity-icon {
+    background-color: #6B7280;
+}
+
+.brain-icon {
+    background-color: #14532D;
+}
+
+.teacher-icon {
+    background-color: #1E40AF;
+}
+
+.divider {
+    height: 16rem;
+    width: 1px;
+    background-color: #9CA3AF;
+}
+
+.work-details {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.work-details-text {
+    text-align: left;
+}
+
+.job-title {
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .job-title {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .job-title {
+        font-size: 24px;
+    }
+}
+
+.job-description {
+    gap: 1rem;
+    list-style-type: disc;
+    padding-left: 3rem;
+}
+
+@media (min-width: 768px) {
+    .job-description {
+        width: 30rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .job-description {
+        width: 43.75rem;
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+    }
+}

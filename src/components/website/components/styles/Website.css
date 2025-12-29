@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgba(237, 237, 237, 0.7);
 }
 
 td {
@@ -29,6 +29,6 @@ li {
 
 .white {
   width: 100%;
-  background-color: rgb(250, 253, 254);
+  background-color: rgb(255, 255, 255);
   height: 50px;
 }

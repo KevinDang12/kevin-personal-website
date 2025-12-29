@@ -6,13 +6,12 @@
     "@react-oauth/google": "^0.11.1",
     "@react-three/drei": "^9.120.5",
     "@react-three/fiber": "^8.17.10",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@tabler/icons-react": "^3.36.0",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.13.1",
     "dotenv": "^16.3.1",
+    "lucide-react": "^0.562.0",
     "openai": "^4.38.5",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
@@ -55,6 +54,11 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "jest": "^27.5.1",
+    "jest-environment-jsdom": "^30.0.4"
   }
 }

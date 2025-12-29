@@ -12,7 +12,7 @@
     z-index: 1;
     width: 100%;
     max-width: 100%;
-    min-height: 100vh;
+    min-height: 80vh;
     transition: background-color 0.5s ease-out;
 }
 
@@ -22,10 +22,6 @@
     font-size: 32px;
     transition: font-size 0.2s;
     transform-origin: left;
-    &:hover {
-        font-size: 40px;
-        transition: font-size 0.2s;
-    }
 }
 
 .card-row {
@@ -49,7 +45,7 @@
     font-size: 50px;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.5s ease-out;
+    transition: background-color 0.7s ease-out;
     &:hover {
         color: rgb(250, 253, 254);
     }
@@ -60,8 +56,8 @@
 }
 
 .skill-icon {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
 }
 
 .divider {

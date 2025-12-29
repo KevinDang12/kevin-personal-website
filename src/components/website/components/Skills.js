@@ -1,5 +1,15 @@
 import React from 'react';
 import MediaQuery from 'react-responsive';
+import {
+  IconBrandJavascript,
+  IconBrandReact,
+  IconBrandKotlin,
+  IconBrandAndroid,
+  IconBrandPython,
+  IconFileTypeSql,
+  IconBrandCSharp,
+  IconBrandCpp
+} from '@tabler/icons-react';
 import * as skillsText from './text/skillsText';
 import { IoLogoJavascript } from "react-icons/io";
 import { FaReact, FaJava, FaAndroid, FaPython } from "react-icons/fa";
@@ -16,9 +26,11 @@ export default function Skills() {
 
   const [backgroundColor, setBackgroundColor] = React.useState(colors.WHITE);
 
+  const iconClassName = 'skill-icon';
+
   return (
     <div>
-      <div className='divider' style={{backgroundColor: backgroundColor}}/>
+      {/* <div className='divider' style={{backgroundColor: backgroundColor}}/> */}
       <MediaQuery minWidth={769}>
         <div className='skill-section' style={{backgroundColor: backgroundColor}}>
           <h1 className='skills-header'>{skillsText.HEADER}</h1>
@@ -28,25 +40,25 @@ export default function Skills() {
                 className='circle'
                 onMouseEnter={() => setBackgroundColor(colors.YELLOW)}
                 onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <IoLogoJavascript className='skill-icon'/>
+                <IconBrandJavascript data-testid="jsImage" className={iconClassName}/>
               </div>
               <div
                 className='circle'
                 onMouseEnter={() => setBackgroundColor(colors.TURQUOISE)}
                 onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <FaReact className='skill-icon'/>
+                <IconBrandReact data-testid="reactImage" className={iconClassName}/>
               </div>
               <div
                 className='circle'
                 onMouseEnter={() => setBackgroundColor(colors.ORANGE)}
                 onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <FaJava className='skill-icon'/>
+                <IconBrandKotlin data-testid="javaImage" className={iconClassName}/>
               </div>
               <div
                 className='circle'
                 onMouseEnter={() => setBackgroundColor(colors.GREEN)}
                 onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <FaAndroid className='skill-icon'/>
+                <IconBrandAndroid data-testid="androidImage" className={iconClassName}/>
               </div>
             </div>
             <div className='card-row'>
@@ -54,25 +66,25 @@ export default function Skills() {
                 className='circle'
                 onMouseEnter={() => setBackgroundColor(colors.BLUE)}
                 onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <FaPython className='skill-icon'/>
+                <IconBrandPython data-testid="pythonImage" className={iconClassName}/>
               </div>
               <div
                 className='circle'
                 onMouseEnter={() => setBackgroundColor(colors.RED)}
                 onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <BsFiletypeSql className='skill-icon'/>
+                <IconFileTypeSql data-testid="sqlImage" className={iconClassName}/>
               </div>
               <div
                 className='circle'
                 onMouseEnter={() => setBackgroundColor(colors.DARK_BLUE)}
                 onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <SiCsharp className='skill-icon'/>
+                <IconBrandCSharp data-testid="cSharpImage" className={iconClassName}/>
               </div>
               <div
                 className='circle'
                 onMouseEnter={() => setBackgroundColor(colors.PURPLE)}
                 onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <SiCplusplus className='skill-icon'/>
+                <IconBrandCpp data-testid="cppImage" className={iconClassName}/>
               </div>
             </div>
           </div>
@@ -134,7 +146,6 @@ export default function Skills() {
           </div>
         </div>
       </MediaQuery>
-      <div className='divider' style={{backgroundColor: backgroundColor}}/>
     </div>
   );
 }

@@ -29,11 +29,18 @@ export default function Hobbies() {
 
   return (
     <div className='hobbies'>
-      <div className={scrollPosition <= window.innerHeight * percentage ? 'black-divider' : 'white'}/>
       <div className={scrollPosition <= window.innerHeight * percentage ? 'hobbies-section' : 'hobbies-clear'} ref={refToTrack}>
-        <h1 className='hobbies-header'>{hobbiesText.TITLE}</h1>
-        <div className='hobbies-description'>
-          <p className='white-body'>{hobbiesText.DESCRIPTION}</p>
+        <div
+          className={scrollPosition <= window.innerHeight * percentage ? 'hobbies-text-show' : 'hobbies-text-hidden'}
+          style={{
+            width: '100%',
+            marginTop: '6rem',
+            maxWidth: 'calc(1000px + 1.5rem)',
+            marginBottom: '2rem',
+          }}
+        >
+          <h1 style={{ marginBottom: '0.5rem', textAlign: 'left' }}>{hobbiesText.TITLE}</h1>
+          <p style={{ margin: 0, fontSize: '20px', textAlign: 'left' }}>{hobbiesText.DESCRIPTION}</p>
         </div>
         <Suspense fallback={<div className="loading-model">Loading 3D Model...</div>}>
           <WorldViewer />

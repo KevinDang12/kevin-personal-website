@@ -78,7 +78,7 @@
 
 .blue-divider {
   width: 100%;
-  background-color: rgb(9, 0, 81);;
+  background-color: #C2E1E2;
   height: 50px;
   transition: background-color 0.5s ease;
 }
