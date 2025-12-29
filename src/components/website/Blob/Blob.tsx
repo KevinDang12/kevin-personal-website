@@ -13,13 +13,15 @@ type Uniforms = {
 };
 
 export const Blob: React.FC = ( { 
-  geometryArgs = [2.3, 20], 
+  geometryArgs = [2.3, 12],
   scale = 1.5,
-  fragmentShader: customFragmentShader 
+  fragmentShader: customFragmentShader,
+  blur = 0.005
 }: { 
   geometryArgs?: [number, number], 
   scale?: number,
-  fragmentShader?: string
+  fragmentShader?: string,
+  blur?: number
 } ) => {
   const shaderToUse = customFragmentShader || fragmentShader;
   const mesh = useRef<Mesh<THREE.IcosahedronGeometry, ShaderMaterial>>(null);
@@ -29,9 +31,9 @@ export const Blob: React.FC = ( {
     return {
       u_time: { value: 0 },
       u_intensity: { value: 0.4 },
-      u_blur: { value: 0.005 },
+      u_blur: { value: blur },
     };
-  }, []);
+  }, [blur]);
 
   useFrame(({ clock }) => {
     if (mesh.current) {

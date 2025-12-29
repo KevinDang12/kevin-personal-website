@@ -246,7 +246,7 @@
 
 .section-image {
     padding: 0px;
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
     max-width: 100%;
 }
@@ -355,8 +355,15 @@
     transform: scale(1.2);
 }
 
+.project-button-outline {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
 .project-button-outline:hover {
-    background-color: rgb(84, 159, 240);
-    border-color: rgb(84, 159, 240);
-    color: white;
+    background-color: rgb(84, 159, 240) !important;
+    border-color: rgb(84, 159, 240) !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(84, 159, 240, 0.4);
 }

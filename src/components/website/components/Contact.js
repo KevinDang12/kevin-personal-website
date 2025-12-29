@@ -34,7 +34,6 @@ export default function Contact() {
 
   return (
     <div className='contact' style={{ position: 'relative' }}>
-      <div className={scrollPosition <= window.innerHeight * percentage ? 'blue-divider' : 'white'}/>
       <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, zIndex: -2 }}>
         <Suspense fallback={null}>
           <ContactBlobCanvas 
@@ -58,51 +57,53 @@ export default function Contact() {
         />
       </div>
       <div className={scrollPosition <= window.innerHeight * percentage ? 'contact-section' : 'contact-clear'} ref={refToTrack}>
-        <h1 className='contact-header'>{contactText.TITLE}</h1>
-        <div className='contact-buttons-container'>
-          <button
-            data-testid="email"
-            className='contact-button-neumorphic'
-            onClick={() => {
-              navigator.clipboard.writeText(contactText.EMAIL_LINK);
-              emailCopy();
-            }}>
-            <IconMail size={32} stroke={1.5} />
-            <span>{contactText.EMAIL}</span>
-          </button>
-          <a
-            data-testid="github"
-            href={contactText.GITHUB_LINK}
-            target="_blank"
-            rel="noreferrer"
-            className='contact-button-neumorphic-link'>
-            <button className='contact-button-neumorphic'>
-              <IconBrandGithub size={32} stroke={1.5} />
-              <span>{contactText.GITHUB}</span>
+        <div className='contact-content'>
+          <h1 className='contact-header'>{contactText.TITLE}</h1>
+          <div className='contact-buttons-container'>
+            <button
+              data-testid="email"
+              className='contact-button-neumorphic'
+              onClick={() => {
+                navigator.clipboard.writeText(contactText.EMAIL_LINK);
+                emailCopy();
+              }}>
+              <IconMail size={32} stroke={1.5} />
+              <span>{contactText.EMAIL}</span>
             </button>
-          </a>
-          <a 
-            data-testid="linkedin" 
-            href={contactText.LINKEDIN_LINK}
-            target="_blank"
-            rel="noreferrer"
-            className='contact-button-neumorphic-link'>
-            <button className='contact-button-neumorphic'>
-              <IconBrandLinkedin size={32} stroke={1.5} />
-              <span>{contactText.LINKEDIN}</span>
-            </button>
-          </a>
-          <a
-            data-testid="resume"
-            href={resume}
-            target="_blank"
-            rel="noreferrer"
-            className='contact-button-neumorphic-link'>
-            <button className='contact-button-neumorphic'>
-              <IconFileCv size={32} stroke={1.5} />
-              <span>{contactText.RESUME}</span>
-            </button>
-          </a>
+            <a
+              data-testid="github"
+              href={contactText.GITHUB_LINK}
+              target="_blank"
+              rel="noreferrer"
+              className='contact-button-neumorphic-link'>
+              <button className='contact-button-neumorphic'>
+                <IconBrandGithub size={32} stroke={1.5} />
+                <span>{contactText.GITHUB}</span>
+              </button>
+            </a>
+            <a 
+              data-testid="linkedin" 
+              href={contactText.LINKEDIN_LINK}
+              target="_blank"
+              rel="noreferrer"
+              className='contact-button-neumorphic-link'>
+              <button className='contact-button-neumorphic'>
+                <IconBrandLinkedin size={32} stroke={1.5} />
+                <span>{contactText.LINKEDIN}</span>
+              </button>
+            </a>
+            <a
+              data-testid="resume"
+              href={resume}
+              target="_blank"
+              rel="noreferrer"
+              className='contact-button-neumorphic-link'>
+              <button className='contact-button-neumorphic'>
+                <IconFileCv size={32} stroke={1.5} />
+                <span>{contactText.RESUME}</span>
+              </button>
+            </a>
+          </div>
         </div>
         <p className='update'>
           Last updated December 2025 • Hosted on Firebase • Built using React.

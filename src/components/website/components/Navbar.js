@@ -20,7 +20,7 @@ export default function Navbar() {
 
   return (
     <div>
-      <MediaQuery minWidth={769}>
+      <MediaQuery minWidth={1030}>
         <div className="header">
           <ul className="header-right">
             <li>
@@ -48,7 +48,7 @@ export default function Navbar() {
         </div>
       </MediaQuery>
 
-      <MediaQuery maxWidth={768}>
+      <MediaQuery maxWidth={1029}>
         <div className="header-mobile">
           <button className="mobile-button" onClick={toggleMenu}>
             ☰
@@ -57,11 +57,6 @@ export default function Navbar() {
             <li>
               <a href="#home" onClick={handleMenuClick}>
                 {headerText.HOME}
-              </a>
-            </li>
-            <li>
-              <a href="#about" onClick={handleMenuClick}>
-                {headerText.ABOUT}
               </a>
             </li>
             <li>

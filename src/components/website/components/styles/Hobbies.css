@@ -56,3 +56,13 @@
 .white-body {
     text-align: left;
 }
+
+.hobbies-text-hidden {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.hobbies-text-show {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}

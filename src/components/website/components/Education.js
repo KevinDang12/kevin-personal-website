@@ -12,12 +12,11 @@ export default function Education() {
   return (
     <div
       style={{
-        minHeight: '100vh',
+        minHeight: '80vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '2rem',
         gap: '2rem',
       }}
     >

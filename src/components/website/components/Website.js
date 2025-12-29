@@ -61,8 +61,6 @@ function Website() {
         <Hobbies/>
       </section>
 
-      <div className='white'/>
-
       <section id="education">
         <Education/>
       </section>

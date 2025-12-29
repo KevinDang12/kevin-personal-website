@@ -32,6 +32,7 @@ export default function Hobbies() {
       <div className={scrollPosition <= window.innerHeight * percentage ? 'black-divider' : 'white'}/>
       <div className={scrollPosition <= window.innerHeight * percentage ? 'hobbies-section' : 'hobbies-clear'} ref={refToTrack}>
         <div
+          className={scrollPosition <= window.innerHeight * percentage ? 'hobbies-text-show' : 'hobbies-text-hidden'}
           style={{
             width: '100%',
             maxWidth: 'calc(1000px + 1.5rem)',

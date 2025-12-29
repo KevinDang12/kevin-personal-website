@@ -9,6 +9,7 @@ export default function BlobCanvas({
     geometryArgs = [2.3, 20],
     scale = 1.5,
     fragmentShader,
+    blur,
 }) {
     const containerRef = useRef(null);
     const [isVisible, setIsVisible] = useState(true);
@@ -21,25 +22,26 @@ export default function BlobCanvas({
             { threshold: 0.1 }
         );
 
-        if (containerRef.current) {
-            observer.observe(containerRef.current);
+        const currentRef = containerRef.current;
+        if (currentRef) {
+            observer.observe(currentRef);
         }
 
         return () => {
-            if (containerRef.current) {
-                observer.unobserve(containerRef.current);
+            if (currentRef) {
+                observer.unobserve(currentRef);
             }
         };
     }, []);
 
     return (
-    <div ref={containerRef} style={{ width: "100vw", height: "100vh", zIndex: -1 }}>
+    <div ref={containerRef} style={{ width: "100%", height: "100vh", zIndex: -1 }}>
         <Canvas 
             camera={{ position: [...position] }}
             frameloop={isVisible ? "always" : "demand"}
             dpr={Math.min(1.5, window.devicePixelRatio)}
         >
-          <Blob geometryArgs={geometryArgs} scale={scale} fragmentShader={fragmentShader} />
+          <Blob geometryArgs={geometryArgs} scale={scale} fragmentShader={fragmentShader} blur={blur} />
         </Canvas>
       </div>
     );
