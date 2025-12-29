@@ -1,5 +1,5 @@
 .header {
-  background-color: #2A628F;
+  background-color: #547fae;
   height: 4em;
   line-height: 4em;
   width: 100%;
@@ -56,7 +56,7 @@
 
 .header-mobile {
   position: fixed;
-  background-color: #2A628F;
+  background-color: #547fae;
   height: 4.5em;
   line-height: 4.5em;
   width: 100%;

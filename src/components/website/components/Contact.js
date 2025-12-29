@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import resume from '../resources/Resume.pdf';
 import * as contactText from './text/contactText';
 import './styles/Contact.css';
 import toast from 'react-hot-toast';
 import { IconMail, IconFileCv, IconBrandGithub, IconBrandLinkedin } from '@tabler/icons-react';
-
-const ContactBlobCanvas = lazy(() => import('../Blob/ContactBlobCanvas'));
 
 const emailCopy = () => toast('Email copied to clipboard.');
 
@@ -33,29 +31,7 @@ export default function Contact() {
   }, []);
 
   return (
-    <div className='contact' style={{ position: 'relative' }}>
-      <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, zIndex: -2 }}>
-        <Suspense fallback={null}>
-          <ContactBlobCanvas 
-            position={[0, 0, 7]} 
-            geometryArgs={[2.5, 25]} 
-            scale={2.0}
-          />
-        </Suspense>
-        <div 
-          style={{ 
-            position: 'absolute', 
-            top: 0, 
-            right: 0, 
-            bottom: 0, 
-            left: 0, 
-            backdropFilter: 'blur(15px)',
-            WebkitBackdropFilter: 'blur(15px)',
-            pointerEvents: 'none',
-            zIndex: -1 
-          }}
-        />
-      </div>
+    <div className='contact'>
       <div className={scrollPosition <= window.innerHeight * percentage ? 'contact-section' : 'contact-clear'} ref={refToTrack}>
         <div className='contact-content'>
           <h1 className='contact-header'>{contactText.TITLE}</h1>
@@ -67,8 +43,8 @@ export default function Contact() {
                 navigator.clipboard.writeText(contactText.EMAIL_LINK);
                 emailCopy();
               }}>
-              <IconMail size={32} stroke={1.5} />
-              <span>{contactText.EMAIL}</span>
+              <IconMail size={56} stroke={1.5} />
+              <span className='contact-text'>{contactText.EMAIL}</span>
             </button>
             <a
               data-testid="github"
@@ -77,8 +53,8 @@ export default function Contact() {
               rel="noreferrer"
               className='contact-button-neumorphic-link'>
               <button className='contact-button-neumorphic'>
-                <IconBrandGithub size={32} stroke={1.5} />
-                <span>{contactText.GITHUB}</span>
+                <IconBrandGithub size={56} stroke={1.5} />
+                <span className='contact-text'>{contactText.GITHUB}</span>
               </button>
             </a>
             <a 
@@ -88,8 +64,8 @@ export default function Contact() {
               rel="noreferrer"
               className='contact-button-neumorphic-link'>
               <button className='contact-button-neumorphic'>
-                <IconBrandLinkedin size={32} stroke={1.5} />
-                <span>{contactText.LINKEDIN}</span>
+                <IconBrandLinkedin size={56} stroke={1.5} />
+                <span className='contact-text'>{contactText.LINKEDIN}</span>
               </button>
             </a>
             <a
@@ -99,8 +75,8 @@ export default function Contact() {
               rel="noreferrer"
               className='contact-button-neumorphic-link'>
               <button className='contact-button-neumorphic'>
-                <IconFileCv size={32} stroke={1.5} />
-                <span>{contactText.RESUME}</span>
+                <IconFileCv size={56} stroke={1.5} />
+                <span className='contact-text'>{contactText.RESUME}</span>
               </button>
             </a>
           </div>

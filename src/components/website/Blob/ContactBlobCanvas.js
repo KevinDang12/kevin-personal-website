@@ -19,19 +19,20 @@ export default function ContactBlobCanvas({
             { threshold: 0.1 }
         );
 
-        if (containerRef.current) {
-            observer.observe(containerRef.current);
+        const currentRef = containerRef.current;
+        if (currentRef) {
+            observer.observe(currentRef);
         }
 
         return () => {
-            if (containerRef.current) {
-                observer.unobserve(containerRef.current);
+            if (currentRef) {
+                observer.unobserve(currentRef);
             }
         };
     }, []);
 
     return (
-    <div ref={containerRef} style={{ width: "100%", height: "100vh", zIndex: -1 }}>
+    <div ref={containerRef} style={{ width: "100%", height: "100%", zIndex: -1 }}>
         <Canvas 
             camera={{ position: [...position] }}
             frameloop={isVisible ? "always" : "demand"}

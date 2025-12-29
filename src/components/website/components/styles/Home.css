@@ -54,7 +54,7 @@
 
 @media (max-width: 2560px) {
     .home-title {
-        font-size: 1.5rem; /* Approximation for 2lg */
+        font-size: 1.5rem;
         line-height: 2rem;
         margin-bottom: 0.5rem;
     }
@@ -72,22 +72,22 @@
     color: black;
     width: 100%;
     text-align: left;
+    font-weight: 100;
 }
 
 @media (max-width: 2560px) {
     .home-paragraph {
-        font-size: 18; /* Approximation for 2lg */
-        /* line-height: 2rem; */
+        font-size: 18px;
         line-height: 1.5rem;
-        width: 20rem; /* Assuming 1rem = 4 units */
+        width: 20rem;
     }
 }
 
 @media (min-width: 2560px) {
     .home-paragraph {
-        font-size: 28px;
-        line-height: 2.5rem;
-        width: 40rem; /* Assuming 1rem = 4 units */
+        font-size: 20px;
+        line-height: 2rem;
+        width: 32rem;
     }
 }
 

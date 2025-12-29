@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Navbar';
 import Home from './Home';
@@ -15,6 +15,8 @@ import './styles/Website.css';
 import Hobbies from './Hobbies';
 import Work from './Work';
 import { Toaster } from 'react-hot-toast';
+
+const ContactBlobCanvas = lazy(() => import('../Blob/ContactBlobCanvas'));
 
 /**
  * The Web Portfolio which contains all the components
@@ -61,15 +63,36 @@ function Website() {
         <Hobbies/>
       </section>
 
-      <section id="education">
-        <Education/>
-      </section>
-
-      <div className='white'/>
-
-      <section id="contact">
-        <Contact/>
-      </section>
+      {/* <div style={{ position: 'relative' }}>
+        <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, zIndex: -2 }}>
+          <Suspense fallback={null}>
+            <ContactBlobCanvas 
+              position={[0, 0, 7]} 
+              geometryArgs={[2, 25]} 
+              scale={2.0}
+            />
+          </Suspense>
+          <div 
+            style={{ 
+              position: 'absolute', 
+              top: 0, 
+              right: 0, 
+              bottom: 0, 
+              left: 0, 
+              backdropFilter: 'blur(15px)',
+              WebkitBackdropFilter: 'blur(15px)',
+              pointerEvents: 'none',
+              zIndex: -1 
+            }}
+          />
+        </div> */}
+        <section id="education">
+          <Education/>
+        </section>
+        <section id="contact">
+          <Contact/>
+        </section>
+      {/* </div> */}
 
       <Chatbot />
     </div>

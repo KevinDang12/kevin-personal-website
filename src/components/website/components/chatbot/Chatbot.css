@@ -25,7 +25,7 @@
   }
   
   .message-header {
-    background-color: #3ea8ff;
+    background-color: #547fae;
     padding: 15px;
     border-radius: 20px 20px 0 0;
     color: #fff;
@@ -56,7 +56,7 @@
     font-size: 15px;
     border-radius: 15px;
     padding: 15px;
-    background-color: #3ea8ff;
+    background-color: #547fae;
     color: #fff;
     font-weight: normal;
   }
@@ -93,7 +93,7 @@
     border-color: #3ea8ff;
     height: 50px;
     width: 50px;
-    background-color: #3ea8ff;
+    background-color: #547fae;
     border-radius: 10px;
   }
   
@@ -109,8 +109,8 @@
     font-size: 50px;
     color: white;
     cursor: pointer;
-    border-color: #3ea8ff;
-    background-color: #3ea8ff;
+    border-color: #547fae;
+    background-color: #547fae;
     height: 80px;
     width: 80px;
     border-radius: 50%;

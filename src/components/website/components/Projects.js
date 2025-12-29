@@ -16,9 +16,8 @@ export default function Projects() {
   return (
     <div
       style={{
-        height: "120vh",
+        height: "90vh",
         position: "relative",
-        marginTop: "5rem",
       }}
     >
       <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, zIndex: -2 }}>
@@ -42,7 +41,7 @@ export default function Projects() {
       <div
         style={{
           position: 'relative',
-          height: '100vh',
+          height: '80vh',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
@@ -56,10 +55,10 @@ export default function Projects() {
             width: '100%',
             marginTop: '6rem',
             maxWidth: 'calc(1000px + 1.5rem)',
-            marginBottom: '3rem',
+            marginBottom: '2rem',
           }}
         >
-          <h1 style={{ marginBottom: '0.5rem', textAlign: 'left' }}>Projects</h1>
+          <h1 style={{  textAlign: 'left' }}>Projects</h1>
           <p style={{ margin: 0, fontSize: '20px', textAlign: 'left' }}>Some of my selected side projects</p>
         </div>
         <div
