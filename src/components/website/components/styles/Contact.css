@@ -1,5 +1,6 @@
 .contact-band {
-    padding-bottom: 32px;
+    justify-content: space-between;
+    padding-bottom: 0;
 }
 
 .contact-inner {
@@ -7,6 +8,8 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    flex: 1;
+    justify-content: center;
 }
 
 .contact-sub {
@@ -78,7 +81,7 @@
 /* Footer -------------------------------------------------------------------- */
 
 .site-footer {
-    margin-top: 72px;
+    margin-top: auto;
     padding: 20px 16px;
     border-top: 1px solid var(--card-border);
     text-align: center;

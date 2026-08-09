@@ -27,9 +27,19 @@ body {
   overflow-x: hidden;
 }
 
-/* Keep anchored sections clear of the floating navigation bar. */
+/* Each portfolio band is exactly one viewport tall. */
 section[id] {
-  scroll-margin-top: 84px;
+  height: 100vh;
+  height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-margin-top: 0;
+  box-sizing: border-box;
+}
+
+section[id] > * {
+  min-height: 100%;
+  box-sizing: border-box;
 }
 
 body {
