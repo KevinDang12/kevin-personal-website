@@ -6,17 +6,10 @@
     align-items: center;
     justify-content: center;
     padding: 120px 24px 72px;
-    background: var(--surface);
+    background-color: rgba(237, 237, 237, 0.7);
     overflow: hidden;
 }
 
-.home-backdrop {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-}
-
-/* Frosted panel keeps the text readable over any blob color state. */
 .home-main {
     position: relative;
     z-index: 1;

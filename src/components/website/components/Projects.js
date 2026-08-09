@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import webNotepad from '../resources/Web-Notepad.JPG';
 import review from '../resources/Review.JPG';
 import * as projectsText from './text/projectsText';
+import projectsFragmentShader from '../Blob/projectsFragmentShader';
 import './styles/Projects.css';
+
+const BlobCanvas = lazy(() => import('../Blob/BlobCanvas'));
 
 const PROJECTS = [
   {
@@ -31,13 +34,26 @@ const PROJECTS = [
 ];
 
 /**
- * The Projects section: selected side projects as cards.
+ * The Projects section: selected side projects as cards over the animated blob.
  * @return {JSX.Element} Projects section
  */
 export default function Projects() {
   return (
-    <div className="section-band section-band-white">
-      <div className="section-inner">
+    <div className="projects-section">
+      <div className="projects-blob-layer" aria-hidden="true">
+        <Suspense fallback={null}>
+          <BlobCanvas
+            position={[5, 3, 8]}
+            geometryArgs={[2, 4]}
+            scale={2.25}
+            fragmentShader={projectsFragmentShader}
+            blur={0.015}
+          />
+        </Suspense>
+        <div className="projects-blob-overlay" />
+      </div>
+
+      <div className="section-inner projects-content">
         <span className="section-eyebrow">Projects</span>
         <h2 className="section-title">Selected side projects</h2>
         <p className="section-sub">

@@ -1,3 +1,31 @@
+.projects-section {
+    position: relative;
+    padding: 96px 24px;
+    overflow: hidden;
+    min-height: 90vh;
+}
+
+/* Blob canvas + frosted overlay (same setup as the previous Projects section). */
+.projects-blob-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.projects-blob-overlay {
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.projects-content {
+    position: relative;
+    z-index: 2;
+}
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -7,23 +35,25 @@
 .project-card {
     display: flex;
     flex-direction: column;
-    background: var(--surface-alt);
-    border: 1px solid var(--card-border);
+    background: rgba(250, 253, 254, 0.6);
+    border: 1px solid rgba(15, 23, 42, 0.08);
     border-radius: var(--radius-card);
-    box-shadow: var(--card-shadow);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .project-card:hover {
     transform: translateY(-4px);
-    box-shadow: var(--card-shadow-hover);
+    box-shadow: 0 48px 90px rgba(0, 0, 0, 0.14);
 }
 
 .project-media {
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    background: var(--surface);
+    background: rgba(244, 246, 249, 0.5);
 }
 
 .project-media img {
@@ -73,6 +103,11 @@
 }
 
 @media (max-width: 860px) {
+    .projects-section {
+        padding: 72px 20px;
+        min-height: auto;
+    }
+
     .projects-grid {
         grid-template-columns: 1fr;
     }

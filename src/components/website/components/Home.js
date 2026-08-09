@@ -13,7 +13,7 @@ const BlobCanvas = lazy(() => import('../Blob/BlobCanvas'));
 export default function Home() {
   return (
     <div className="home-container">
-      <div className="home-backdrop" aria-hidden="true">
+      <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, zIndex: -1 }}>
         <Suspense fallback={null}>
           <BlobCanvas fragmentShader={fragmentShader} geometryArgs={[2, 12]} scale={1.5} />
         </Suspense>
@@ -22,11 +22,11 @@ export default function Home() {
       <main className="home-main">
         <span className="home-eyebrow">Computer Science student · York University</span>
         <h1 className="home-title">
-          Hi, I&apos;m <span className="home-title-accent">Kevin</span>.
+          Hi, I&apos;m <span className="home-title-accent">Kevin</span>
         </h1>
         <p className="home-paragraph">
-          I build software across the stack — from web and mobile apps to
-          machine learning and Unity. Take a look at my work and projects below.
+        I am currently a third-year Computer Science student at York University.
+        You may check out more about me and my projects below.
         </p>
         <div className="home-actions">
           <a href="#projects" className="btn-pill btn-primary">View my projects</a>
