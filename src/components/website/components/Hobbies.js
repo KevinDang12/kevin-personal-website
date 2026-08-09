@@ -1,50 +1,27 @@
-import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import * as hobbiesText from './text/hobbiesText';
 import './styles/Hobbies.css';
 
 const WorldViewer = lazy(() => import('./WorldViewer'));
 
 /**
- * The Hobbies Page
- * @return {JSX.Element} Hobbies Page
+ * The Hobbies section featuring an interactive 3D Minecraft world.
+ * @return {JSX.Element} Hobbies section
  */
 export default function Hobbies() {
-
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const refToTrack = useRef(null);
-  const percentage = 0.7;
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const rect = refToTrack.current.getBoundingClientRect();
-      setScrollPosition(rect.y);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   return (
-    <div className='hobbies'>
-      <div className={scrollPosition <= window.innerHeight * percentage ? 'hobbies-section' : 'hobbies-clear'} ref={refToTrack}>
-        <div
-          className={scrollPosition <= window.innerHeight * percentage ? 'hobbies-text-show' : 'hobbies-text-hidden'}
-          style={{
-            width: '100%',
-            marginTop: '6rem',
-            maxWidth: 'calc(1000px + 1.5rem)',
-            marginBottom: '2rem',
-          }}
-        >
-          <h1 style={{ marginBottom: '0.5rem', textAlign: 'left' }}>{hobbiesText.TITLE}</h1>
-          <p style={{ margin: 0, fontSize: '20px', textAlign: 'left' }}>{hobbiesText.DESCRIPTION}</p>
+    <div className="section-band section-band-dark hobbies-band">
+      <div className="section-inner">
+        <span className="section-eyebrow">{hobbiesText.TITLE}</span>
+        <h2 className="section-title">Beyond the keyboard</h2>
+        <p className="section-sub">{hobbiesText.DESCRIPTION}</p>
+
+        <div className="hobbies-viewer-frame">
+          <Suspense fallback={<div className="loading-model">Loading 3D model&hellip;</div>}>
+            <WorldViewer />
+          </Suspense>
+          <p className="hobbies-viewer-hint">Drag to rotate &middot; scroll to zoom</p>
         </div>
-        <Suspense fallback={<div className="loading-model">Loading 3D Model...</div>}>
-          <WorldViewer />
-        </Suspense>
       </div>
     </div>
   );

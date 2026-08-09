@@ -1,81 +1,86 @@
-import { IconBrandUnity, IconBrain, IconChalkboardTeacher  } from '@tabler/icons-react';
+import React from 'react';
+import { IconBrandUnity, IconBrain, IconChalkboardTeacher } from '@tabler/icons-react';
 import './styles/Work.css';
 
+const ROLES = [
+  {
+    id: 'unity',
+    icon: IconBrandUnity,
+    iconClass: 'work-badge-unity',
+    title: 'Junior Programmer',
+    tags: ['Unity', 'C#', 'Mobile'],
+    bullets: [
+      'Developed a mobile app using Unity and C# to capture the user\u2019s response and calculate their response time when presented with a visual stimulus.',
+      'Wrote technical documentation detailing the code architecture and Unity components for future engineers.',
+      'Built a Unity plugin that helps users generate character animation using an AI-powered audio prompt.',
+    ],
+  },
+  {
+    id: 'bci',
+    icon: IconBrain,
+    iconClass: 'work-badge-bci',
+    title: 'Software Engineer',
+    tags: ['Machine Learning', 'Python', 'BCI'],
+    bullets: [
+      'Contributed to a Brain-Computer Interface project for stroke rehabilitation using a machine learning model.',
+      'Developed a Recurrent Neural Network, along with other machine learning models, for classifying brain waves.',
+      'Implemented baseline correction as a data-cleaning method to improve data quality for analysis.',
+      'Designed a maze mini-game in Python that lets patients interact using the Brain-Computer Interface system.',
+    ],
+  },
+  {
+    id: 'ta',
+    icon: IconChalkboardTeacher,
+    iconClass: 'work-badge-ta',
+    title: 'Teaching Assistant',
+    tags: ['Java', 'Web Development', 'Mentoring'],
+    bullets: [
+      'TA\u2019d for Java (object-oriented programming), computer mathematics, and front-end web development courses.',
+      'Supported students through lectures, group reviews, and one-on-one sessions, and hosted tutorials reviewing course concepts.',
+      'Updated a time-management LibGuide on the official Sheridan College website, adding new content and functionality with HTML.',
+    ],
+  },
+];
+
+/**
+ * Work experience presented as a vertical timeline of cards.
+ * @return {JSX.Element} Work section
+ */
 export default function Work() {
   return (
-    <div className="work-container">
-        <h1 className="work-title">Work Experience</h1>
-        <div className="work-item">
-            <IconBrandUnity 
-                className="work-icon unity-icon"
-            />
-            <div className="divider" />
-            <div className="work-details">
-                <div className="work-details-text">
-                    <h1 className="job-title">Junior Programmer</h1>
-                    <ul className="job-description">
-                        <li>
-                            Develop a mobile app using Unity and C# to capture the user&apos;s response and calculate their response time when presented with a visual stimulus
-                        </li>
-                        <li>
-                            I wrote technical documentation on the app detailing the code architecture and Unity components for future engineers
-                        </li>
-                        <li>
-                            I also worked on developing a Unity plugin that helps users generate character animation using an AI-powered audio prompt
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+    <div className="section-band section-band-white">
+      <div className="section-inner">
+        <span className="section-eyebrow">Experience</span>
+        <h2 className="section-title">Where I&apos;ve worked</h2>
+        <p className="section-sub">
+          Roles spanning game development, machine learning research, and teaching.
+        </p>
 
-        <div className="work-item">
-            <IconBrain 
-                className="work-icon brain-icon"
-            />
-            <div className="divider" />
-            <div className="work-details">
-                <div className="work-details-text">
-                    <h1 className="job-title">Software Engineer</h1>
-                    <ul className="job-description">
-                        <li>
-                            Contributed to a Brain-Computer Interface Project for Stroke Rehabilitation using a Machine Learning model
-                        </li>
-                        <li>
-                            Developed a Recurrent Neural Network, along with other Machine Learning models for classifying brain waves
-                        </li>
-                        <li>
-                            Implemented baseline correction as a data-cleaning method to process and improve data quality for analysis
-                        </li>
-                        <li>
-                            Designed and implemented a Maze mini-game using Python to allow patients to interact with the game using the Brain-Computer Interface System
-                        </li>
-                    </ul>
+        <ol className="work-timeline">
+          {ROLES.map(({ id, icon: Icon, iconClass, title, tags, bullets }) => (
+            <li key={id} className="work-entry">
+              <div className={`work-badge ${iconClass}`}>
+                <Icon size={30} stroke={1.6} />
+              </div>
+              <div className="work-card">
+                <div className="work-card-head">
+                  <h3 className="work-role">{title}</h3>
+                  <div className="work-tags">
+                    {tags.map((tag) => (
+                      <span key={tag} className="chip">{tag}</span>
+                    ))}
+                  </div>
                 </div>
-            </div>
-        </div>
-
-        <div className="work-item">
-            <IconChalkboardTeacher 
-                className="work-icon teacher-icon"
-            />
-            <div className="divider" />
-            <div className="work-details">
-                <div className="work-details-text">
-                    <h1 className="job-title">Teaching Assistant</h1>
-                    <ul className="job-description">
-                        <li>
-                            TA&apos;d for the course Java (Object Oriented Programming), Computer Mathematics, and front-end web development using HTML, CSS, and JavaScript
-                        </li>
-                        <li>
-                            Assisted students in those courses by answering students&apos; questions during lectures, group reviews, and one-on-one sessions; hosted tutorials reviewing course concepts
-                        </li>
-                        <li>
-                            Contributed to updating a Time-Management LibGuide on the official Sheridan College website by adding new content and utilizing HTML to add new functionality
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+                <ul className="work-bullets">
+                  {bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
   );
 }

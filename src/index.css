@@ -1,8 +1,41 @@
+:root {
+  --accent: #2a628f;
+  --accent-strong: #1d4e75;
+  --accent-soft: rgba(42, 98, 143, 0.08);
+  --ink: #0f172a;
+  --ink-2: #334155;
+  --muted: #64748b;
+  --surface: #f4f6f9;
+  --surface-alt: #ffffff;
+  --surface-dark: #101418;
+  --card-border: rgba(15, 23, 42, 0.08);
+  --card-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  --card-shadow-hover: 0 18px 44px rgba(15, 23, 42, 0.12);
+  --radius-card: 20px;
+  --font-sans: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Helvetica Neue', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent horizontal overflow from expanding the mobile layout viewport,
+   which would stretch fixed-position elements (e.g. the navbar). */
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* Keep anchored sections clear of the floating navigation bar. */
+section[id] {
+  scroll-margin-top: 84px;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  color: var(--ink);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

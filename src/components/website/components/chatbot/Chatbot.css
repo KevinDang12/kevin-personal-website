@@ -3,119 +3,155 @@
     bottom: 20px;
     right: 20px;
     z-index: 1000;
-  }
+    font-family: var(--font-sans, Inter, sans-serif);
+}
 
-  @media only screen and (min-width: 500px) {
+@media only screen and (min-width: 500px) {
     #chatCon {
-      width: 450px;
+        width: 400px;
     }
-  }
+}
 
-  @media only screen and (max-width: 499px) {
+@media only screen and (max-width: 499px) {
     #chatCon {
-      width: 280px;
+        width: 300px;
     }
-  }
-  
-  .chat-box {
+}
+
+.chat-box {
     width: 100%;
     height: 500px;
-    border-radius: 25px;
-    background-color: #eee;
-  }
-  
-  .message-header {
-    background-color: #547fae;
-    padding: 15px;
-    border-radius: 20px 20px 0 0;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+    overflow: hidden;
+}
+
+.message-header {
+    background: #2a628f;
+    padding: 16px 20px;
     color: #fff;
-    font-size: 20px;
-  }
-  
-  .msg-area {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.msg-area {
     overflow-y: auto;
-    height: 370px;
-    padding: 15px;
-  }
-  
-  .left span {
+    height: 360px;
+    padding: 16px;
+}
+
+.left span {
     display: inline-block;
-    font-size: 15px;
-    border-radius: 15px;
-    padding: 15px;
-    background-color: #ffffff;
+    max-width: 85%;
+    font-size: 14.5px;
+    line-height: 1.5;
+    border-radius: 16px 16px 16px 4px;
+    padding: 12px 14px;
+    background-color: #eef2f6;
+    color: #1f2937;
     font-weight: normal;
-  }
-  
-  .right {
+}
+
+.right {
     text-align: right;
-  }
-  
-  .right span {
+}
+
+.right span {
     display: inline-block;
-    font-size: 15px;
-    border-radius: 15px;
-    padding: 15px;
-    background-color: #547fae;
+    max-width: 85%;
+    font-size: 14.5px;
+    line-height: 1.5;
+    border-radius: 16px 16px 4px 16px;
+    padding: 12px 14px;
+    background-color: #2a628f;
     color: #fff;
     font-weight: normal;
-  }
-  
-  .footer {
-    padding: 0 20px;
-    display: -webkit-box;
-    display: -ms-flexbox;
+    text-align: left;
+}
+
+.footer {
+    padding: 12px 14px;
     display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
+    gap: 8px;
     justify-content: space-between;
-  }
-  
-  .prompt-box {
-    border: 1px solid #fff;
-    padding: 10px;
-    width: 80%;
-    border-radius: 15px;
-  }
-  
-  .prompt-box:foucs {
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.prompt-box {
+    flex: 1;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-size: 14.5px;
+    background: #fff;
+    color: #1f2937;
     outline: none;
-  }
-  
-  .send-prompt {
-    border: 10px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.prompt-box:focus {
+    border-color: #2a628f;
+    box-shadow: 0 0 0 3px rgba(42, 98, 143, 0.15);
+}
+
+.send-prompt {
+    display: flex;
     align-items: center;
     justify-content: center;
-    display: flex;
-    font-size: 25px;
-    color: white;
+    flex-shrink: 0;
+    height: 42px;
+    width: 42px;
+    font-size: 18px;
+    color: #fff;
     cursor: pointer;
-    border-color: #3ea8ff;
-    height: 50px;
-    width: 50px;
-    background-color: #547fae;
-    border-radius: 10px;
-  }
-  
-  .pop {
-    text-align: right;
-  }
+    border: none;
+    background-color: #2a628f;
+    border-radius: 50%;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
 
-  .openai-button {
+.send-prompt:hover {
+    background-color: #1d4e75;
+    transform: scale(1.06);
+}
+
+.pop {
+    text-align: right;
+}
+
+.openai-button {
     display: flex;
     margin-left: auto;
     margin-right: 0;
-    border: 10px;
-    font-size: 50px;
-    color: white;
+    font-size: 34px;
+    color: #fff;
     cursor: pointer;
-    border-color: #547fae;
-    background-color: #547fae;
-    height: 80px;
-    width: 80px;
+    border: none;
+    background-color: #2a628f;
+    height: 64px;
+    width: 64px;
     border-radius: 50%;
-  }
+    box-shadow: 0 12px 30px rgba(42, 98, 143, 0.4);
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
 
-  .icon {
+.openai-button:hover {
+    background-color: #1d4e75;
+    transform: scale(1.08);
+}
+
+.icon {
     margin: auto;
-  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .openai-button,
+    .send-prompt,
+    .prompt-box {
+        transition: none;
+    }
+}

@@ -1,97 +1,136 @@
-import React, {useState} from 'react';
-import MediaQuery from 'react-responsive';
+import React, { useState, useEffect, useRef } from 'react';
 import * as headerText from './text/headerText';
 import './styles/Navbar.css';
 
+const NAV_LINKS = [
+  { id: 'home', label: headerText.HOME },
+  { id: 'work', label: headerText.WORK },
+  { id: 'skills', label: headerText.SKILLS },
+  { id: 'projects', label: headerText.PROJECTS },
+  { id: 'hobbies', label: headerText.HOBBIES },
+  { id: 'education', label: headerText.EDUCATION },
+  { id: 'contact', label: headerText.CONTACT },
+];
+
 /**
- * Navbar component
+ * Floating glass navigation bar with scroll-spy, a brand mark,
+ * a contact call-to-action, and an animated mobile menu.
  * @return {JSX.Element} Navbar component
  */
 export default function Navbar() {
-  const [showMenu, setShowMenu] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const navRef = useRef(null);
 
-  const toggleMenu = () => {
-    setShowMenu(!showMenu);
-  };
+  // Elevate the bar once the page is scrolled.
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 16);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  const handleMenuClick = () => {
-    setShowMenu(false);
-  };
+  // Scroll-spy: highlight the section currently in view.
+  useEffect(() => {
+    const sections = NAV_LINKS
+      .map(({ id }) => document.getElementById(id))
+      .filter(Boolean);
+    if (sections.length === 0 || typeof IntersectionObserver === 'undefined') {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      // A narrow horizontal band around the upper-middle of the viewport
+      // decides which section counts as "active".
+      { rootMargin: '-35% 0px -55% 0px', threshold: 0 },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  // Close the mobile menu on outside click or Escape.
+  useEffect(() => {
+    if (!menuOpen) return undefined;
+
+    const handlePointerDown = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [menuOpen]);
+
+  const closeMenu = () => setMenuOpen(false);
 
   return (
-    <div>
-      <MediaQuery minWidth={1030}>
-        <div className="header">
-          <ul className="header-right">
-            <li>
-              <a data-testid="home" href="#home">{headerText.HOME}</a>
-            </li>
-            <li>
-              <a data-testid="work" href="#work">{headerText.WORK}</a>
-            </li>
-            <li>
-              <a data-testid="skills" href="#skills">{headerText.SKILLS}</a>
-            </li>
-            <li>
-              <a data-testid="projects" href="#projects">{headerText.PROJECTS}</a>
-            </li>
-            <li>
-              <a data-testid="hobbies" href="#hobbies">{headerText.HOBBIES}</a>
-            </li>
-            <li>
-              <a data-testid="education" href="#education">{headerText.EDUCATION}</a>
-            </li>
-            <li>
-              <a data-testid="contact" href="#contact">{headerText.CONTACT}</a>
-            </li>
-          </ul>
-        </div>
-      </MediaQuery>
+    <header className={`nav-shell${scrolled ? ' nav-shell-scrolled' : ''}`}>
+      <nav className="nav-bar" ref={navRef} aria-label="Primary navigation">
+        <a className="nav-brand" href="#home" onClick={closeMenu}>
+          <span className="nav-brand-mark" aria-hidden="true">KD</span>
+          <span className="nav-brand-name">Kevin Dang</span>
+        </a>
 
-      <MediaQuery maxWidth={1029}>
-        <div className="header-mobile">
-          <button className="mobile-button" onClick={toggleMenu}>
-            ☰
-          </button>
-          <ul className={`menu-items ${showMenu ? 'show' : ''}`}>
-            <li>
-              <a href="#home" onClick={handleMenuClick}>
-                {headerText.HOME}
+        <ul
+          id="primary-menu"
+          className={`nav-links${menuOpen ? ' nav-links-open' : ''}`}
+        >
+          {NAV_LINKS.map(({ id, label }) => (
+            <li key={id} className="nav-item">
+              <a
+                data-testid={id}
+                href={`#${id}`}
+                className={`nav-link${activeSection === id ? ' nav-link-active' : ''}`}
+                aria-current={activeSection === id ? 'true' : undefined}
+                onClick={closeMenu}
+              >
+                {label}
               </a>
             </li>
-            <li>
-              <a href="#work" onClick={handleMenuClick}>
-                {headerText.WORK}
-              </a>
-            </li>
-            <li>
-              <a href="#skills" onClick={handleMenuClick}>
-                {headerText.SKILLS}
-              </a>
-            </li>
-            <li>
-              <a href="#projects" onClick={handleMenuClick}>
-                {headerText.PROJECTS}
-              </a>
-            </li>
-            <li>
-              <a href="#hobbies" onClick={handleMenuClick}>
-                {headerText.HOBBIES}
-              </a>
-            </li>
-            <li>
-              <a href="#education" onClick={handleMenuClick}>
-                {headerText.EDUCATION}
-              </a>
-            </li>
-            <li>
-              <a href="#contact" onClick={handleMenuClick}>
-                {headerText.CONTACT}
-              </a>
-            </li>
-          </ul>
-        </div>
-      </MediaQuery>
-    </div>
+          ))}
+          <li className="nav-item nav-item-cta">
+            <a href="#contact" className="nav-cta nav-cta-mobile" onClick={closeMenu}>
+              Get in touch
+            </a>
+          </li>
+        </ul>
+
+        <a href="#contact" className="nav-cta nav-cta-desktop">
+          Get in touch
+        </a>
+
+        <button
+          type="button"
+          className={`nav-toggle${menuOpen ? ' nav-toggle-open' : ''}`}
+          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={menuOpen}
+          aria-controls="primary-menu"
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <span className="nav-toggle-line" />
+          <span className="nav-toggle-line" />
+          <span className="nav-toggle-line" />
+        </button>
+      </nav>
+    </header>
   );
 }

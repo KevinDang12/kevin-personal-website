@@ -1,98 +1,58 @@
 import React from 'react';
 import * as educationText from './text/educationText';
-import './styles/SectionStyles.css';
+import './styles/Education.css';
 import SheridanLogo from '../resources/Sheridan.jpg';
 import YorkLogo from '../resources/YU.jpg';
 
+const SCHOOLS = [
+  {
+    id: 'york',
+    logo: YorkLogo,
+    alt: 'York University logo',
+    name: educationText.UNIVERSITY,
+    duration: 'September 2024 - Present',
+    credential: 'Honours Bachelor of Science, Computer Science',
+    description: educationText.DESCRIPTION[0],
+  },
+  {
+    id: 'sheridan',
+    logo: SheridanLogo,
+    alt: 'Sheridan College logo',
+    name: educationText.COLLEGE,
+    duration: 'September 2020 - April 2024',
+    credential: 'Advanced Diploma, Computer Engineering Technology',
+    description: educationText.DESCRIPTION[1],
+  },
+];
+
 /**
- * The Education Page
- * @return {JSX.Element} Education Page
+ * The Education section with school cards.
+ * @return {JSX.Element} Education section
  */
 export default function Education() {
   return (
-    <div
-      style={{
-        minHeight: '80vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '2rem',
-      }}
-    >
-      <h1 
-        style={{ 
-          fontSize: '2rem', 
-          fontWeight: 'bold',
-          marginBottom: '1rem'
-        }}
-        data-testid="educationHeader"
-      >
-        {educationText.TITLE}
-      </h1>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1.5rem',
-          width: '100%',
-          maxWidth: '800px',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            padding: '1.5rem',
-          }}
-        >
-          <img
-            src={YorkLogo}
-            alt="York University Logo"
-            className="education-logo"
-          />
-          <div style={{ padding: 0, flex: 1 }}>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem' }}>
-              {educationText.UNIVERSITY}
-            </h3>
-            <time style={{ display: 'block', fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem' }}>
-              September 2024 - Present
-            </time>
-            <p style={{ color: '#374151', fontWeight: '500', marginBottom: '0.75rem' }}>
-              Honours Bachelor of Science, Computer Science
-            </p>
-            <p style={{ marginBottom: '0.5rem' }}>
-              {educationText.DESCRIPTION[0]}
-            </p>
-          </div>
-          </div>
+    <div className="section-band section-band-light">
+      <div className="section-inner">
+        <span className="section-eyebrow">Education</span>
+        <h2 className="section-title" data-testid="educationHeader">
+          {educationText.TITLE}
+        </h2>
+        <p className="section-sub">My academic background.</p>
 
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            padding: '1.5rem',
-          }}
-        >
-          <img
-            src={SheridanLogo}
-            alt="Sheridan College Logo"
-            className="education-logo"
-          />
-          <div style={{ padding: 0, flex: 1 }}>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem' }}>
-              {educationText.COLLEGE}
-            </h3>
-            <time style={{ display: 'block', fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem' }}>
-              September 2020 - April 2024
-            </time>
-            <p style={{ color: '#374151', fontWeight: '500', marginBottom: '0.75rem' }}>
-              Advanced Diploma, Computer Engineering Technology
-            </p>
-            <p style={{ marginBottom: '0.5rem' }}>
-              {educationText.DESCRIPTION[1]}
-            </p>
-          </div>
+        <div className="education-list">
+          {SCHOOLS.map(({ id, logo, alt, name, duration, credential, description }) => (
+            <article key={id} className="education-card">
+              <img src={logo} alt={alt} className="education-logo" />
+              <div className="education-details">
+                <div className="education-head">
+                  <h3 className="education-school">{name}</h3>
+                  <time className="education-duration">{duration}</time>
+                </div>
+                <p className="education-credential">{credential}</p>
+                <p className="education-description">{description}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </div>

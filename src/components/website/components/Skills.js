@@ -1,5 +1,4 @@
 import React from 'react';
-import MediaQuery from 'react-responsive';
 import {
   IconBrandJavascript,
   IconBrandReact,
@@ -8,144 +7,45 @@ import {
   IconBrandPython,
   IconFileTypeSql,
   IconBrandCSharp,
-  IconBrandCpp
+  IconBrandCpp,
 } from '@tabler/icons-react';
 import * as skillsText from './text/skillsText';
-import { IoLogoJavascript } from "react-icons/io";
-import { FaReact, FaJava, FaAndroid, FaPython } from "react-icons/fa";
-import { BsFiletypeSql } from "react-icons/bs";
-import { SiCsharp , SiCplusplus } from "react-icons/si";
-import * as colors from './text/colors.js';
 import './styles/Skills.css';
 
+const SKILLS = [
+  { testId: 'jsImage', icon: IconBrandJavascript, label: skillsText.JS, color: '#b7950b' },
+  { testId: 'reactImage', icon: IconBrandReact, label: skillsText.REACT, color: '#0e7490' },
+  { testId: 'javaImage', icon: IconBrandKotlin, label: skillsText.KOTLIN, color: '#c2410c' },
+  { testId: 'androidImage', icon: IconBrandAndroid, label: skillsText.ANDROID, color: '#15803d' },
+  { testId: 'pythonImage', icon: IconBrandPython, label: skillsText.PYTHON, color: '#1d4ed8' },
+  { testId: 'sqlImage', icon: IconFileTypeSql, label: skillsText.SQL, color: '#b91c1c' },
+  { testId: 'cSharpImage', icon: IconBrandCSharp, label: skillsText.CSHARP, color: '#4338ca' },
+  { testId: 'cppImage', icon: IconBrandCpp, label: skillsText.CPP, color: '#6d28d9' },
+];
+
 /**
- * The Skills Page
- * @return {JSX.Element} Skills Page
+ * The Skills section: a labeled grid of technology tiles.
+ * @return {JSX.Element} Skills section
  */
 export default function Skills() {
-
-  const [backgroundColor, setBackgroundColor] = React.useState(colors.WHITE);
-
-  const iconClassName = 'skill-icon';
-
   return (
-    <div>
-      {/* <div className='divider' style={{backgroundColor: backgroundColor}}/> */}
-      <MediaQuery minWidth={769}>
-        <div className='skill-section' style={{backgroundColor: backgroundColor}}>
-          <h1 className='skills-header'>{skillsText.HEADER}</h1>
-          <div>
-            <div className='card-row'>
-              <div 
-                className='circle'
-                onMouseEnter={() => setBackgroundColor(colors.YELLOW)}
-                onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <IconBrandJavascript data-testid="jsImage" className={iconClassName}/>
-              </div>
-              <div
-                className='circle'
-                onMouseEnter={() => setBackgroundColor(colors.TURQUOISE)}
-                onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <IconBrandReact data-testid="reactImage" className={iconClassName}/>
-              </div>
-              <div
-                className='circle'
-                onMouseEnter={() => setBackgroundColor(colors.ORANGE)}
-                onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <IconBrandKotlin data-testid="javaImage" className={iconClassName}/>
-              </div>
-              <div
-                className='circle'
-                onMouseEnter={() => setBackgroundColor(colors.GREEN)}
-                onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <IconBrandAndroid data-testid="androidImage" className={iconClassName}/>
-              </div>
-            </div>
-            <div className='card-row'>
-              <div
-                className='circle'
-                onMouseEnter={() => setBackgroundColor(colors.BLUE)}
-                onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <IconBrandPython data-testid="pythonImage" className={iconClassName}/>
-              </div>
-              <div
-                className='circle'
-                onMouseEnter={() => setBackgroundColor(colors.RED)}
-                onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <IconFileTypeSql data-testid="sqlImage" className={iconClassName}/>
-              </div>
-              <div
-                className='circle'
-                onMouseEnter={() => setBackgroundColor(colors.DARK_BLUE)}
-                onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <IconBrandCSharp data-testid="cSharpImage" className={iconClassName}/>
-              </div>
-              <div
-                className='circle'
-                onMouseEnter={() => setBackgroundColor(colors.PURPLE)}
-                onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-                <IconBrandCpp data-testid="cppImage" className={iconClassName}/>
-              </div>
-            </div>
-          </div>
-        </div>
-      </MediaQuery>
+    <div className="section-band section-band-light">
+      <div className="section-inner">
+        <span className="section-eyebrow">Skills</span>
+        <h2 className="section-title">{skillsText.HEADER}</h2>
+        <p className="section-sub">
+          Languages and technologies I use to build software.
+        </p>
 
-      <MediaQuery maxWidth={768}>
-        <div className='skill-section' style={{backgroundColor: backgroundColor}}>
-          <h1>{skillsText.HEADER}</h1>
-          <div className='card-row'>
-            <div
-                className='circle'
-                onMouseEnter={() => setBackgroundColor(colors.YELLOW)}
-                onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-              <IoLogoJavascript className='skill-icon'/>
-            </div>
-            <div
-                className='circle'
-                onMouseEnter={() => setBackgroundColor(colors.TURQUOISE)}
-                onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-              <FaReact className='skill-icon'/>
-            </div>
-            <div
-                className='circle'
-                onMouseEnter={() => setBackgroundColor(colors.ORANGE)}
-                onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-              <FaJava className='skill-icon'/>
-            </div>
-            <div
-                className='circle'
-                onMouseEnter={() => setBackgroundColor(colors.GREEN)}
-                onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-              <FaAndroid className='skill-icon'/>
-            </div>
-            <div
-                className='circle'
-                onMouseEnter={() => setBackgroundColor(colors.BLUE)}
-                onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-              <FaPython className='skill-icon'/>
-            </div>
-            <div
-                className='circle'
-                onMouseEnter={() => setBackgroundColor(colors.RED)}
-                onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-              <BsFiletypeSql className='skill-icon'/>
-            </div>
-            <div
-                className='circle'
-                onMouseEnter={() => setBackgroundColor(colors.DARK_BLUE)}
-                onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-              <SiCsharp className='skill-icon'/>
-            </div>
-            <div
-                className='circle'
-                onMouseEnter={() => setBackgroundColor(colors.PURPLE)}
-                onMouseLeave={() => setBackgroundColor(colors.WHITE)}>
-              <SiCplusplus className='skill-icon'/>
-            </div>
-          </div>
-        </div>
-      </MediaQuery>
+        <ul className="skills-grid">
+          {SKILLS.map(({ testId, icon: Icon, label, color }) => (
+            <li key={testId} className="skill-tile" style={{ '--skill-color': color }}>
+              <Icon data-testid={testId} className="skill-icon" stroke={1.4} />
+              <span className="skill-label">{label}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
