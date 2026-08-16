@@ -50,7 +50,7 @@ export default function Contact() {
               <IconBrandGithub size={30} stroke={1.6} />
             </span>
             <span className="contact-tile-label">{contactText.GITHUB}</span>
-            <span className="contact-tile-hint">See my code</span>
+            <span className="contact-tile-hint">View my repository</span>
           </a>
 
           <a
@@ -84,7 +84,7 @@ export default function Contact() {
       </div>
 
       <footer className="site-footer">
-        Last updated December 2025 &bull; Hosted on Firebase &bull; Built with React.
+        Last updated August 2026 &bull; Hosted on Firebase &bull; Built with React.
       </footer>
     </div>
   );

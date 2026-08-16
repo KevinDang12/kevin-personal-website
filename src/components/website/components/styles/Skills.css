@@ -1,10 +1,41 @@
+.skills-section {
+    --skills-gap: 18px;
+    transition: background-color 0.5s ease-out;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Keep the Skills labels readable on any hover wash.
+   Width matches a full row of four skill tiles. */
+.skills-heading {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 32px;
+    padding: 20px 24px 18px;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    box-shadow: 0 14px 36px rgba(15, 23, 42, 0.14);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.skills-heading .section-title {
+    color: var(--ink);
+}
+
+.skills-heading .section-sub {
+    margin-bottom: 0;
+    color: var(--ink-2);
+}
+
 .skills-grid {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
+    gap: var(--skills-gap);
 }
 
 .skill-tile {
@@ -57,9 +88,12 @@
 }
 
 @media (max-width: 600px) {
+    .skills-section {
+        --skills-gap: 12px;
+    }
+
     .skills-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
     }
 
     .skill-tile {
@@ -73,6 +107,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .skills-section,
     .skill-tile,
     .skill-icon {
         transition: none;

@@ -14,7 +14,7 @@ const NAV_LINKS = [
 
 /**
  * Floating glass navigation bar with scroll-spy, a brand mark,
- * a contact call-to-action, and an animated mobile menu.
+ * and an animated mobile menu.
  * @return {JSX.Element} Navbar component
  */
 export default function Navbar() {
@@ -85,9 +85,8 @@ export default function Navbar() {
   return (
     <header className={`nav-shell${scrolled ? ' nav-shell-scrolled' : ''}`}>
       <nav className="nav-bar" ref={navRef} aria-label="Primary navigation">
-        <a className="nav-brand" href="#home" onClick={closeMenu}>
+        <a className="nav-brand" href="#home" onClick={closeMenu} aria-label="Home">
           <span className="nav-brand-mark" aria-hidden="true">KD</span>
-          <span className="nav-brand-name">Kevin Dang</span>
         </a>
 
         <ul
@@ -107,16 +106,7 @@ export default function Navbar() {
               </a>
             </li>
           ))}
-          <li className="nav-item nav-item-cta">
-            <a href="#contact" className="nav-cta nav-cta-mobile" onClick={closeMenu}>
-              Get in touch
-            </a>
-          </li>
         </ul>
-
-        <a href="#contact" className="nav-cta nav-cta-desktop">
-          Get in touch
-        </a>
 
         <button
           type="button"

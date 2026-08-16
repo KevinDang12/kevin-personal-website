@@ -10,9 +10,9 @@ const ROLES = [
     title: 'Junior Programmer',
     tags: ['Unity', 'C#', 'Mobile'],
     bullets: [
-      'Developed a mobile app using Unity and C# to capture the user\u2019s response and calculate their response time when presented with a visual stimulus.',
-      'Wrote technical documentation detailing the code architecture and Unity components for future engineers.',
-      'Built a Unity plugin that helps users generate character animation using an AI-powered audio prompt.',
+      'Developed a mobile app using Unity and C# to capture the user\u2019s response and calculate their response time when presented with a visual stimulus',
+      'Wrote technical documentation detailing the code architecture and Unity components for future engineers',
+      'Built a Unity plugin that helps users generate character animation using an AI-powered audio prompt',
     ],
   },
   {
@@ -22,10 +22,10 @@ const ROLES = [
     title: 'Software Engineer',
     tags: ['Machine Learning', 'Python', 'BCI'],
     bullets: [
-      'Contributed to a Brain-Computer Interface project for stroke rehabilitation using a machine learning model.',
-      'Developed a Recurrent Neural Network, along with other machine learning models, for classifying brain waves.',
-      'Implemented baseline correction as a data-cleaning method to improve data quality for analysis.',
-      'Designed a maze mini-game in Python that lets patients interact using the Brain-Computer Interface system.',
+      'Contributed to a Brain-Computer Interface project for stroke rehabilitation using a machine learning model',
+      'Developed a Recurrent Neural Network, along with other machine learning models, for classifying brain waves',
+      'Implemented baseline correction as a data-cleaning method to improve data quality for analysis',
+      'Designed a maze mini-game in Python that lets patients interact using the Brain-Computer Interface system',
     ],
   },
   {
@@ -33,11 +33,11 @@ const ROLES = [
     icon: IconChalkboardTeacher,
     iconClass: 'work-badge-ta',
     title: 'Teaching Assistant',
-    tags: ['Java', 'Web Development', 'Mentoring'],
+    tags: ['Java', 'Web Development', 'Computer Mathematics'],
     bullets: [
-      'TA\u2019d for Java (object-oriented programming), computer mathematics, and front-end web development courses.',
-      'Supported students through lectures, group reviews, and one-on-one sessions, and hosted tutorials reviewing course concepts.',
-      'Updated a time-management LibGuide on the official Sheridan College website, adding new content and functionality with HTML.',
+      'TA\u2019d for Java (object-oriented programming), computer mathematics, and front-end web development courses',
+      'Supported students through lectures, group reviews, and one-on-one sessions, and hosted tutorials reviewing course concepts',
+      'Updated a time-management LibGuide on the official Sheridan College website, adding new content and functionality with HTML and CSS',
     ],
   },
 ];

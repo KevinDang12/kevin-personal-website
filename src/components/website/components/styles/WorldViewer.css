@@ -1,7 +1,7 @@
 .world-viewer-container {
     width: 100%;
-    max-width: 920px;
-    height: min(420px, 42vh);
+    max-width: 100%;
+    height: min(500px, 52vh);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     overflow: hidden;
@@ -37,8 +37,8 @@
 
 .loading-model {
     width: 100%;
-    max-width: 920px;
-    height: min(420px, 42vh);
+    max-width: 100%;
+    height: min(500px, 52vh);
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -51,7 +51,7 @@
 @media (max-width: 700px) {
     .world-viewer-container,
     .loading-model {
-        height: min(280px, 36vh);
+        height: min(340px, 42vh);
     }
 }
 

@@ -53,8 +53,7 @@
 .nav-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 4px 8px 4px 4px;
+  padding: 4px;
   text-decoration: none;
   border-radius: var(--nav-radius);
   margin-right: auto;
@@ -77,13 +76,6 @@
 
 .nav-brand:hover .nav-brand-mark {
   transform: scale(1.08) rotate(-6deg);
-}
-
-.nav-brand-name {
-  color: var(--nav-ink);
-  font-size: 16px;
-  font-weight: 600;
-  white-space: nowrap;
 }
 
 /* Links ------------------------------------------------------------------ */
@@ -122,33 +114,6 @@
 .nav-link-active:hover {
   color: #fff;
   background: var(--nav-accent);
-}
-
-/* Call to action ----------------------------------------------------------- */
-
-.nav-cta {
-  display: inline-block;
-  padding: 9px 18px;
-  border-radius: var(--nav-radius);
-  border: 1.5px solid var(--nav-accent);
-  color: var(--nav-accent);
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: background-color 0.25s ease, color 0.25s ease,
-    transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.nav-cta:hover {
-  background: var(--nav-accent);
-  color: #fff;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(42, 98, 143, 0.35);
-}
-
-.nav-cta-mobile {
-  display: none;
 }
 
 /* Mobile toggle ------------------------------------------------------------ */
@@ -197,10 +162,6 @@
 /* Mobile layout ------------------------------------------------------------ */
 
 @media (max-width: 1029px) {
-  .nav-cta-desktop {
-    display: none;
-  }
-
   .nav-toggle {
     display: flex;
   }
@@ -238,24 +199,6 @@
     font-size: 16px;
     text-align: left;
   }
-
-  .nav-item-cta {
-    margin-top: 6px;
-    padding: 6px 6px 2px;
-    border-top: 1px solid var(--nav-border);
-  }
-
-  .nav-cta-mobile {
-    display: block;
-    text-align: center;
-    margin-top: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  .nav-brand-name {
-    display: none;
-  }
 }
 
 /* Respect users who prefer reduced motion. */
@@ -263,7 +206,6 @@
   .nav-bar,
   .nav-links,
   .nav-link,
-  .nav-cta,
   .nav-brand-mark,
   .nav-toggle-line {
     transition: none;

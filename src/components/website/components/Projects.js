@@ -55,7 +55,7 @@ export default function Projects() {
 
       <div className="section-inner projects-content">
         <span className="section-eyebrow">Projects</span>
-        <h2 className="section-title">Selected side projects</h2>
+        <h2 className="section-title">Side Projects</h2>
         <p className="section-sub">
           Things I&apos;ve designed, built, and shipped outside of school and work.
         </p>
