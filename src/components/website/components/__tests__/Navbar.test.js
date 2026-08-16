@@ -6,7 +6,6 @@ import NavBar from '../Navbar';
 
 const navLinks = [
     { label: 'home', href: '#home' },
-    { label: 'about', href: '#about' },
     { label: 'work', href: '#work' },
     { label: 'skills', href: '#skills' },
     { label: 'projects', href: '#projects' },

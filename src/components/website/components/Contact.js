@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import resume from '../resources/Resume.pdf';
 import * as contactText from './text/contactText';
 import './styles/Contact.css';
@@ -8,83 +8,84 @@ import { IconMail, IconFileCv, IconBrandGithub, IconBrandLinkedin } from '@table
 const emailCopy = () => toast('Email copied to clipboard.');
 
 /**
- * The Contact Page
- * @return {JSX.Element} Contact Page
+ * The Contact section with quick links and the site footer.
+ * @return {JSX.Element} Contact section
  */
 export default function Contact() {
-
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const refToTrack = useRef(null);
-  const percentage = 0.7;
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const rect = refToTrack.current.getBoundingClientRect();
-      setScrollPosition(rect.y);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   return (
-    <div className='contact'>
-      <div className={scrollPosition <= window.innerHeight * percentage ? 'contact-section' : 'contact-clear'} ref={refToTrack}>
-        <div className='contact-content'>
-          <h1 className='contact-header'>{contactText.TITLE}</h1>
-          <div className='contact-buttons-container'>
-            <button
-              data-testid="email"
-              className='contact-button-neumorphic'
-              onClick={() => {
-                navigator.clipboard.writeText(contactText.EMAIL_LINK);
-                emailCopy();
-              }}>
-              <IconMail size={56} stroke={1.5} />
-              <span className='contact-text'>{contactText.EMAIL}</span>
-            </button>
-            <a
-              data-testid="github"
-              href={contactText.GITHUB_LINK}
-              target="_blank"
-              rel="noreferrer"
-              className='contact-button-neumorphic-link'>
-              <button className='contact-button-neumorphic'>
-                <IconBrandGithub size={56} stroke={1.5} />
-                <span className='contact-text'>{contactText.GITHUB}</span>
-              </button>
-            </a>
-            <a 
-              data-testid="linkedin" 
-              href={contactText.LINKEDIN_LINK}
-              target="_blank"
-              rel="noreferrer"
-              className='contact-button-neumorphic-link'>
-              <button className='contact-button-neumorphic'>
-                <IconBrandLinkedin size={56} stroke={1.5} />
-                <span className='contact-text'>{contactText.LINKEDIN}</span>
-              </button>
-            </a>
-            <a
-              data-testid="resume"
-              href={resume}
-              target="_blank"
-              rel="noreferrer"
-              className='contact-button-neumorphic-link'>
-              <button className='contact-button-neumorphic'>
-                <IconFileCv size={56} stroke={1.5} />
-                <span className='contact-text'>{contactText.RESUME}</span>
-              </button>
-            </a>
-          </div>
-        </div>
-        <p className='update'>
-          Last updated December 2025 • Hosted on Firebase • Built using React.
+    <div className="section-band section-band-white contact-band">
+      <div className="section-inner contact-inner">
+        <span className="section-eyebrow">Contact</span>
+        <h2 className="section-title">Let&apos;s connect</h2>
+        <p className="section-sub contact-sub">
+          Whether it&apos;s a project, an opportunity, or just a question &mdash;
+          my inbox is always open.
         </p>
+
+        <div className="contact-grid">
+          <button
+            data-testid="email"
+            type="button"
+            className="contact-tile"
+            onClick={() => {
+              navigator.clipboard.writeText(contactText.EMAIL_LINK);
+              emailCopy();
+            }}
+          >
+            <span className="contact-tile-icon">
+              <IconMail size={30} stroke={1.6} />
+            </span>
+            <span className="contact-tile-label">{contactText.EMAIL}</span>
+            <span className="contact-tile-hint">Copy address</span>
+          </button>
+
+          <a
+            data-testid="github"
+            href={contactText.GITHUB_LINK}
+            target="_blank"
+            rel="noreferrer"
+            className="contact-tile"
+          >
+            <span className="contact-tile-icon">
+              <IconBrandGithub size={30} stroke={1.6} />
+            </span>
+            <span className="contact-tile-label">{contactText.GITHUB}</span>
+            <span className="contact-tile-hint">View my repository</span>
+          </a>
+
+          <a
+            data-testid="linkedin"
+            href={contactText.LINKEDIN_LINK}
+            target="_blank"
+            rel="noreferrer"
+            className="contact-tile"
+          >
+            <span className="contact-tile-icon">
+              <IconBrandLinkedin size={30} stroke={1.6} />
+            </span>
+            <span className="contact-tile-label">{contactText.LINKEDIN}</span>
+            <span className="contact-tile-hint">Connect with me</span>
+          </a>
+
+          <a
+            data-testid="resume"
+            href={resume}
+            target="_blank"
+            rel="noreferrer"
+            className="contact-tile"
+          >
+            <span className="contact-tile-icon">
+              <IconFileCv size={30} stroke={1.6} />
+            </span>
+            <span className="contact-tile-label">{contactText.RESUME}</span>
+            <span className="contact-tile-hint">View my CV</span>
+          </a>
+        </div>
       </div>
+
+      <footer className="site-footer">
+        Last updated August 2026 &bull; Hosted on Firebase &bull; Built with React.
+      </footer>
     </div>
   );
 }

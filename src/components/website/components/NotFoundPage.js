@@ -7,6 +7,17 @@ import './styles/NotFoundPage.css';
  */
 export default function NotFoundPage() {
   return (
-    <h1 data-testid="not-found-page">404: Page Not Found!</h1>
+    <div className="not-found">
+      <p className="not-found-code">404</p>
+      <h1 data-testid="not-found-page" className="not-found-title">
+        Page not found
+      </h1>
+      <p className="not-found-text">
+        The page you&apos;re looking for doesn&apos;t exist or has moved.
+      </p>
+      <a href="/kevin-website" className="not-found-link">
+        Go to the homepage
+      </a>
+    </div>
   );
 }
